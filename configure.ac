@@ -25,10 +25,10 @@ AC_C_BIGENDIAN
 
 
 
-DFLAGS="-D "
+DFLAGS=""
 
-CFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
-#CXXFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include"
+CFLAGS="-Wall -O3 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
+#CFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
 LDFLAGS="-lm"
 
 
