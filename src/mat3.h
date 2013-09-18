@@ -49,7 +49,7 @@
 extern "C" {
 #endif
 
-#include <vec3.h>
+#include "vec3.h"
 
 #if defined(MAT3_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T

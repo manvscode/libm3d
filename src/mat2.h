@@ -49,7 +49,7 @@
 extern "C" {
 #endif
 
-#include <vec2.h>
+#include "vec2.h"
 
 #if defined(MAT2_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T

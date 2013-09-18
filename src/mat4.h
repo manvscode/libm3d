@@ -49,7 +49,7 @@
 extern "C" {
 #endif
 
-#include <vec4.h>
+#include "vec4.h"
 
 #if defined(MAT4_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T
