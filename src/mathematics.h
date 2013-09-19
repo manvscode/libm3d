@@ -53,6 +53,13 @@ extern "C" {
 
 #define RADIANS_PER_DEGREE  (M_PI / 180.0)
 
+
+float   uniformf  ( void );
+double  uniformd  ( void );
+float   guassianf ( float mean, float stddev );
+double  guassiand ( double mean, double stddev );
+
+
 #include "vec2.h"
 #include "vec3.h"
 #include "vec4.h"
