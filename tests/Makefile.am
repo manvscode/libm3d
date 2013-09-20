@@ -4,7 +4,7 @@ LDADD = -lm
 
 bin_PROGRAMS = \
 $(top_builddir)/bin/test-math \
-$(top_builddir)/bin/test-random_numbers
+$(top_builddir)/bin/test-random-numbers
 
 __top_builddir__bin_test_math_SOURCES              = test-math.c
 __top_builddir__bin_test_math_LDFLAGS              = -lm $(top_builddir)/lib/.libs/lib3dmath.a
