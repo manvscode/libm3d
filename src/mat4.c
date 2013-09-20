@@ -22,6 +22,7 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
+#include "mathematics.h"
 #include "mat4.h"
 
 const mat4_t MAT4_IDENTITY = { .m = {

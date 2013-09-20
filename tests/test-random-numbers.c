@@ -10,15 +10,12 @@ int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );
 
-	#if 1
 	for( int i = 0; i < 10; i++ )
 	{
-		float r = MAX * uniformf( );
+		float r = uniformf( );
 		assert( r >= 0.0f && r <= 1.0f );
 		printf( "uniform random = %.3f\n", r );
 	}
-	#endif
-
 
 	for( int i = 0; i < 10; i++ )
 	{
@@ -26,6 +23,14 @@ int main( int argc, char* argv[] )
 		printf( "guassian random = %.3f\n", r );
 	}
 
+	for( int i = 0; i < 10; i++ )
+	{
+		int r = uniform_rangei( 30, 100 );
+		assert( r >= 30 && r <= 100 );
+		printf( "random integer between 30 and 100 = %d\n", r );
+	}
 
+
+	printf( "done.\n" );
 	return 0;
 }

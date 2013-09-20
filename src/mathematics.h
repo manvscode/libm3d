@@ -53,12 +53,41 @@ extern "C" {
 
 #define RADIANS_PER_DEGREE  (M_PI / 180.0)
 
+float   uniformf           ( void ); /* [0.0f, 1.0f] */
+double  uniformd           ( void ); /* [0.0, 1.0] */
+int     uniform_rangei     ( int min, int max ); /* [min. max] */
+long    uniform_rangel     ( long min, long max ); /* [min. max] */
+float   uniform_rangef     ( float min, float max ); /* [min. max] */
+double  uniform_ranged     ( double min, double max ); /* [min. max] */
+float   uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
+double  uniform_unitd      ( void ); /* [-1.0, 1.0]; */
+float   guassianf          ( float mean, float stddev );
+double  guassiand          ( double mean, double stddev );
+float   fast_inverse_sqrt  ( float number );
 
-float   uniformf  ( void );
-double  uniformd  ( void );
-float   guassianf ( float mean, float stddev );
-double  guassiand ( double mean, double stddev );
 
+#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
+/* 
+ * C11 generic functions
+ */
+#define uniform_range(min_num, max_num) _Generic( (min_num), \
+	int:     uniform_rangei, \
+	long:    uniform_rangel, \
+	float:   uniform_rangef, \
+	double:  uniform_ranged, \
+	default: uniform_rangef \
+);
+#define uniform(type) _Generic( (type), \
+	float:   uniformf, \
+	double:  uniformd, \
+	default: uniformf \
+);
+#define guassian(mean, stddev) _Generic( (mean), \
+	float:   guassianf, \
+	double:  guassiand, \
+	default: guassianf \
+);
+#endif
 
 #include "vec2.h"
 #include "vec3.h"
