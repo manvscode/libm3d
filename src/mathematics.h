@@ -66,6 +66,13 @@ double  guassiand          ( double mean, double stddev );
 float   fast_inverse_sqrt  ( float number );
 
 
+#define linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
+#define lerp                                           linear_interpolation
+#define bilear_interpolation( a, b, x0, x1, x2, x3 )   (lerp( b, lerp( a, x0, x1 ), lerp( a, x2, x3 ) ))
+#define bilerp                                         bilear_interpolation
+
+
+
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
 /* 
  * C11 generic functions
