@@ -51,7 +51,14 @@ extern "C" {
 	#endif
 #endif
 
-#define RADIANS_PER_DEGREE  (M_PI / 180.0)
+#define PI                    (M_PI)
+#define TWO_PI                (2*M_PI)
+#define RADIANS_PER_DEGREE    (M_PI / 180.0)
+#define DEGREES_PER_RANDIAN   (180.0 / M_PI)
+
+#define to_radians( degrees )  ((degrees)*RADIANS_PER_DEGREE)
+#define to_degrees( radians )  ((radians)/RADIANS_PER_DEGREE)
+
 
 float   uniformf           ( void ); /* [0.0f, 1.0f] */
 double  uniformd           ( void ); /* [0.0, 1.0] */
