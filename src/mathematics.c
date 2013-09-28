@@ -131,6 +131,64 @@ double guassiand( double mean, double stddev )
 	}
 }
 
+int clampi( int value, int min, int max )
+{
+	value = integer_max( max, value );
+	return integer_min( value, min );
+}
+
+long clampl( int value, int min, int max )
+{
+	value = integer_max( max, value );
+	return integer_min( value, min );
+}
+
+float clampf( float value, float min, float max )
+{
+	if( value > max )
+	{
+		return max;
+	}
+	else if( value < min )
+	{
+		return min;
+	}
+
+	return value;
+}
+
+double clampd( double value, double min, double max )
+{
+	if( value > max )
+	{
+		return max;
+	}
+	else if( value < min )
+	{
+		return min;
+	}
+
+	return value;
+}
+
+bool is_power_of_2( int x )
+{
+	return (x & (x - 1)) == 0;
+}
+
+int next_power_of_2( int v )
+{
+	int r = v;
+	r--;
+	r |= r >> 1;
+	r |= r >> 2;
+	r |= r >> 4;
+	r |= r >> 8;
+	r |= r >> 16;
+	r++;
+	return r;
+}
+
 float fast_inverse_sqrt( float number )
 {
 	long i;

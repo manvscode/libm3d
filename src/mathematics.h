@@ -25,6 +25,8 @@
 extern "C" {
 #endif
 
+#include <stdbool.h>
+
 #if defined(SIMPLEGL_MATH_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T
 	#define SCALAR_T 
@@ -59,6 +61,8 @@ extern "C" {
 #define to_radians( degrees )  ((degrees)*RADIANS_PER_DEGREE)
 #define to_degrees( radians )  ((radians)/RADIANS_PER_DEGREE)
 
+#define integer_max( x, y )    ((x) ^ (((x) ^ (y)) & -((x) < (y))))
+#define integer_min( x, y )    ((y) ^ (((x) ^ (y)) & -((x) < (y))))
 
 float   uniformf           ( void ); /* [0.0f, 1.0f] */
 double  uniformd           ( void ); /* [0.0, 1.0] */
@@ -70,6 +74,13 @@ float   uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
 double  uniform_unitd      ( void ); /* [-1.0, 1.0]; */
 float   guassianf          ( float mean, float stddev );
 double  guassiand          ( double mean, double stddev );
+int     clampi             ( int value, int min, int max );
+long    clampl             ( int value, int min, int max );
+float   clampf             ( float value, float min, float max );
+double  clampd             ( double value, double min, double max );
+
+bool    is_power_of_2      ( int x );
+int     next_power_of_2    ( int v );
 float   fast_inverse_sqrt  ( float number );
 
 
