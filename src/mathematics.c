@@ -131,6 +131,46 @@ double guassiand( double mean, double stddev )
 	}
 }
 
+int maxi( int x, int y )
+{
+	return integer_max( x, y );
+}
+
+long maxl( long x, long y )
+{
+	return integer_max( x, y );
+}
+
+float maxf( float x, float y )
+{
+	return x > y ? x : y;
+}
+
+double maxd( double x, double y )
+{
+	return x > y ? x : y;
+}
+
+int mini( int x, int y )
+{
+	return integer_min( x, y );
+}
+
+long minl( long x, long y )
+{
+	return integer_min( x, y );
+}
+
+float minf( float x, float y )
+{
+	return x < y ? x : y;
+}
+
+double mind( double x, double y )
+{
+	return x < y ? x : y;
+}
+
 int clampi( int value, int min, int max )
 {
 	value = integer_max( max, value );

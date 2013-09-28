@@ -74,11 +74,18 @@ float   uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
 double  uniform_unitd      ( void ); /* [-1.0, 1.0]; */
 float   guassianf          ( float mean, float stddev );
 double  guassiand          ( double mean, double stddev );
+int     maxi               ( int x, int y );
+long    maxl               ( long x, long y );
+float   maxf               ( float x, float y );
+double  maxd               ( double x, double y );
+int     mini               ( int x, int y );
+long    minl               ( long x, long y );
+float   minf               ( float x, float y );
+double  mind               ( double x, double y );
 int     clampi             ( int value, int min, int max );
 long    clampl             ( int value, int min, int max );
 float   clampf             ( float value, float min, float max );
 double  clampd             ( double value, double min, double max );
-
 bool    is_power_of_2      ( int x );
 int     next_power_of_2    ( int v );
 float   fast_inverse_sqrt  ( float number );
