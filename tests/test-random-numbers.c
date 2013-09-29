@@ -12,8 +12,8 @@ int main( int argc, char* argv[] )
 
 	for( int i = 0; i < 10; i++ )
 	{
-		float r = uniformf( );
-		assert( r >= 0.0f && r <= 1.0f );
+		float r = uniform_unitf( );
+		assert( r >= -1.0f && r <= 1.0f );
 		printf( "uniform random = %.3f\n", r );
 	}
 

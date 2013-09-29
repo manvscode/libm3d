@@ -63,12 +63,12 @@ double uniform_ranged( double min, double max )
 
 float uniform_unitf( void )
 {
-	return ((float)((rand( ) << 1) - RAND_MAX)) / RAND_MAX; // (2.0f * rand() - RAND_MAX) / RAND_MAX
+	return 2 * (((float)rand()) / RAND_MAX) - 1;
 }
 
 double uniform_unitd( void )
 {
-	return ((double)((rand( ) << 1) - RAND_MAX)) / RAND_MAX; // (2.0f * rand() - RAND_MAX) / RAND_MAX
+	return 2 * (((float)rand()) / RAND_MAX) - 1;
 }
 
 float guassianf( float mean, float stddev )
