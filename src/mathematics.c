@@ -37,6 +37,11 @@ double uniformd( void )
 	return ((double)rand( )) / RAND_MAX;
 }
 
+long double uniformld( void )
+{
+	return ((long double)rand( )) / RAND_MAX;
+}
+
 int uniform_rangei( int min, int max )
 {
 	int diff = max - min;
@@ -68,7 +73,12 @@ float uniform_unitf( void )
 
 double uniform_unitd( void )
 {
-	return 2 * (((float)rand()) / RAND_MAX) - 1;
+	return 2 * (((double)rand()) / RAND_MAX) - 1;
+}
+
+long double uniform_unitld( void )
+{
+	return 2 * (((long double)rand()) / RAND_MAX) - 1;
 }
 
 float guassianf( float mean, float stddev )
@@ -131,6 +141,36 @@ double guassiand( double mean, double stddev )
 	}
 }
 
+long double guassianld( long double mean, long double stddev )
+{
+	long double ux;
+	long double uy;
+	long double s;
+	static long double spare;
+	static bool spare_ready = false;
+
+	if( spare_ready )
+	{
+		spare_ready = false;
+		return mean + stddev * spare;
+	}
+	else
+	{
+		do {
+			ux = uniformld( ) * 2.0 - 1;
+			uy = uniformld( ) * 2.0 - 1;
+			s = ux * ux + uy * uy;
+		} while( s >= 1.0f || s <= 0.0f );
+
+		long double mul = sqrtl( -2.0f * log(s) / s );
+
+		spare = uy * mul;
+		spare_ready = true;
+
+		return mean + stddev * ux * mul;
+	}
+}
+
 int maxi( int x, int y )
 {
 	return integer_max( x, y );
@@ -151,6 +191,11 @@ double maxd( double x, double y )
 	return x > y ? x : y;
 }
 
+long double maxld( long double x, long double y )
+{
+	return x > y ? x : y;
+}
+
 int mini( int x, int y )
 {
 	return integer_min( x, y );
@@ -167,6 +212,11 @@ float minf( float x, float y )
 }
 
 double mind( double x, double y )
+{
+	return x < y ? x : y;
+}
+
+long double minld( long double x, long double y )
 {
 	return x < y ? x : y;
 }
@@ -198,6 +248,20 @@ float clampf( float value, float min, float max )
 }
 
 double clampd( double value, double min, double max )
+{
+	if( value > max )
+	{
+		return max;
+	}
+	else if( value < min )
+	{
+		return min;
+	}
+
+	return value;
+}
+
+long double clampld( long double value, long double min, long double max )
 {
 	if( value > max )
 	{

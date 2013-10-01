@@ -1,8 +1,8 @@
 # Add new files in alphabetical order. Thanks.
-lib3dmath_src = vec2.c vec3.c vec4.c mat2.c mat3.c mat4.c mathematics.c
+lib3dmath_src = vec2.c vec3.c vec4.c mat2.c mat3.c mat4.c quat.c mathematics.c
 
 # Add new files in alphabetical order. Thanks.
-lib3dmath_headers = vec2.h vec3.h vec4.h mat2.h mat3.h mat4.h mathematics.h 
+lib3dmath_headers = vec2.h vec3.h vec4.h mat2.h mat3.h mat4.h quat.h mathematics.h 
 
 library_includedir      = $(includedir)/lib3dmath/
 library_include_HEADERS = $(lib3dmath_headers)
