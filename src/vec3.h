@@ -24,56 +24,14 @@
 #include <limits.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
-#ifdef __restrict
-#undef __restrict
-#define __restrict restrict
-#endif
-#ifdef __inline
-#undef __inline
-#define __inline inline
-#endif
 #else
-#define bool int
-#define true 1
-#define false 0
-#ifdef __restrict
-#undef __restrict
-#define __restrict
+#error "Need a C99 compiler."
 #endif
-#ifdef __inline
-#undef __inline
-#define __inline
-#endif
-#endif
+#include "mathematics.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if defined(VEC3_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(VEC3_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
-#endif
 
 /*
  * Three Dimensional Vectors
@@ -91,26 +49,173 @@ extern const vec3_t VEC3_XUNIT;
 extern const vec3_t VEC3_YUNIT;
 extern const vec3_t VEC3_ZUNIT;
 
+
 /* |a|
  * |b|
  * |c|
  */
-#define VEC3_VECTOR(a,b,c)  { .x = a, .y = b, .z = c }
+#define VEC3_LITERAL(a,b,c)  (vec3_t){ .x = a, .y = b, .z = c }
 
-vec3_t      vec3_add           ( const vec3_t* a, const vec3_t* b );
-vec3_t      vec3_subtract      ( const vec3_t* a, const vec3_t* b );
-vec3_t      vec3_multiply      ( const vec3_t* v, scaler_t s );
-void        vec3_scale         ( vec3_t* v, scaler_t s );
-scaler_t    vec3_dot_product   ( const vec3_t* a, const vec3_t* b );
-vec3_t      vec3_cross_product ( const vec3_t* a, const vec3_t* b );
-scaler_t    vec3_magnitude     ( const vec3_t* v );
-scaler_t    vec3_distance      ( const vec3_t* a, const vec3_t* b );
-scaler_t    vec3_angle         ( const vec3_t* a, const vec3_t* b ); /* in radians */
-void        vec3_normalize     ( vec3_t* v );
-bool        vec3_is_normalized ( const vec3_t* v );
-void        vec3_negate        ( vec3_t* v );
-bool        vec3_compare       ( const vec3_t* a, const vec3_t* b );
-void        vec3_zero          ( vec3_t* v );
+
+static inline vec3_t vec3_add( vec3_t a, vec3_t b )
+{
+	return VEC3_LITERAL(
+		a.x + b.x,
+		a.y + b.y,
+		a.z + b.z
+	);
+}
+
+static inline vec3_t vec3_subtract( vec3_t a, vec3_t b )
+{
+	return VEC3_LITERAL(
+		a.x - b.x,
+		a.y - b.y,
+		a.z - b.z
+	);
+}
+
+static inline vec3_t vec3_multiply( vec3_t v, scaler_t s )
+{
+	return VEC3_LITERAL(
+    	v.x * s,
+    	v.y * s,
+    	v.z * s
+	);
+}
+
+static inline void vec3_scale( vec3_t* v, scaler_t s )
+{
+    v->x *= s;
+    v->y *= s;
+    v->z *= s;
+}
+
+static inline scaler_t vec3_dot_product( vec3_t a, vec3_t b )
+{
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+static inline vec3_t vec3_cross_product( vec3_t a, vec3_t b )
+{
+	return VEC3_LITERAL(
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x
+	);
+}
+
+static inline scaler_t vec3_magnitude( vec3_t v )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return sqrtl( v.x * v.x + v.y * v.y + v.z * v.z );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return sqrt( v.x * v.x + v.y * v.y + v.z * v.z );
+	#else /* default: use float */
+    return sqrtf( v.x * v.x + v.y * v.y + v.z * v.z );
+	#endif
+}
+
+static inline scaler_t vec3_distance( vec3_t a, vec3_t b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return sqrtl(
+		(a.x - b.x) * (a.x - b.x) +
+		(a.y - b.y) * (a.y - b.y) +
+		(a.z - b.z) * (a.z - b.z)
+	);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return sqrt(
+		(a.x - b.x) * (a.x - b.x) +
+		(a.y - b.y) * (a.y - b.y) +
+		(a.z - b.z) * (a.z - b.z)
+	);
+	#else /* default: use float */
+    return sqrtf(
+		(a.x - b.x) * (a.x - b.x) +
+		(a.y - b.y) * (a.y - b.y) +
+		(a.z - b.z) * (a.z - b.z)
+	);
+	#endif
+}
+
+static inline scaler_t vec3_angle( vec3_t a, vec3_t b ) /* in radians */
+{
+    scaler_t dot_product = vec3_dot_product( a, b );
+    scaler_t a_length    = vec3_magnitude( a );
+    scaler_t b_length    = vec3_magnitude( b );
+
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return acosl( dot_product / ( a_length * b_length ) );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return acos( dot_product / ( a_length * b_length ) );
+	#else /* default: use float */
+    return acosf( dot_product / ( a_length * b_length ) );
+	#endif
+}
+
+static inline void vec3_normalize( vec3_t* v )
+{
+	#if 0
+    scaler_t length = vec3_magnitude( v );
+    v->x /= length;
+    v->y /= length;
+    v->z /= length;
+	#else
+    scaler_t inverse_length = fast_inverse_sqrt( v->x * v->x + v->y * v->y + v->z * v->z );
+    v->x *= inverse_length;
+    v->y *= inverse_length;
+    v->z *= inverse_length;
+	#endif
+}
+
+static inline bool vec3_is_normalized( vec3_t v )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return (fabsl(v.x - 1.0) < SCALAR_EPSILON) &&
+           (fabsl(v.y - 1.0) < SCALAR_EPSILON) &&
+           (fabsl(v.z - 1.0) < SCALAR_EPSILON);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return (fabs(v.x - 1.0) < SCALAR_EPSILON) &&
+           (fabs(v.y - 1.0) < SCALAR_EPSILON) &&
+           (fabs(v.z - 1.0) < SCALAR_EPSILON);
+	#else /* default: use float */
+    return (fabsf(v.x - 1.0f) < SCALAR_EPSILON) &&
+           (fabsf(v.y - 1.0f) < SCALAR_EPSILON) &&
+           (fabsf(v.z - 1.0f) < SCALAR_EPSILON);
+	#endif
+}
+
+static inline void vec3_negate( vec3_t* v )
+{
+    v->x = -v->x;
+    v->y = -v->y;
+    v->z = -v->z;
+}
+
+static inline bool vec3_compare( const vec3_t a, const vec3_t b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return (fabsl(a.x - b.x) < SCALAR_EPSILON) &&
+           (fabsl(a.y - b.y) < SCALAR_EPSILON) &&
+           (fabsl(a.z - b.z) < SCALAR_EPSILON);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return (fabs(a.x - b.x) < SCALAR_EPSILON) &&
+           (fabs(a.y - b.y) < SCALAR_EPSILON) &&
+           (fabs(a.z - b.z) < SCALAR_EPSILON);
+	#else /* default: use float */
+    return (fabsf(a.x - b.x) < SCALAR_EPSILON) &&
+           (fabsf(a.y - b.y) < SCALAR_EPSILON) &&
+           (fabsf(a.z - b.z) < SCALAR_EPSILON);
+	#endif
+}
+
+static inline void vec3_zero( vec3_t* v )
+{
+	*v = VEC3_ZERO;
+}
+
+
 const char* vec3_to_string     ( const vec3_t* v ); /* not thread safe */
 
 

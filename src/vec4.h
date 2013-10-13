@@ -24,55 +24,12 @@
 #include <limits.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
-#ifdef __restrict
-#undef __restrict
-#define __restrict restrict
-#endif
-#ifdef __inline
-#undef __inline
-#define __inline inline
-#endif
 #else
-#define bool int
-#define true 1
-#define false 0
-#ifdef __restrict
-#undef __restrict
-#define __restrict
+#error "Need a C99 compiler."
 #endif
-#ifdef __inline
-#undef __inline
-#define __inline
-#endif
-#endif
+#include "mathematics.h"
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if defined(VEC4_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(VEC4_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
 #endif
 
 /*
@@ -98,22 +55,183 @@ extern const vec4_t VEC4_WUNIT;
  * |c|
  * |d|
  */
-#define VEC4_VECTOR(a,b,c,d)  { .x = a, .y = b, .z = c, .w = d }
+#define VEC4_LITERAL(a,b,c,d)  (vec4_t){ .x = a, .y = b, .z = c, .w = d }
 
-vec4_t      vec4_add            ( const vec4_t* a, const vec4_t* b );
-vec4_t      vec4_subtract       ( const vec4_t* a, const vec4_t* b );
-vec4_t      vec4_multiply       ( const vec4_t* v, scaler_t s );
-void        vec4_scale          ( vec4_t* v, scaler_t s );
-scaler_t    vec4_dot_product    ( const vec4_t* a, const vec4_t* b );
-vec4_t      vec4_cross_product  ( const vec4_t* a, const vec4_t* b, const vec4_t* c );
-scaler_t    vec4_magnitude      ( const vec4_t* v );
-scaler_t    vec4_distance       ( const vec4_t* a, const vec4_t* b );
-scaler_t    vec4_angle          ( const vec4_t* a, const vec4_t* b ); /* in radians */
-void        vec4_normalize      ( vec4_t* v );
-bool        vec4_is_normalized  ( const vec4_t* v );
-void        vec4_negate         ( vec4_t* v );
-bool        vec4_compare        ( const vec4_t* a, const vec4_t* b );
-void        vec4_zero           ( vec4_t* v );
+
+static inline vec4_t vec4_add( const vec4_t* a, const vec4_t* b )
+{
+	return VEC4_LITERAL(
+		a->x + b->x,
+		a->y + b->y,
+		a->z + b->z,
+		a->w + b->w
+	);
+}
+
+static inline vec4_t vec4_subtract( const vec4_t* a, const vec4_t* b )
+{
+	return VEC4_LITERAL(
+		a->x - b->x,
+		a->y - b->y,
+		a->z - b->z,
+		a->w - b->w
+	);
+}
+
+static inline vec4_t vec4_multiply( const vec4_t* v, scaler_t s )
+{
+	return VEC4_LITERAL(
+		v->x * s,
+		v->y * s,
+		v->z * s,
+		v->w * s
+	);
+}
+
+static inline void vec4_scale( vec4_t* v, scaler_t s )
+{
+    v->x *= s;
+    v->y *= s;
+    v->z *= s;
+    v->w *= s;
+}
+
+static inline scaler_t vec4_dot_product( const vec4_t* a, const vec4_t* b )
+{
+    return a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
+}
+
+static inline vec4_t vec4_cross_product( const vec4_t* a, const vec4_t* b, const vec4_t* c )
+{
+    vec4_t result;
+    // TODO: Implement this!
+    assert( false );
+    return result;
+}
+
+static inline scaler_t vec4_magnitude( const vec4_t* v )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return sqrtl( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return sqrt( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
+	#else /* default: use float */
+    return sqrtf( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
+	#endif
+}
+
+static inline scaler_t vec4_distance( const vec4_t* a, const vec4_t* b )
+{
+	#if defined(VEC3_USE_LONG_DOUBLE)
+    return sqrtl(
+		(a->x - b->x) * (a->x - b->x) +
+		(a->y - b->y) * (a->y - b->y) +
+		(a->z - b->z) * (a->z - b->z) +
+		(a->w - b->w) * (a->w - b->w)
+	);
+	#elif defined(VEC3_USE_DOUBLE)
+    return sqrt(
+		(a->x - b->x) * (a->x - b->x) +
+		(a->y - b->y) * (a->y - b->y) +
+		(a->z - b->z) * (a->z - b->z) +
+		(a->w - b->w) * (a->w - b->w)
+	);
+	#else /* default: use float */
+    return sqrtf(
+		(a->x - b->x) * (a->x - b->x) +
+		(a->y - b->y) * (a->y - b->y) +
+		(a->z - b->z) * (a->z - b->z) +
+		(a->w - b->w) * (a->w - b->w)
+	);
+	#endif
+}
+
+static inline scaler_t vec4_angle( const vec4_t* a, const vec4_t* b ) /* in radians */
+{
+    scaler_t dot_product = vec4_dot_product( a, b );
+    scaler_t a_length    = vec4_magnitude( a );
+    scaler_t b_length    = vec4_magnitude( b );
+
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return acosl( dot_product / ( a_length * b_length ) );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return acos( dot_product / ( a_length * b_length ) );
+	#else /* default: use float */
+    return acosf( dot_product / ( a_length * b_length ) );
+	#endif
+}
+
+static inline void vec4_normalize( vec4_t* v )
+{
+    #if 0
+    scaler_t length = vec4_magnitude( v );
+    v->x /= length;
+    v->y /= length;
+    v->z /= length;
+    v->w /= length;
+    #else
+    scaler_t inverse_length = fast_inverse_sqrt( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
+    v->x *= inverse_length;
+    v->y *= inverse_length;
+    v->z *= inverse_length;
+    v->w *= inverse_length;
+    #endif
+}
+
+static inline bool vec4_is_normalized( const vec4_t* v )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return (fabsl(v->x - 1.0f) < SCALAR_EPSILON) &&
+           (fabsl(v->y - 1.0f) < SCALAR_EPSILON) &&
+           (fabsl(v->z - 1.0f) < SCALAR_EPSILON) &&
+           (fabsl(v->w - 1.0f) < SCALAR_EPSILON);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return (fabs(v->x - 1.0f) < SCALAR_EPSILON) &&
+           (fabs(v->y - 1.0f) < SCALAR_EPSILON) &&
+           (fabs(v->z - 1.0f) < SCALAR_EPSILON) &&
+           (fabs(v->w - 1.0f) < SCALAR_EPSILON);
+	#else /* default: use float */
+    return (fabsf(v->x - 1.0f) < SCALAR_EPSILON) &&
+           (fabsf(v->y - 1.0f) < SCALAR_EPSILON) &&
+           (fabsf(v->z - 1.0f) < SCALAR_EPSILON) &&
+           (fabsf(v->w - 1.0f) < SCALAR_EPSILON);
+	#endif
+}
+
+static inline void vec4_negate( vec4_t* v )
+{
+    v->x = -v->x;
+    v->y = -v->y;
+    v->z = -v->z;
+    v->w = -v->w;
+}
+
+static inline bool vec4_compare( const vec4_t* a, const vec4_t* b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return (fabsl(a->x - b->x) < SCALAR_EPSILON) &&
+           (fabsl(a->y - b->y) < SCALAR_EPSILON) &&
+           (fabsl(a->z - b->z) < SCALAR_EPSILON) &&
+           (fabsl(a->w - b->w) < SCALAR_EPSILON);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return (fabs(a->x - b->x) < SCALAR_EPSILON) &&
+           (fabs(a->y - b->y) < SCALAR_EPSILON) &&
+           (fabs(a->z - b->z) < SCALAR_EPSILON) &&
+           (fabs(a->w - b->w) < SCALAR_EPSILON);
+	#else /* default: use float */
+    return (fabsf(a->x - b->x) < SCALAR_EPSILON) &&
+           (fabsf(a->y - b->y) < SCALAR_EPSILON) &&
+           (fabsf(a->z - b->z) < SCALAR_EPSILON) &&
+           (fabsf(a->w - b->w) < SCALAR_EPSILON);
+	#endif
+}
+
+static inline void vec4_zero( vec4_t* v )
+{
+	*v = VEC4_ZERO;
+}
+
+
 const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
 
 #define vec4_to_vec3( p_v ) ((vec3_t*)(p_v)

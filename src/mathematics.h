@@ -27,7 +27,7 @@ extern "C" {
 
 #include <stdbool.h>
 
-#if defined(SIMPLEGL_MATH_USE_LONG_DOUBLE)
+#if defined(LIB3DMATH_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T
 	#define SCALAR_T 
 	typedef long double scaler_t;
@@ -35,7 +35,7 @@ extern "C" {
 	#ifndef SCALAR_EPSILON
 	#define SCALAR_EPSILON LDBL_EPSILON
 	#endif
-#elif defined(SIMPLEGL_MATH_USE_DOUBLE)
+#elif defined(LIB3DMATH_USE_DOUBLE)
 	#ifndef SCALAR_T
 	#define SCALAR_T 
 	typedef double scaler_t;
@@ -53,6 +53,7 @@ extern "C" {
 	#endif
 #endif
 
+#define HALF_PI               (M_PI_2)
 #define PI                    (M_PI)
 #define TWO_PI                (2*M_PI)
 #define RADIANS_PER_DEGREE    (M_PI / 180.0)
@@ -94,7 +95,27 @@ double       clampd             ( double value, double min, double max );
 long double  clampld            ( long double value, long double min, long double max );
 bool         is_power_of_2      ( int x );
 int          next_power_of_2    ( int v );
-float        fast_inverse_sqrt  ( float number );
+
+
+static inline scaler_t fast_inverse_sqrt( scaler_t number )
+{
+	long i;
+	scaler_t x2, y;
+	const scaler_t threehalfs = 1.5F;
+
+	x2 = number * 0.5F;
+	y  = number;
+	i  = * (long *) &y;                       /* evil floating point bit level hacking */
+	i  = 0x5f3759df - ( i >> 1 );               /* what the fuck? */
+	y  = * (scaler_t *) &i;
+	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 1st iteration */
+	#if 0
+	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 2nd iteration, this can be removed */
+	#endif
+
+	return y;
+}
+
 
 
 #define linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
@@ -127,12 +148,12 @@ float        fast_inverse_sqrt  ( float number );
 );
 #endif
 
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat2.h"
-#include "mat3.h"
-#include "mat4.h"
+//#include "vec2.h"
+//#include "vec3.h"
+//#include "vec4.h"
+//#include "mat2.h"
+//#include "mat3.h"
+//#include "mat4.h"
 
 #ifdef __cplusplus
 } /* C linkage */

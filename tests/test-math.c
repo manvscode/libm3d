@@ -21,8 +21,8 @@ int main( int argc, char* argv[] )
 	printf( "%s\n", mat3_to_string(&matrix) );
 
 
-	mat2_t A = MAT2_MATRIX(2, 1, 0.5, 3);
-	mat2_t B = MAT2_MATRIX(0.33, 7, 4, -3);
+	mat2_t A = MAT2_LITERAL(2, 1, 0.5, 3);
+	mat2_t B = MAT2_LITERAL(0.33, 7, 4, -3);
 
 	mat2_t C = mat2_mult_matrix( &A, &B );
 
@@ -32,9 +32,9 @@ int main( int argc, char* argv[] )
 
 
 #if 1
-	mat3_t D = MAT3_MATRIX(1, 0, 2, 3, 1, 1, 1, 5, 1);
-	mat3_t E = MAT3_MATRIX(1, 1, 1, 1, 1, 1, 1, 1, 1);
-	vec3_t a = VEC3_VECTOR(1,2,1);
+	mat3_t D = MAT3_LITERAL(1, 0, 2, 3, 1, 1, 1, 5, 1);
+	mat3_t E = MAT3_LITERAL(1, 1, 1, 1, 1, 1, 1, 1, 1);
+	vec3_t a = VEC3_LITERAL(1,2,1);
 	vec3_t r = mat3_mult_vector( &D, &a );
 
 

@@ -24,55 +24,12 @@
 #include <limits.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
-#ifdef __restrict
-#undef __restrict
-#define __restrict restrict
-#endif
-#ifdef __inline
-#undef __inline
-#define __inline inline
-#endif
 #else
-#define bool int
-#define true 1
-#define false 0
-#ifdef __restrict
-#undef __restrict
-#define __restrict
+#error "Need a C99 compiler."
 #endif
-#ifdef __inline
-#undef __inline
-#define __inline
-#endif
-#endif
+#include "mathematics.h"
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#if defined(VEC2_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(VEC2_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
 #endif
 
 /*
@@ -92,23 +49,155 @@ extern const vec2_t VEC2_YUNIT;
 /* |a|
  * |b|
  */
-#define VEC2_VECTOR(a,b)  { .x = a, .y = b }
+#define VEC2_LITERAL(a,b)  (vec2_t){ .x = a, .y = b }
 
-vec2_t      vec2_add           ( const vec2_t* a, const vec2_t* b );
-vec2_t      vec2_subtract      ( const vec2_t* a, const vec2_t* b );
-vec2_t      vec2_multiply      ( const vec2_t* v, scaler_t s );
-void        vec2_scale         ( vec2_t* v, scaler_t s );
-scaler_t    vec2_dot_product   ( const vec2_t* a, const vec2_t* b );
-vec2_t      vec2_cross_product ( const vec2_t* v );
-scaler_t    vec2_determinant   ( const vec2_t* a, const vec2_t* b );
-scaler_t    vec2_magnitude     ( const vec2_t* v );
-scaler_t    vec2_distance      ( const vec2_t* a, const vec2_t* b );
-scaler_t    vec2_angle         ( const vec2_t* a, const vec2_t* b ); /* in radians */
-void        vec2_normalize     ( vec2_t* v );
-bool        vec2_is_normalized ( const vec2_t* v );
-void        vec2_negate        ( vec2_t* v );
-bool        vec2_compare       ( const vec2_t* a, const vec2_t* b );
-void        vec2_zero          ( vec2_t* v );
+static inline vec2_t vec2_add( const vec2_t* a, const vec2_t* b )
+{
+	return VEC2_LITERAL(
+		a->x + b->x,
+		a->y + b->y
+	);
+}
+
+static inline vec2_t vec2_subtract( const vec2_t* a, const vec2_t* b )
+{
+	return VEC2_LITERAL(
+		a->x - b->x,
+		a->y - b->y
+    );
+}
+
+static inline vec2_t vec2_multiply( const vec2_t* v, scaler_t s )
+{
+	return VEC2_LITERAL(
+		v->x * s,
+		v->y * s
+	);
+}
+
+static inline void vec2_scale( vec2_t* v, scaler_t s )
+{
+    v->x *= s;
+    v->y *= s;
+}
+
+static inline scaler_t vec2_dot_product( const vec2_t* a, const vec2_t* b )
+{
+    return a->x * b->x + a->y * b->y;
+}
+
+static inline vec2_t vec2_cross_product( const vec2_t* v )
+{
+	return VEC2_LITERAL(
+		 v->y,
+		-v->x
+	);
+}
+
+static inline scaler_t vec2_determinant( const vec2_t* a, const vec2_t* b )
+{
+    return a->x * b->y - b->x * a->y;
+}
+
+static inline scaler_t vec2_magnitude( const vec2_t* v )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return sqrtl( v->x * v->x + v->y * v->y );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return sqrt( v->x * v->x + v->y * v->y );
+	#else /* default: use float */
+    return sqrtf( v->x * v->x + v->y * v->y );
+	#endif
+}
+
+static inline scaler_t vec2_distance( const vec2_t* a, const vec2_t* b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return sqrtl(
+		(a->x - b->x) * (a->x - b->x) +
+		(a->y - b->y) * (a->y - b->y)
+	);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return sqrt(
+		(a->x - b->x) * (a->x - b->x) +
+		(a->y - b->y) * (a->y - b->y)
+	);
+	#else /* default: use float */
+    return sqrtf(
+		(a->x - b->x) * (a->x - b->x) +
+		(a->y - b->y) * (a->y - b->y)
+	);
+	#endif
+}
+
+static inline scaler_t vec2_angle( const vec2_t* a, const vec2_t* b ) /* in radians */
+{
+    scaler_t dot_product = vec2_dot_product( a, b );
+    scaler_t a_length    = vec2_magnitude( a );
+    scaler_t b_length    = vec2_magnitude( b );
+
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return acosl( dot_product / ( a_length * b_length ) );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return acos( dot_product / ( a_length * b_length ) );
+	#else /* default: use float */
+    return acosf( dot_product / ( a_length * b_length ) );
+	#endif
+}
+
+static inline void vec2_normalize( vec2_t* v )
+{
+	#if 0
+    scaler_t length = vec2_magnitude( v );
+    v->x /= length;
+    v->y /= length;
+	#else
+    scaler_t inverse_length = fast_inverse_sqrt( v->x * v->x + v->y * v->y );
+    v->x *= inverse_length;
+    v->y *= inverse_length;
+	#endif
+}
+
+static inline bool vec2_is_normalized( const vec2_t* v )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return (fabsl(v->x - 1.0) < SCALAR_EPSILON) &&
+           (fabsl(v->y - 1.0) < SCALAR_EPSILON);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return (fabs(v->x - 1.0) < SCALAR_EPSILON) &&
+           (fabs(v->y - 1.0) < SCALAR_EPSILON);
+	#else /* default: use float */
+    return (fabsf(v->x - 1.0f) < SCALAR_EPSILON) &&
+           (fabsf(v->y - 1.0f) < SCALAR_EPSILON);
+	#endif
+}
+
+static inline void vec2_negate( vec2_t* v )
+{
+    v->x = -v->x;
+    v->y = -v->y;
+}
+
+static inline bool vec2_compare( const vec2_t* a, const vec2_t* b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+    return (fabsl(a->x - b->x) < SCALAR_EPSILON) &&
+           (fabsl(a->y - b->y) < SCALAR_EPSILON);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+    return (fabs(a->x - b->x) < SCALAR_EPSILON) &&
+           (fabs(a->y - b->y) < SCALAR_EPSILON);
+	#else /* default: use float */
+    return (fabsf(a->x - b->x) < SCALAR_EPSILON) &&
+           (fabsf(a->y - b->y) < SCALAR_EPSILON);
+	#endif
+}
+
+static inline void vec2_zero( vec2_t* v )
+{
+	*v = VEC2_ZERO;
+}
+
+
 const char* vec2_to_string     ( const vec2_t* v ); /* not thread safe */
 
 #define     vec2_area          vec2_determinant

@@ -24,58 +24,15 @@
 #include <limits.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
-#ifdef __restrict
-#undef __restrict
-#define __restrict restrict
-#endif
-#ifdef __inline
-#undef __inline
-#define __inline inline
-#endif
 #else
-#define bool int
-#define true 1
-#define false 0
-#ifdef __restrict
-#undef __restrict
-#define __restrict
+#error "Need a C99 compiler."
 #endif
-#ifdef __inline
-#undef __inline
-#define __inline
-#endif
-#endif
+#include "mathematics.h"
+#include "vec3.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "vec3.h"
-
-#if defined(MAT3_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(MAT3_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
-#endif
 
 
 /*
@@ -92,7 +49,7 @@ extern const mat3_t MAT3_ZERO;
  * |b e h|
  * |c f i|
  */
-#define MAT3_MATRIX(a,b,c,d,e,f,g,h,i)  { .m = { (a), (b), (c), (d), (e), (f), (g), (h), (i) } }
+#define MAT3_LITERAL(a,b,c,d,e,f,g,h,i)  (mat3_t){ .m = { (a), (b), (c), (d), (e), (f), (g), (h), (i) } }
 
 void          mat3_identity    ( mat3_t* m );
 void          mat3_zero        ( mat3_t* m );

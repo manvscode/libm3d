@@ -24,32 +24,14 @@
 #include <limits.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
-#ifdef __restrict
-#undef __restrict
-#define __restrict restrict
-#endif
-#ifdef __inline
-#undef __inline
-#define __inline inline
-#endif
 #else
-#define bool int
-#define true 1
-#define false 0
-#ifdef __restrict
-#undef __restrict
-#define __restrict
+#error "Need a C99 compiler."
 #endif
-#ifdef __inline
-#undef __inline
-#define __inline
-#endif
-#endif
+#include "mathematics.h"
+#include "vec4.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "vec4.h"
 
 #if defined(MAT4_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T
@@ -93,7 +75,7 @@ extern const mat4_t MAT4_ZERO;
  * |C G K O|
  * |D H L P|
  */
-#define MAT4_MATRIX(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)  { .m = { (A), (B), (C), (D), (E), (F), (G), (H), (I), (J), (K), (L), (M), (N), (O), (P) } }
+#define MAT4_LITERAL(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)  (mat4_t){ .m = { (A), (B), (C), (D), (E), (F), (G), (H), (I), (J), (K), (L), (M), (N), (O), (P) } }
 
 void          mat4_identity    ( mat4_t* m );
 void          mat4_zero        ( mat4_t* m );
