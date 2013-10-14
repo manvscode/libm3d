@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "087BA821180B9769005EE561"
-               BuildableName = "liblib3dmath.a"
+               BuildableName = "lib3dmath.a"
                BlueprintName = "3dmath"
                ReferencedContainer = "container:lib3dmath.xcodeproj">
             </BuildableReference>
