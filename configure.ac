@@ -22,11 +22,11 @@ AH_BOTTOM([
 ])
 
 
-DFLAGS=""
+DFLAGS="$DFLAGS"
 
-CFLAGS="-std=c99 -Wall -O3 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
-#CFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
-LDFLAGS="-lm"
+CFLAGS="-std=c99 -Wall -O3 $DFLAGS -I/usr/include "
+#CFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include "
+LDFLAGS="-lm "
 
 
 AM_PROG_AR
@@ -43,6 +43,16 @@ echo " CXXFLAGS = $CFLAGS"
 echo "  LDFLAGS = $LDFLAGS"
 echo ""
 echo " ------------------------------ "
+
+
+AC_ARG_ENABLE([tests],
+	[AS_HELP_STRING([--disable-tests], [Enable test programs.])],
+	[:],
+	[enable_tests=no])
+
+AM_CONDITIONAL([ENABLE_TESTS], [test "$enable_tests" = "yes"])
+
+
 
 AC_CONFIG_FILES([
         Makefile
