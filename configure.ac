@@ -1,3 +1,4 @@
+AC_PREREQ(2.67)
 AC_INIT([lib3dmath], [0.1], [manvscode@manvscode.com], [lib3dmath], [http://www.manvscode.com/])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
@@ -19,10 +20,6 @@ AH_TOP([
 AH_BOTTOM([
 #endif /* _LIB3DMATH_H_ */
 ])
-
-# If big endian define WORDS_BIGENDIAN
-AC_C_BIGENDIAN
-
 
 
 DFLAGS=""
@@ -55,10 +52,9 @@ AC_PROG_MAKE_SET
 
 
 AM_PROG_AR
-LT_INIT([shared static])
-
 AC_PROG_LIBTOOL
 AM_PROG_LIBTOOL
+LT_INIT([static])
 
 AC_PROG_INSTALL
 
