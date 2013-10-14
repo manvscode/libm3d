@@ -209,7 +209,7 @@ AUTOMAKE = ${SHELL} /Users/manvscode/projects/lib3dmath/missing automake-1.14
 AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -Wall -O3  -I/usr/include -I/usr/local/include -I/usr/include 
+CFLAGS = -std=c99 -Wall -O3  -I/usr/include -I/usr/local/include -I/usr/include 
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++

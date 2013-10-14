@@ -24,31 +24,9 @@ AH_BOTTOM([
 
 DFLAGS=""
 
-CFLAGS="-Wall -O3 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
+CFLAGS="-std=c99 -Wall -O3 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
 #CFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include -I/usr/local/include -I/usr/include "
 LDFLAGS="-lm"
-
-
-AC_CHECK_HEADERS([float.h])
-AC_CHECK_HEADERS([math.h])
-AC_CHECK_HEADERS([limits.h])
-AC_CHECK_FUNCS([floor])
-AC_CHECK_FUNCS([memset])
-AC_CHECK_FUNCS([sqrtf])
-AC_CHECK_FUNCS([sqrt])
-AC_CHECK_FUNCS([sqrtl])
-AC_FUNC_MALLOC
-AC_HEADER_STDBOOL
-AC_TYPE_INT16_T
-AC_TYPE_INT32_T
-AC_TYPE_SIZE_T
-AC_TYPE_UINT16_T
-AC_TYPE_UINT32_T
-AC_TYPE_UINT8_T
-AC_PREREQ
-AC_PROG_AWK
-AC_PROG_LN_S
-AC_PROG_MAKE_SET
 
 
 AM_PROG_AR
