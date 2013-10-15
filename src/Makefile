@@ -209,13 +209,9 @@ AUTOMAKE = ${SHELL} /Users/manvscode/projects/lib3dmath/missing automake-1.14
 AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -std=c99 -Wall -O3  -I/usr/include 
+CFLAGS =  -g -O2
 CPP = gcc -E
 CPPFLAGS = 
-CXX = g++
-CXXCPP = g++ -E
-CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -271,7 +267,6 @@ abs_top_builddir = /Users/manvscode/projects/lib3dmath
 abs_top_srcdir = /Users/manvscode/projects/lib3dmath
 ac_ct_AR = ar
 ac_ct_CC = gcc
-ac_ct_CXX = g++
 ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .

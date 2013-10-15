@@ -7,7 +7,6 @@ AC_CONFIG_HEADERS([src/lib3dmath-config.h])
 
 AC_PROG_CC
 AC_PROG_CC_STDC
-AC_PROG_CXX
 AC_C_INLINE
 AC_HEADER_STDC
 AC_PROG_RANLIB
@@ -24,9 +23,9 @@ AH_BOTTOM([
 
 DFLAGS="$DFLAGS"
 
-CFLAGS="-std=c99 -Wall -O3 $DFLAGS -I/usr/include "
-#CFLAGS="-Wall -g -ggdb -O0 $DFLAGS -I/usr/include "
-LDFLAGS="-lm "
+CFLAGS="$DFLAGS $CFLAGS"
+#CFLAGS="-Wall -g -ggdb -O0 $DFLAGS $CFLAGS"
+LDFLAGS="-lm $LDFLAGS"
 
 
 AM_PROG_AR
@@ -39,7 +38,6 @@ AC_PROG_INSTALL
 echo " ------------------------------ "
 echo ""
 echo "   CFLAGS = $CFLAGS"
-echo " CXXFLAGS = $CFLAGS"
 echo "  LDFLAGS = $LDFLAGS"
 echo ""
 echo " ------------------------------ "
