@@ -1,6 +1,6 @@
 AC_PREREQ(2.67)
 AC_INIT([lib3dmath], [0.1], [manvscode@manvscode.com], [lib3dmath], [http://www.manvscode.com/])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([1.13 foreign silent-rules -Wall -Werror])
 
 AM_SILENT_RULES([yes])
 AC_CONFIG_HEADERS([src/lib3dmath-config.h])
