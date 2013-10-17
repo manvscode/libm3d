@@ -6,11 +6,9 @@ AM_SILENT_RULES([yes])
 AC_CONFIG_HEADERS([src/lib3dmath-config.h])
 
 AC_PROG_CC
-AC_PROG_CC_STDC
+AC_PROG_CC_C99
 AC_C_INLINE
 AC_HEADER_STDC
-AC_PROG_RANLIB
-
 
 AH_TOP([
 #ifndef _LIB3DMATH_H_
@@ -29,9 +27,18 @@ LDFLAGS="-lm $LDFLAGS"
 
 
 AM_PROG_AR
+LT_INIT([static])
 AC_PROG_LIBTOOL
 AM_PROG_LIBTOOL
-LT_INIT([static])
+
+# -------------------------------------------------
+AC_ARG_ENABLE([tests],
+	[AS_HELP_STRING([--disable-tests], [Enable test programs.])],
+	[:],
+	[enable_tests=no])
+
+AM_CONDITIONAL([ENABLE_TESTS], [test "$enable_tests" = "yes"])
+# -------------------------------------------------
 
 AC_PROG_INSTALL
 
@@ -41,16 +48,6 @@ echo "   CFLAGS = $CFLAGS"
 echo "  LDFLAGS = $LDFLAGS"
 echo ""
 echo " ------------------------------ "
-
-
-AC_ARG_ENABLE([tests],
-	[AS_HELP_STRING([--disable-tests], [Enable test programs.])],
-	[:],
-	[enable_tests=no])
-
-AM_CONDITIONAL([ENABLE_TESTS], [test "$enable_tests" = "yes"])
-
-
 
 AC_CONFIG_FILES([
         Makefile
