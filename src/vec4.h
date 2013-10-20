@@ -58,7 +58,7 @@ extern const vec4_t VEC4_WUNIT;
 #define VEC4_LITERAL(a,b,c,d)  (vec4_t){ .x = a, .y = b, .z = c, .w = d }
 
 
-static inline vec4_t vec4_add( const vec4_t* a, const vec4_t* b )
+static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
 	return VEC4_LITERAL(
 		a->x + b->x,
@@ -68,7 +68,7 @@ static inline vec4_t vec4_add( const vec4_t* a, const vec4_t* b )
 	);
 }
 
-static inline vec4_t vec4_subtract( const vec4_t* a, const vec4_t* b )
+static inline vec4_t vec4_subtract( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
 	return VEC4_LITERAL(
 		a->x - b->x,
@@ -96,12 +96,12 @@ static inline void vec4_scale( vec4_t* v, scaler_t s )
     v->w *= s;
 }
 
-static inline scaler_t vec4_dot_product( const vec4_t* a, const vec4_t* b )
+static inline scaler_t vec4_dot_product( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
     return a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
 }
 
-static inline vec4_t vec4_cross_product( const vec4_t* a, const vec4_t* b, const vec4_t* c )
+static inline vec4_t vec4_cross_product( const vec4_t* __restrict a, const vec4_t* __restrict b, const vec4_t* __restrict c )
 {
     vec4_t result;
     // TODO: Implement this!
@@ -120,7 +120,7 @@ static inline scaler_t vec4_magnitude( const vec4_t* v )
 	#endif
 }
 
-static inline scaler_t vec4_distance( const vec4_t* a, const vec4_t* b )
+static inline scaler_t vec4_distance( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
 	#if defined(VEC3_USE_LONG_DOUBLE)
     return sqrtl(
@@ -146,7 +146,7 @@ static inline scaler_t vec4_distance( const vec4_t* a, const vec4_t* b )
 	#endif
 }
 
-static inline scaler_t vec4_angle( const vec4_t* a, const vec4_t* b ) /* in radians */
+static inline scaler_t vec4_angle( const vec4_t* __restrict a, const vec4_t* __restrict b ) /* in radians */
 {
     scaler_t dot_product = vec4_dot_product( a, b );
     scaler_t a_length    = vec4_magnitude( a );
@@ -206,7 +206,7 @@ static inline void vec4_negate( vec4_t* v )
     v->w = -v->w;
 }
 
-static inline bool vec4_compare( const vec4_t* a, const vec4_t* b )
+static inline bool vec4_compare( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
 	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
     return (fabsl(a->x - b->x) < SCALAR_EPSILON) &&

@@ -51,7 +51,7 @@ extern const vec2_t VEC2_YUNIT;
  */
 #define VEC2_LITERAL(a,b)  (vec2_t){ .x = a, .y = b }
 
-static inline vec2_t vec2_add( const vec2_t* a, const vec2_t* b )
+static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
 	return VEC2_LITERAL(
 		a->x + b->x,
@@ -59,7 +59,7 @@ static inline vec2_t vec2_add( const vec2_t* a, const vec2_t* b )
 	);
 }
 
-static inline vec2_t vec2_subtract( const vec2_t* a, const vec2_t* b )
+static inline vec2_t vec2_subtract( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
 	return VEC2_LITERAL(
 		a->x - b->x,
@@ -81,7 +81,7 @@ static inline void vec2_scale( vec2_t* v, scaler_t s )
     v->y *= s;
 }
 
-static inline scaler_t vec2_dot_product( const vec2_t* a, const vec2_t* b )
+static inline scaler_t vec2_dot_product( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
     return a->x * b->x + a->y * b->y;
 }
@@ -94,7 +94,7 @@ static inline vec2_t vec2_cross_product( const vec2_t* v )
 	);
 }
 
-static inline scaler_t vec2_determinant( const vec2_t* a, const vec2_t* b )
+static inline scaler_t vec2_determinant( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
     return a->x * b->y - b->x * a->y;
 }
@@ -110,7 +110,7 @@ static inline scaler_t vec2_magnitude( const vec2_t* v )
 	#endif
 }
 
-static inline scaler_t vec2_distance( const vec2_t* a, const vec2_t* b )
+static inline scaler_t vec2_distance( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
 	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
     return sqrtl(
@@ -130,7 +130,7 @@ static inline scaler_t vec2_distance( const vec2_t* a, const vec2_t* b )
 	#endif
 }
 
-static inline scaler_t vec2_angle( const vec2_t* a, const vec2_t* b ) /* in radians */
+static inline scaler_t vec2_angle( const vec2_t* __restrict a, const vec2_t* __restrict b ) /* in radians */
 {
     scaler_t dot_product = vec2_dot_product( a, b );
     scaler_t a_length    = vec2_magnitude( a );
@@ -178,7 +178,7 @@ static inline void vec2_negate( vec2_t* v )
     v->y = -v->y;
 }
 
-static inline bool vec2_compare( const vec2_t* a, const vec2_t* b )
+static inline bool vec2_compare( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
 	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
     return (fabsl(a->x - b->x) < SCALAR_EPSILON) &&

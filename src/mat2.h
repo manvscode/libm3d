@@ -24,57 +24,13 @@
 #include <limits.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #include <stdbool.h>
-#ifdef __restrict
-#undef __restrict
-#define __restrict restrict
-#endif
-#ifdef __inline
-#undef __inline
-#define __inline inline
-#endif
 #else
-#define bool int
-#define true 1
-#define false 0
-#ifdef __restrict
-#undef __restrict
-#define __restrict
+#error "Need a C99 compiler."
 #endif
-#ifdef __inline
-#undef __inline
-#define __inline
-#endif
-#endif
+#include "mathematics.h"
+#include "vec2.h"
 #ifdef __cplusplus
 extern "C" {
-#endif
-
-#include "vec2.h"
-
-#if defined(MAT2_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(MAT2_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
 #endif
 
 

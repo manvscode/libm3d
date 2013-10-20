@@ -33,32 +33,6 @@
 extern "C" {
 #endif
 
-#if defined(MAT4_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(MAT4_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
-#endif
-
 
 /*
  * Four Dimensional Matrices
