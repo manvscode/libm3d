@@ -234,7 +234,8 @@ static inline void vec4_zero( vec4_t* v )
 
 const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
 
-#define vec4_to_vec3( p_v ) ((vec3_t*)(p_v)
+#define vec4_to_vec2( p_v ) ((vec2_t*)(p_v))
+#define vec4_to_vec3( p_v ) ((vec3_t*)(p_v))
 
 
 #ifdef __cplusplus

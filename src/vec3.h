@@ -218,6 +218,7 @@ static inline void vec3_zero( vec3_t* v )
 
 const char* vec3_to_string     ( const vec3_t* v ); /* not thread safe */
 
+#define vec3_to_vec2( p_v ) ((vec2_t*)(p_v))
 
 #ifdef __cplusplus
 } /* C linkage */
