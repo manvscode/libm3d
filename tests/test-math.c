@@ -20,7 +20,6 @@ bool test_uniform_unitf( void );
 bool test_uniform_unitd( void );
 bool test_uniform_unitld( void );
 bool test_even_and_odd( void );
-bool test_mulu7( void );
 
 const test_feature_t generic_math_functions[] = {
 	{ "Testing uniformf()", test_uniformf },
@@ -33,8 +32,7 @@ const test_feature_t generic_math_functions[] = {
 	{ "Testing uniform_unitf()", test_uniform_unitf },
 	{ "Testing uniform_unitd()", test_uniform_unitd },
 	{ "Testing uniform_unitld()", test_uniform_unitld },
-	{ "Testing is_even() and is_odd()", test_even_and_odd },
-	{ "Testing mulu7()", test_mulu7 }
+	{ "Testing is_even() and is_odd()", test_even_and_odd }
 };
 
 
@@ -252,19 +250,3 @@ bool test_uniform_unitld( void )
 	return passed;
 }
 
-bool test_mulu7( void )
-{
-	bool passed = true;
-
-	for( unsigned int i = 0; passed && i < 2000000; i++ )
-	{
-		unsigned int n = mulu7( i );
-
-		if( n != 7 * i )
-		{
-			passed = false;
-		}
-	}
-
-	return passed;
-}
