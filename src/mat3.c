@@ -104,7 +104,7 @@ bool mat3_invert( mat3_t* m )
 
 	scaler_t det = mat3_determinant( m );
 
-	if( det > SCALAR_EPSILON ) // testing if not zero
+	if( fabs(det) > SCALAR_EPSILON ) // testing if not zero
 	{
 		mat3_adjoint( m );
 

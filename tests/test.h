@@ -1,6 +1,8 @@
 #ifndef _TEST_H_
 #define _TEST_H_
 
+#include <time.h>
+#include <string.h>
 
 #define COLOR_BEGIN(bg,fg)                    "\e[" #bg ";" #fg "m"
 #define COLOR_END                             "\e[m"

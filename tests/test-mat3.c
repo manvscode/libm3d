@@ -4,14 +4,20 @@
 #include <vec3.h>
 #include <mat2.h>
 #include <mat3.h>
+#include "test.h"
 
 
 
+bool test_mat3_inversion( void );
 
-
+const test_feature_t mat3_functions[] = {
+	{ "Testing mat3 inversion()", test_mat3_inversion },
+};
 
 int main( int argc, char* argv[] )
 {
+	srand( time(NULL) );
+	test_eval_features( "3x3 Matrix Functions", mat3_functions, sizeof(mat3_functions) / sizeof(mat3_functions[0]) );
 	mat3_t matrix = MAT3_IDENTITY;
 
 	printf( "x' = %s\n", vec3_to_string( mat3_x_vector(&matrix) ) );
@@ -52,4 +58,37 @@ int main( int argc, char* argv[] )
 #endif
 
 	return 0;
+}
+
+bool test_mat3_inversion( void )
+{
+	mat3_t matrix1 = MAT3_LITERAL(1, 4, 3, 0, -1, 1, 2, 7, 2);
+	mat3_invert( &matrix1 );
+
+	bool test1 =
+		(fabs( matrix1.m[0] + 1.8) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[1] - 2.6) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[2] - 1.4) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[3] - 0.4) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[4] + 0.8) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[5] + 0.2) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[6] - 0.4) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[7] - 0.2) < SCALAR_EPSILON) &&
+		(fabs( matrix1.m[8] + 0.2) < SCALAR_EPSILON);
+
+	mat3_t matrix2 = MAT3_LITERAL(1, 0, 11, 2, 7, 0, 3, 1, 2);
+	mat3_invert( &matrix2 );
+
+	bool test2 =
+		(fabs( matrix2.m[0] - (-14.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[1] - (-11.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[2] - ( 77.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[3] - (  4.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[4] - ( 31.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[5] - (-22.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[6] - ( 19.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[7] - (  1.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[8] - ( -7.0f/195)) < SCALAR_EPSILON);
+
+	return test1 && test2;
 }
