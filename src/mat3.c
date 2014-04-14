@@ -100,7 +100,7 @@ vec3_t mat3_mult_vector( const mat3_t* __restrict m, const vec3_t* __restrict v 
 
 bool mat3_invert( mat3_t* m )
 {
-    assert( false );
+    //assert( false );
 
 	scaler_t det = mat3_determinant( m );
 

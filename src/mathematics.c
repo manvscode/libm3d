@@ -275,17 +275,6 @@ long double clampld( long double value, long double min, long double max )
 	return value;
 }
 
-unsigned int mulu7( unsigned int n )
-{
-	return (n << 3) - n;
-}
-
-unsigned int divu7( unsigned int n )
-{
-	/* TODO: Implement this. */
-	return 0;
-}
-
 bool is_even( int n )
 {
 	return (n & 1) == 0;

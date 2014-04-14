@@ -93,8 +93,6 @@ long         clampl             ( int value, int min, int max );
 float        clampf             ( float value, float min, float max );
 double       clampd             ( double value, double min, double max );
 long double  clampld            ( long double value, long double min, long double max );
-unsigned int mulu7              ( unsigned int n );
-//unsigned int divu7               ( unsigned int n );
 bool         is_even            ( int n );
 bool         is_odd             ( int n );
 bool         is_power_of_2      ( int x );
