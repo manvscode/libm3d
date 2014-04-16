@@ -17,7 +17,7 @@ AH_TOP([
 AH_BOTTOM([
 #endif /* _LIB3DMATH_H_ */
 ])
-
+AC_DEFINE([LIB3DMATH_USE_DOUBLE], [1], [All scalar types are doubles.])
 
 DFLAGS="$DFLAGS"
 
