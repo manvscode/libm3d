@@ -56,7 +56,7 @@ extern const vec4_t VEC4_WUNIT;
  * |d|
  */
 #define VEC4_LITERAL(a,b,c,d)  (vec4_t){ .x = a, .y = b, .z = c, .w = d }
-
+#define VEC4 VEC4_LITERAL
 
 static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
@@ -163,7 +163,7 @@ static inline scaler_t vec4_angle( const vec4_t* __restrict a, const vec4_t* __r
 
 static inline void vec4_normalize( vec4_t* v )
 {
-    #if 0
+    #if 1 /* Need more precision */
     scaler_t length = vec4_magnitude( v );
     v->x /= length;
     v->y /= length;

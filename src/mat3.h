@@ -50,6 +50,7 @@ extern const mat3_t MAT3_ZERO;
  * |c f i|
  */
 #define MAT3_LITERAL(a,b,c,d,e,f,g,h,i)  (mat3_t){ .m = { (a), (b), (c), (d), (e), (f), (g), (h), (i) } }
+#define MAT3 MAT3_LITERAL
 
 void          mat3_identity    ( mat3_t* m );
 void          mat3_zero        ( mat3_t* m );

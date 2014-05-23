@@ -55,7 +55,7 @@ extern const vec3_t VEC3_ZUNIT;
  * |c|
  */
 #define VEC3_LITERAL(a,b,c)  (vec3_t){ .x = a, .y = b, .z = c }
-
+#define VEC3 VEC3_LITERAL
 
 static inline vec3_t vec3_add( const vec3_t* __restrict a, const vec3_t* __restrict b )
 {
@@ -156,7 +156,7 @@ static inline scaler_t vec3_angle( const vec3_t* __restrict a, const vec3_t* __r
 
 static inline void vec3_normalize( vec3_t* v )
 {
-	#if 0
+	#if 1 /* Need more precision */
     scaler_t length = vec3_magnitude( v );
     v->x /= length;
     v->y /= length;

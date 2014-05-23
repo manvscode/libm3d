@@ -42,6 +42,7 @@ extern "C" {
 typedef vec4_t quat_t;
 
 #define QUAT_LITERAL    VEC4_LITERAL
+#define QUAT QUAT_LITERAL
 
 static inline scaler_t quat_magnitude( const quat_t* q )
 {

@@ -21,6 +21,7 @@
 #ifndef _MATHEMATICS_H_
 #define _MATHEMATICS_H_
 #include <math.h>
+#include "lib3dmath-config.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -111,7 +112,7 @@ static inline scaler_t fast_inverse_sqrt( scaler_t number )
 	i  = 0x5f3759df - ( i >> 1 );               /* what the fuck? */
 	y  = * (scaler_t *) &i;
 	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 1st iteration */
-	#if 0
+	#if 1
 	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 2nd iteration, this can be removed */
 	#endif
 

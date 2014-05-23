@@ -8,10 +8,12 @@
 
 
 
+bool test_mat3_determinant( void );
 bool test_mat3_inversion( void );
 
 const test_feature_t mat3_functions[] = {
-	{ "Testing mat3 inversion()", test_mat3_inversion },
+	{ "Testing mat3 determinants", test_mat3_inversion },
+	{ "Testing mat3 inversion", test_mat3_inversion },
 };
 
 int main( int argc, char* argv[] )
@@ -58,6 +60,32 @@ int main( int argc, char* argv[] )
 #endif
 
 	return 0;
+}
+bool test_mat3_determinant( void )
+{
+	mat3_t matrix1 = MAT3_LITERAL(
+		1, 4, 3,
+	    0, -1, 1,
+		2, 7, 2);
+	float d1 = mat3_determinant( &matrix1 );
+
+	bool test1 = fabs(d1 - 5.0f) < SCALAR_EPSILON;
+
+	mat3_t matrix2 = MAT3_LITERAL(1, 0, 11, 2, 7, 0, 3, 1, 2);
+	mat3_invert( &matrix2 );
+
+	bool test2 =
+		(fabs( matrix2.m[0] - (-14.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[1] - (-11.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[2] - ( 77.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[3] - (  4.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[4] - ( 31.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[5] - (-22.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[6] - ( 19.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[7] - (  1.0f/195)) < SCALAR_EPSILON) &&
+		(fabs( matrix2.m[8] - ( -7.0f/195)) < SCALAR_EPSILON);
+
+	return test1 && test2;
 }
 
 bool test_mat3_inversion( void )

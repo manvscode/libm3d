@@ -50,6 +50,7 @@ extern const vec2_t VEC2_YUNIT;
  * |b|
  */
 #define VEC2_LITERAL(a,b)  (vec2_t){ .x = a, .y = b }
+#define VEC2 VEC2_LITERAL
 
 static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
@@ -147,7 +148,7 @@ static inline scaler_t vec2_angle( const vec2_t* __restrict a, const vec2_t* __r
 
 static inline void vec2_normalize( vec2_t* v )
 {
-	#if 0
+	#if 1 /* Need more precision */
     scaler_t length = vec2_magnitude( v );
     v->x /= length;
     v->y /= length;
