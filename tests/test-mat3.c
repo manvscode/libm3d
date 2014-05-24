@@ -9,10 +9,12 @@
 
 
 bool test_mat3_determinant( void );
+bool test_mat3_multiplcation( void );
 bool test_mat3_inversion( void );
 
 const test_feature_t mat3_functions[] = {
-	{ "Testing mat3 determinants", test_mat3_inversion },
+	{ "Testing mat3 determinants", test_mat3_determinant },
+	{ "Testing mat3 multiplcation", test_mat3_multiplcation },
 	{ "Testing mat3 inversion", test_mat3_inversion },
 };
 
@@ -86,6 +88,38 @@ bool test_mat3_determinant( void )
 		(fabs( matrix2.m[8] - ( -7.0f/195)) < SCALAR_EPSILON);
 
 	return test1 && test2;
+}
+
+bool test_mat3_multiplcation( void )
+{
+	mat3_t a = MAT3( 1, 3, 2,
+	                 2, 2, 1,
+	                 3, 1, 3 );
+	mat3_t b = MAT3( 4, 6, 4,
+	                 5, 5, 6,
+	                 6, 4, 5 );
+
+	mat3_t r = mat3_mult_matrix( &a, &b );
+
+
+	bool result = r.m[ 0 ] == 28 &&
+	              r.m[ 1 ] == 28 &&
+	              r.m[ 2 ] == 26 &&
+	              r.m[ 3 ] == 33 &&
+	              r.m[ 4 ] == 31 &&
+	              r.m[ 5 ] == 33 &&
+	              r.m[ 6 ] == 29 &&
+	              r.m[ 7 ] == 31 &&
+	              r.m[ 8 ] == 31;
+
+	if( !result )
+	{
+		printf( "%s\n", mat3_to_string(&a) );
+		printf( "%s\n", mat3_to_string(&b) );
+		printf( "%s\n", mat3_to_string(&r) );
+	}
+
+	return result;
 }
 
 bool test_mat3_inversion( void )
