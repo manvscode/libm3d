@@ -321,6 +321,8 @@ static inline quat_t quat_lerp( const quat_t* __restrict a, const quat_t* __rest
 }
 
 
+#define quat_to_string vec4_to_string
+
 
 #ifdef __cplusplus
 } /* C linkage */
