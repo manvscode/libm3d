@@ -69,23 +69,27 @@ static inline quat_t quat_from_axis3_angle( const vec3_t* axis, scaler_t angle )
 {
 	//vec3_normalize( axis );
 
-	quat_t q;
-
 	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	q.w = cosl( angle / 2.0f );
-	q.x = axis->x * sinl( angle / 2.0f );
-	q.y = axis->y * sinl( angle / 2.0f );
-	q.z = axis->z * sinl( angle / 2.0f );
+	quat_t q = QUAT(
+		axis->x * sinl( angle / 2.0f ),
+		axis->y * sinl( angle / 2.0f ),
+		axis->z * sinl( angle / 2.0f ),
+		cosl( angle / 2.0f )
+	);
 	#elif defined(QUAT_USE_DOUBLE)
-	q.w = cos( angle / 2.0f );
-	q.x = axis->x * sin( angle / 2.0f );
-	q.y = axis->y * sin( angle / 2.0f );
-	q.z = axis->z * sin( angle / 2.0f );
+	quat_t q = QUAT(
+		axis->x * sin( angle / 2.0f ),
+		axis->y * sin( angle / 2.0f ),
+		axis->z * sin( angle / 2.0f ),
+		cos( angle / 2.0f )
+	);
 	#else
-	q.w = cosf( angle / 2.0f );
-	q.x = axis->x * sinf( angle / 2.0f );
-	q.y = axis->y * sinf( angle / 2.0f );
-	q.z = axis->z * sinf( angle / 2.0f );
+	quat_t q = QUAT(
+		axis->x * sinf( angle / 2.0f ),
+		axis->y * sinf( angle / 2.0f ),
+		axis->z * sinf( angle / 2.0f ),
+		cosf( angle / 2.0f )
+	);
 	#endif
 
 	quat_normalize( &q );
@@ -95,25 +99,29 @@ static inline quat_t quat_from_axis3_angle( const vec3_t* axis, scaler_t angle )
 
 static inline quat_t quat_from_axis4_angle( const vec4_t* axis, scaler_t angle )
 {
-	quat_t q;
-
 	//vec4_normalize( axis );
 
 	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	q.w = cosl( angle / 2.0f );
-	q.x = axis->x * sinl( angle / 2.0f );
-	q.y = axis->y * sinl( angle / 2.0f );
-	q.z = axis->z * sinl( angle / 2.0f );
+	quat_t q = QUAT(
+		axis->x * sinl( angle / 2.0f ),
+		axis->y * sinl( angle / 2.0f ),
+		axis->z * sinl( angle / 2.0f ),
+		cosl( angle / 2.0f )
+	);
 	#elif defined(QUAT_USE_DOUBLE)
-	q.w = cos( angle / 2.0f );
-	q.x = axis->x * sin( angle / 2.0f );
-	q.y = axis->y * sin( angle / 2.0f );
-	q.z = axis->z * sin( angle / 2.0f );
+	quat_t q = QUAT(
+		axis->x * sin( angle / 2.0f ),
+		axis->y * sin( angle / 2.0f ),
+		axis->z * sin( angle / 2.0f ),
+		cos( angle / 2.0f )
+	);
 	#else
-	q.w = cosf( angle / 2.0f );
-	q.x = axis->x * sinf( angle / 2.0f );
-	q.y = axis->y * sinf( angle / 2.0f );
-	q.z = axis->z * sinf( angle / 2.0f );
+	quat_t q = QUAT(
+		axis->x * sinf( angle / 2.0f ),
+		axis->y * sinf( angle / 2.0f ),
+		axis->z * sinf( angle / 2.0f ),
+		cosf( angle / 2.0f )
+	);
 	#endif
 
 	quat_normalize( &q );
@@ -123,7 +131,7 @@ static inline quat_t quat_from_axis4_angle( const vec4_t* axis, scaler_t angle )
 
 static inline quat_t quat_from_vec3( const vec3_t* v )
 {
-	return QUAT_LITERAL(
+	return QUAT(
 		v->x,
 		v->y,
 		v->z,
@@ -133,7 +141,7 @@ static inline quat_t quat_from_vec3( const vec3_t* v )
 
 static inline quat_t quat_from_vec4( const vec4_t* v )
 {
-	return QUAT_LITERAL(
+	return QUAT(
 		v->x,
 		v->y,
 		v->z,
@@ -149,7 +157,7 @@ quat_t      quat_slerp                   ( const quat_t* a, const quat_t* b, sca
 
 static inline quat_t quat_add( const quat_t* a, const quat_t* b )
 {
-	return QUAT_LITERAL(
+	return QUAT(
 		a->x + b->x,
 		a->y + b->y,
 		a->z + b->z,
@@ -159,7 +167,7 @@ static inline quat_t quat_add( const quat_t* a, const quat_t* b )
 
 static inline quat_t quat_multiply( const quat_t* a, const quat_t* b )
 {
-	return QUAT_LITERAL(
+	return QUAT(
 		a->w * b->x + a->x * b->w - a->y * b->z + a->z * b->y,
 		a->w * b->y + a->x * b->z + a->y * b->w - a->z * b->x,
 		a->w * b->z - a->x * b->y + a->y * b->x + a->z * b->w,
@@ -182,7 +190,7 @@ static inline scaler_t quat_dot_product( const quat_t* a, const quat_t* b ) /* 1
 
 static inline quat_t quat_conjugate( const quat_t* q )
 {
-	return QUAT_LITERAL(
+	return QUAT(
 		-q->x,
 		-q->y,
 		-q->z,
