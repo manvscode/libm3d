@@ -49,7 +49,7 @@ extern const mat4_t MAT4_ZERO;
  * |C G K O|
  * |D H L P|
  */
-#define MAT4(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)  (mat4_t){ .m = { (A), (B), (C), (D), (E), (F), (G), (H), (I), (J), (K), (L), (M), (N), (O), (P) } }
+#define MAT4(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)  ((mat4_t){ .m = { (A), (B), (C), (D), (E), (F), (G), (H), (I), (J), (K), (L), (M), (N), (O), (P) } })
 
 void          mat4_identity    ( mat4_t* m );
 void          mat4_zero        ( mat4_t* m );

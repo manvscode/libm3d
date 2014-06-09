@@ -49,7 +49,7 @@ extern const vec2_t VEC2_YUNIT;
 /* |a|
  * |b|
  */
-#define VEC2(a,b)  (vec2_t){ .x = a, .y = b }
+#define VEC2(a,b)  ((vec2_t){ .x = (a), .y = (b) })
 
 static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {

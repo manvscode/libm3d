@@ -55,7 +55,7 @@ extern const vec4_t VEC4_WUNIT;
  * |c|
  * |d|
  */
-#define VEC4(a,b,c,d)  (vec4_t){ .x = a, .y = b, .z = c, .w = d }
+#define VEC4(a,b,c,d)  (vec4_t){ .x = (a), .y = (b), .z = (c), .w = (d) }
 
 static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {

@@ -54,7 +54,7 @@ extern const vec3_t VEC3_ZUNIT;
  * |b|
  * |c|
  */
-#define VEC3(a,b,c)  (vec3_t){ .x = a, .y = b, .z = c }
+#define VEC3(a,b,c)  ((vec3_t){ .x = (a), .y = (b), .z = (c) })
 
 static inline vec3_t vec3_add( const vec3_t* __restrict a, const vec3_t* __restrict b )
 {

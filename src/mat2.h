@@ -47,7 +47,7 @@ extern const mat2_t MAT2_ZERO;
 /* |a c|
  * |b d|
  */
-#define MAT2(a,b,c,d)  (mat2_t){ .m = { (a), (b), (c), (d) } }
+#define MAT2(a,b,c,d)  ((mat2_t){ .m = { (a), (b), (c), (d) } })
 
 void          mat2_initialize  ( mat2_t* m, scaler_t a, scaler_t b, scaler_t c, scaler_t d );
 void          mat2_identity    ( mat2_t* m );
