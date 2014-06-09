@@ -41,8 +41,7 @@ extern "C" {
  */
 typedef vec4_t quat_t;
 
-#define QUAT_LITERAL    VEC4_LITERAL
-#define QUAT QUAT_LITERAL
+#define QUAT            VEC4
 
 static inline scaler_t quat_magnitude( const quat_t* q )
 {
@@ -207,8 +206,7 @@ static inline vec3_t quat_rotate3( const quat_t* q, const vec3_t* v )
 	quat_t q_v_inverse = quat_multiply( &q_v, &q_inverse );
 	quat_t q_result = quat_multiply( q, &q_v_inverse );
 
-	vec3_t result = VEC3_LITERAL( q_result.x, q_result.y, q_result.z );
-	return result;
+	return VEC3( q_result.x, q_result.y, q_result.z );
 }
 
 static inline vec4_t quat_rotate4( const quat_t* q, const vec4_t* v )
@@ -220,13 +218,12 @@ static inline vec4_t quat_rotate4( const quat_t* q, const vec4_t* v )
 	quat_t q_v_inverse = quat_multiply( &q_v, &q_inverse );
 	quat_t q_result = quat_multiply( q, &q_v_inverse );
 
-	vec4_t result = VEC4_LITERAL( q_result.x, q_result.y, q_result.z, 0.0f );
-	return result;
+	return VEC4( q_result.x, q_result.y, q_result.z, 0.0f );
 }
 
 static inline mat3_t quat_to_mat3( const quat_t* q )
 {
-	return MAT3_LITERAL(
+	return MAT3(
 		1-2*q->y*q->y-2*q->z*q->z,  2*q->x*q->y+2*q->w*q->z,   2*q->x*q->z-2*q->w*q->y,
 		2*q->x*q->y-2*q->w*q->z,    1-2*q->x*q->x-2*q->z*q->z, 2*q->y*q->z+2*q->w*q->x,
 		2*q->x*q->z+2*q->w*q->y,    2*q->y*q->z-2*q->w*q->x,   1-2*q->x*q->x-2*q->y*q->y
@@ -235,7 +232,7 @@ static inline mat3_t quat_to_mat3( const quat_t* q )
 
 static inline mat4_t quat_to_mat4( const quat_t* q )
 {
-	return MAT4_LITERAL(
+	return MAT4(
 		1-2*q->y*q->y-2*q->z*q->z,  2*q->x*q->y+2*q->w*q->z,   2*q->x*q->z-2*q->w*q->y,   0.0f,
 		2*q->x*q->y-2*q->w*q->z,    1-2*q->x*q->x-2*q->z*q->z, 2*q->y*q->z+2*q->w*q->x,   0.0f,
 		2*q->x*q->z+2*q->w*q->y,    2*q->y*q->z-2*q->w*q->x,   1-2*q->x*q->x-2*q->y*q->y, 0.0f,

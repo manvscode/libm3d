@@ -49,12 +49,11 @@ extern const vec2_t VEC2_YUNIT;
 /* |a|
  * |b|
  */
-#define VEC2_LITERAL(a,b)  (vec2_t){ .x = a, .y = b }
-#define VEC2 VEC2_LITERAL
+#define VEC2(a,b)  (vec2_t){ .x = a, .y = b }
 
 static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
-	return VEC2_LITERAL(
+	return VEC2(
 		a->x + b->x,
 		a->y + b->y
 	);
@@ -62,7 +61,7 @@ static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restr
 
 static inline vec2_t vec2_subtract( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
-	return VEC2_LITERAL(
+	return VEC2(
 		a->x - b->x,
 		a->y - b->y
     );
@@ -70,7 +69,7 @@ static inline vec2_t vec2_subtract( const vec2_t* __restrict a, const vec2_t* __
 
 static inline vec2_t vec2_multiply( const vec2_t* v, scaler_t s )
 {
-	return VEC2_LITERAL(
+	return VEC2(
 		v->x * s,
 		v->y * s
 	);
@@ -89,7 +88,7 @@ static inline scaler_t vec2_dot_product( const vec2_t* __restrict a, const vec2_
 
 static inline vec2_t vec2_cross_product( const vec2_t* v )
 {
-	return VEC2_LITERAL(
+	return VEC2(
 		 v->y,
 		-v->x
 	);

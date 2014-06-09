@@ -60,27 +60,24 @@ scaler_t mat2_determinant( const mat2_t* m )
 
 mat2_t mat2_mult_matrix( const mat2_t* __restrict a, const mat2_t* __restrict b )
 {
-	mat2_t result;
 	/*      a     b              result
 	 *   |a  c||e  g|  =  |(a*e+c*f) (a*g+c*h)|
 	 *   |b  d||f  h|     |(b*e+d*f) (b*g+d*h)|
 	 */
-	result.m[ 0 ] = a->m[ 0 ] * b->m[ 0 ] + a->m[ 2 ] * b->m[ 1 ];
-	result.m[ 1 ] = a->m[ 1 ] * b->m[ 0 ] + a->m[ 3 ] * b->m[ 1 ];
-	result.m[ 2 ] = a->m[ 0 ] * b->m[ 2 ] + a->m[ 2 ] * b->m[ 3 ];
-	result.m[ 3 ] = a->m[ 1 ] * b->m[ 2 ] + a->m[ 3 ] * b->m[ 3 ];
-
-	return result;
+	return MAT2(
+		a->m[ 0 ] * b->m[ 0 ] + a->m[ 2 ] * b->m[ 1 ],
+		a->m[ 1 ] * b->m[ 0 ] + a->m[ 3 ] * b->m[ 1 ],
+		a->m[ 0 ] * b->m[ 2 ] + a->m[ 2 ] * b->m[ 3 ],
+		a->m[ 1 ] * b->m[ 2 ] + a->m[ 3 ] * b->m[ 3 ]
+	);
 }
 
 vec2_t mat2_mult_vector( const mat2_t* __restrict m, const vec2_t* __restrict v )
 {
-    vec2_t result;
-
-	result.x = m->m[ 0 ] * v->x + m->m[ 2 ] * v->y;
-	result.y = m->m[ 1 ] * v->x + m->m[ 3 ] * v->y;
-
-    return result;
+	return VEC2(
+		m->m[ 0 ] * v->x + m->m[ 2 ] * v->y,
+		m->m[ 1 ] * v->x + m->m[ 3 ] * v->y
+	);
 }
 
 bool mat2_invert( mat2_t* m )

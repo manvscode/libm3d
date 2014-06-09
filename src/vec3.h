@@ -54,12 +54,11 @@ extern const vec3_t VEC3_ZUNIT;
  * |b|
  * |c|
  */
-#define VEC3_LITERAL(a,b,c)  (vec3_t){ .x = a, .y = b, .z = c }
-#define VEC3 VEC3_LITERAL
+#define VEC3(a,b,c)  (vec3_t){ .x = a, .y = b, .z = c }
 
 static inline vec3_t vec3_add( const vec3_t* __restrict a, const vec3_t* __restrict b )
 {
-	return VEC3_LITERAL(
+	return VEC3(
 		a->x + b->x,
 		a->y + b->y,
 		a->z + b->z
@@ -68,7 +67,7 @@ static inline vec3_t vec3_add( const vec3_t* __restrict a, const vec3_t* __restr
 
 static inline vec3_t vec3_subtract( const vec3_t* __restrict a, const vec3_t* __restrict b )
 {
-	return VEC3_LITERAL(
+	return VEC3(
 		a->x - b->x,
 		a->y - b->y,
 		a->z - b->z
@@ -77,7 +76,7 @@ static inline vec3_t vec3_subtract( const vec3_t* __restrict a, const vec3_t* __
 
 static inline vec3_t vec3_multiply( const vec3_t* v, scaler_t s )
 {
-	return VEC3_LITERAL(
+	return VEC3(
     	v->x * s,
     	v->y * s,
     	v->z * s
@@ -98,7 +97,7 @@ static inline scaler_t vec3_dot_product( const vec3_t* __restrict a, const vec3_
 
 static inline vec3_t vec3_cross_product( const vec3_t* __restrict a, const vec3_t* __restrict b )
 {
-	return VEC3_LITERAL(
+	return VEC3(
 		a->y * b->z - a->z * b->y,
 		a->z * b->x - a->x * b->z,
 		a->x * b->y - a->y * b->x

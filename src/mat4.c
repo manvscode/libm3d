@@ -62,38 +62,36 @@ scaler_t mat4_determinant( const mat4_t* m )
 
 mat4_t mat4_mult_matrix( const mat4_t* __restrict a, const mat4_t* __restrict b )
 {
-	mat4_t result;
     assert( a && b );
 	// |a00 a04 a08 a12|   |b00 b04 b08 b12|
 	// |a01 a05 a09 a13| * |b01 b05 b09 b13|
 	// |a02 a06 a10 a14|   |b02 b06 b10 b14|
 	// |a03 a07 a11 a15|   |b03 b07 b11 b15|
-	result.m[ 0] = a->m[ 0] * b->m[ 0]  +  a->m[ 4] * b->m[ 1]  +  a->m[ 8] * b->m[ 2]  +  a->m[12] * b->m[ 3];
-	result.m[ 1] = a->m[ 1] * b->m[ 0]  +  a->m[ 5] * b->m[ 1]  +  a->m[ 9] * b->m[ 2]  +  a->m[13] * b->m[ 3];
-	result.m[ 2] = a->m[ 2] * b->m[ 0]  +  a->m[ 6] * b->m[ 1]  +  a->m[10] * b->m[ 2]  +  a->m[14] * b->m[ 3];
-	result.m[ 3] = a->m[ 3] * b->m[ 0]  +  a->m[ 7] * b->m[ 1]  +  a->m[11] * b->m[ 2]  +  a->m[15] * b->m[ 3];
+	return MAT4(
+		a->m[ 0] * b->m[ 0]  +  a->m[ 4] * b->m[ 1]  +  a->m[ 8] * b->m[ 2]  +  a->m[12] * b->m[ 3],
+		a->m[ 1] * b->m[ 0]  +  a->m[ 5] * b->m[ 1]  +  a->m[ 9] * b->m[ 2]  +  a->m[13] * b->m[ 3],
+		a->m[ 2] * b->m[ 0]  +  a->m[ 6] * b->m[ 1]  +  a->m[10] * b->m[ 2]  +  a->m[14] * b->m[ 3],
+		a->m[ 3] * b->m[ 0]  +  a->m[ 7] * b->m[ 1]  +  a->m[11] * b->m[ 2]  +  a->m[15] * b->m[ 3],
 
-	result.m[ 4] = a->m[ 0] * b->m[ 4]  +  a->m[ 4] * b->m[ 5]  +  a->m[ 8] * b->m[ 6]  +  a->m[12] * b->m[ 7];
-	result.m[ 5] = a->m[ 1] * b->m[ 4]  +  a->m[ 5] * b->m[ 5]  +  a->m[ 9] * b->m[ 6]  +  a->m[13] * b->m[ 7];
-	result.m[ 6] = a->m[ 2] * b->m[ 4]  +  a->m[ 6] * b->m[ 5]  +  a->m[10] * b->m[ 6]  +  a->m[14] * b->m[ 7];
-	result.m[ 7] = a->m[ 3] * b->m[ 4]  +  a->m[ 7] * b->m[ 5]  +  a->m[11] * b->m[ 6]  +  a->m[15] * b->m[ 7];
+		a->m[ 0] * b->m[ 4]  +  a->m[ 4] * b->m[ 5]  +  a->m[ 8] * b->m[ 6]  +  a->m[12] * b->m[ 7],
+		a->m[ 1] * b->m[ 4]  +  a->m[ 5] * b->m[ 5]  +  a->m[ 9] * b->m[ 6]  +  a->m[13] * b->m[ 7],
+		a->m[ 2] * b->m[ 4]  +  a->m[ 6] * b->m[ 5]  +  a->m[10] * b->m[ 6]  +  a->m[14] * b->m[ 7],
+		a->m[ 3] * b->m[ 4]  +  a->m[ 7] * b->m[ 5]  +  a->m[11] * b->m[ 6]  +  a->m[15] * b->m[ 7],
 
-	result.m[ 8] = a->m[ 0] * b->m[ 8]  +  a->m[ 4] * b->m[ 9]  +  a->m[ 8] * b->m[10]  +  a->m[12] * b->m[11];
-	result.m[ 9] = a->m[ 1] * b->m[ 8]  +  a->m[ 5] * b->m[ 9]  +  a->m[ 9] * b->m[10]  +  a->m[13] * b->m[11];
-	result.m[10] = a->m[ 2] * b->m[ 8]  +  a->m[ 6] * b->m[ 9]  +  a->m[10] * b->m[10]  +  a->m[14] * b->m[11];
-	result.m[11] = a->m[ 3] * b->m[ 8]  +  a->m[ 7] * b->m[ 9]  +  a->m[11] * b->m[10]  +  a->m[15] * b->m[11];
+		a->m[ 0] * b->m[ 8]  +  a->m[ 4] * b->m[ 9]  +  a->m[ 8] * b->m[10]  +  a->m[12] * b->m[11],
+		a->m[ 1] * b->m[ 8]  +  a->m[ 5] * b->m[ 9]  +  a->m[ 9] * b->m[10]  +  a->m[13] * b->m[11],
+		a->m[ 2] * b->m[ 8]  +  a->m[ 6] * b->m[ 9]  +  a->m[10] * b->m[10]  +  a->m[14] * b->m[11],
+		a->m[ 3] * b->m[ 8]  +  a->m[ 7] * b->m[ 9]  +  a->m[11] * b->m[10]  +  a->m[15] * b->m[11],
 
-	result.m[12] = a->m[ 0] * b->m[12]  +  a->m[ 4] * b->m[13]  +  a->m[ 8] * b->m[14]  +  a->m[12] * b->m[15];
-	result.m[13] = a->m[ 1] * b->m[12]  +  a->m[ 5] * b->m[13]  +  a->m[ 9] * b->m[14]  +  a->m[13] * b->m[15];
-	result.m[14] = a->m[ 2] * b->m[12]  +  a->m[ 6] * b->m[13]  +  a->m[10] * b->m[14]  +  a->m[14] * b->m[15];
-	result.m[15] = a->m[ 3] * b->m[12]  +  a->m[ 7] * b->m[13]  +  a->m[11] * b->m[14]  +  a->m[15] * b->m[15];
-
-	return result;
+		a->m[ 0] * b->m[12]  +  a->m[ 4] * b->m[13]  +  a->m[ 8] * b->m[14]  +  a->m[12] * b->m[15],
+		a->m[ 1] * b->m[12]  +  a->m[ 5] * b->m[13]  +  a->m[ 9] * b->m[14]  +  a->m[13] * b->m[15],
+		a->m[ 2] * b->m[12]  +  a->m[ 6] * b->m[13]  +  a->m[10] * b->m[14]  +  a->m[14] * b->m[15],
+		a->m[ 3] * b->m[12]  +  a->m[ 7] * b->m[13]  +  a->m[11] * b->m[14]  +  a->m[15] * b->m[15]
+	);
 }
 
 vec4_t mat4_mult_vector( const mat4_t* __restrict m, const vec4_t* __restrict v )
 {
-    vec4_t result;
     assert( m && v );
 
 	// |m00x + m01y + m02z + m03w|   | m00 m04 m08 m12|    |x|
@@ -101,12 +99,12 @@ vec4_t mat4_mult_vector( const mat4_t* __restrict m, const vec4_t* __restrict v 
 	// |m06x + m07y + m08z + m03w|   | m02 m06 m10 m14|    |z|
 	// |m06x + m07y + m08z + m03w|   | m03 m07 m11 m15|    |w|
 
-	result.x = m->m[ 0] * v->x  +  m->m[ 4] * v->y  +  m->m[ 8] * v->z  +  m->m[12] * v->w;
-	result.y = m->m[ 1] * v->x  +  m->m[ 5] * v->y  +  m->m[ 9] * v->z  +  m->m[13] * v->w;
-	result.z = m->m[ 2] * v->x  +  m->m[ 6] * v->y  +  m->m[10] * v->z  +  m->m[14] * v->w;
-	result.w = m->m[ 3] * v->x  +  m->m[ 7] * v->y  +  m->m[11] * v->z  +  m->m[15] * v->w;
-
-    return result;
+	return VEC4(
+		m->m[ 0] * v->x  +  m->m[ 4] * v->y  +  m->m[ 8] * v->z  +  m->m[12] * v->w,
+		m->m[ 1] * v->x  +  m->m[ 5] * v->y  +  m->m[ 9] * v->z  +  m->m[13] * v->w,
+		m->m[ 2] * v->x  +  m->m[ 6] * v->y  +  m->m[10] * v->z  +  m->m[14] * v->w,
+		m->m[ 3] * v->x  +  m->m[ 7] * v->y  +  m->m[11] * v->z  +  m->m[15] * v->w
+	);
 }
 
 bool mat4_invert( mat4_t* m )

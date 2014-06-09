@@ -31,8 +31,8 @@ int main( int argc, char* argv[] )
 	printf( "%s\n", mat3_to_string(&matrix) );
 
 
-	mat2_t A = MAT2_LITERAL(2, 1, 0.5, 3);
-	mat2_t B = MAT2_LITERAL(0.33, 7, 4, -3);
+	mat2_t A = MAT2(2, 1, 0.5, 3);
+	mat2_t B = MAT2(0.33, 7, 4, -3);
 
 	mat2_t C = mat2_mult_matrix( &A, &B );
 
@@ -42,9 +42,9 @@ int main( int argc, char* argv[] )
 
 
 #if 1
-	mat3_t D = MAT3_LITERAL(1, 0, 2, 3, 1, 1, 1, 5, 1);
-	mat3_t E = MAT3_LITERAL(1, 1, 1, 1, 1, 1, 1, 1, 1);
-	vec3_t a = VEC3_LITERAL(1,2,1);
+	mat3_t D = MAT3(1, 0, 2, 3, 1, 1, 1, 5, 1);
+	mat3_t E = MAT3(1, 1, 1, 1, 1, 1, 1, 1, 1);
+	vec3_t a = VEC3(1,2,1);
 	vec3_t r = mat3_mult_vector( &D, &a );
 
 
@@ -65,15 +65,16 @@ int main( int argc, char* argv[] )
 }
 bool test_mat3_determinant( void )
 {
-	mat3_t matrix1 = MAT3_LITERAL(
+	mat3_t matrix1 = MAT3(
 		1, 4, 3,
 	    0, -1, 1,
-		2, 7, 2);
+		2, 7, 2
+	);
 	float d1 = mat3_determinant( &matrix1 );
 
 	bool test1 = fabs(d1 - 5.0f) < SCALAR_EPSILON;
 
-	mat3_t matrix2 = MAT3_LITERAL(1, 0, 11, 2, 7, 0, 3, 1, 2);
+	mat3_t matrix2 = MAT3(1, 0, 11, 2, 7, 0, 3, 1, 2);
 	mat3_invert( &matrix2 );
 
 	bool test2 =
@@ -124,7 +125,7 @@ bool test_mat3_multiplcation( void )
 
 bool test_mat3_inversion( void )
 {
-	mat3_t matrix1 = MAT3_LITERAL(1, 4, 3, 0, -1, 1, 2, 7, 2);
+	mat3_t matrix1 = MAT3(1, 4, 3, 0, -1, 1, 2, 7, 2);
 	mat3_invert( &matrix1 );
 
 	bool test1 =
@@ -138,7 +139,7 @@ bool test_mat3_inversion( void )
 		(fabs( matrix1.m[7] - 0.2) < SCALAR_EPSILON) &&
 		(fabs( matrix1.m[8] + 0.2) < SCALAR_EPSILON);
 
-	mat3_t matrix2 = MAT3_LITERAL(1, 0, 11, 2, 7, 0, 3, 1, 2);
+	mat3_t matrix2 = MAT3(1, 0, 11, 2, 7, 0, 3, 1, 2);
 	mat3_invert( &matrix2 );
 
 	bool test2 =

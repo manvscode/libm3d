@@ -55,12 +55,11 @@ extern const vec4_t VEC4_WUNIT;
  * |c|
  * |d|
  */
-#define VEC4_LITERAL(a,b,c,d)  (vec4_t){ .x = a, .y = b, .z = c, .w = d }
-#define VEC4 VEC4_LITERAL
+#define VEC4(a,b,c,d)  (vec4_t){ .x = a, .y = b, .z = c, .w = d }
 
 static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
-	return VEC4_LITERAL(
+	return VEC4(
 		a->x + b->x,
 		a->y + b->y,
 		a->z + b->z,
@@ -70,7 +69,7 @@ static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restr
 
 static inline vec4_t vec4_subtract( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
-	return VEC4_LITERAL(
+	return VEC4(
 		a->x - b->x,
 		a->y - b->y,
 		a->z - b->z,
@@ -80,7 +79,7 @@ static inline vec4_t vec4_subtract( const vec4_t* __restrict a, const vec4_t* __
 
 static inline vec4_t vec4_multiply( const vec4_t* v, scaler_t s )
 {
-	return VEC4_LITERAL(
+	return VEC4(
 		v->x * s,
 		v->y * s,
 		v->z * s,
