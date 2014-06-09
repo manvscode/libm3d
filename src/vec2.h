@@ -197,6 +197,14 @@ static inline void vec2_zero( vec2_t* v )
 	*v = VEC2_ZERO;
 }
 
+static inline vec2_t vec2_lerp( const vec2_t* __restrict a, const vec2_t* __restrict b, scaler_t s )
+{
+	return VEC2(
+		linear_interpolation( s, a->x, b->x ),
+		linear_interpolation( s, a->y, b->y )
+	);
+}
+
 
 const char* vec2_to_string     ( const vec2_t* v ); /* not thread safe */
 

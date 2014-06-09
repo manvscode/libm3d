@@ -214,6 +214,15 @@ static inline void vec3_zero( vec3_t* v )
 	*v = VEC3_ZERO;
 }
 
+static inline vec3_t vec3_lerp( const vec3_t* __restrict a, const vec3_t* __restrict b, scaler_t s )
+{
+	return VEC3(
+		linear_interpolation( s, a->x, b->x ),
+		linear_interpolation( s, a->y, b->y ),
+		linear_interpolation( s, a->z, b->z )
+	);
+}
+
 
 const char* vec3_to_string     ( const vec3_t* v ); /* not thread safe */
 

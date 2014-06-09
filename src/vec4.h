@@ -230,6 +230,16 @@ static inline void vec4_zero( vec4_t* v )
 	*v = VEC4_ZERO;
 }
 
+static inline vec4_t vec4_lerp( const vec4_t* __restrict a, const vec4_t* __restrict b, scaler_t s )
+{
+	return VEC4(
+		linear_interpolation( s, a->x, b->x ),
+		linear_interpolation( s, a->y, b->y ),
+		linear_interpolation( s, a->z, b->z ),
+		linear_interpolation( s, a->w, b->w )
+	);
+}
+
 
 const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
 
