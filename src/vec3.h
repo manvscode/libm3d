@@ -49,6 +49,7 @@ extern const vec3_t VEC3_XUNIT;
 extern const vec3_t VEC3_YUNIT;
 extern const vec3_t VEC3_ZUNIT;
 
+const char* vec3_to_string     ( const vec3_t* v ); /* not thread safe */
 
 /* |a|
  * |b|
@@ -156,10 +157,13 @@ static inline scaler_t vec3_angle( const vec3_t* __restrict a, const vec3_t* __r
 static inline void vec3_normalize( vec3_t* v )
 {
 	#if 1 /* Need more precision */
-    scaler_t length = vec3_magnitude( v );
-    v->x /= length;
-    v->y /= length;
-    v->z /= length;
+	scaler_t length = vec3_magnitude( v );
+	if( length > 0.0f )
+	{
+		v->x /= length;
+		v->y /= length;
+		v->z /= length;
+	}
 	#else
     scaler_t inverse_length = fast_inverse_sqrt( v->x * v->x + v->y * v->y + v->z * v->z );
     v->x *= inverse_length;
@@ -223,8 +227,6 @@ static inline vec3_t vec3_lerp( const vec3_t* __restrict a, const vec3_t* __rest
 	);
 }
 
-
-const char* vec3_to_string     ( const vec3_t* v ); /* not thread safe */
 
 #define vec3_to_vec2( p_v ) ((vec2_t*)(p_v))
 

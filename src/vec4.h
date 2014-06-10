@@ -50,6 +50,8 @@ extern const vec4_t VEC4_YUNIT;
 extern const vec4_t VEC4_ZUNIT;
 extern const vec4_t VEC4_WUNIT;
 
+const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
+
 /* |a|
  * |b|
  * |c|
@@ -163,11 +165,14 @@ static inline scaler_t vec4_angle( const vec4_t* __restrict a, const vec4_t* __r
 static inline void vec4_normalize( vec4_t* v )
 {
     #if 1 /* Need more precision */
-    scaler_t length = vec4_magnitude( v );
-    v->x /= length;
-    v->y /= length;
-    v->z /= length;
-    v->w /= length;
+	scaler_t length = vec4_magnitude( v );
+	if( length > 0.0f )
+	{
+		v->x /= length;
+		v->y /= length;
+		v->z /= length;
+		v->w /= length;
+	}
     #else
     scaler_t inverse_length = fast_inverse_sqrt( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
     v->x *= inverse_length;
@@ -239,9 +244,6 @@ static inline vec4_t vec4_lerp( const vec4_t* __restrict a, const vec4_t* __rest
 		linear_interpolation( s, a->w, b->w )
 	);
 }
-
-
-const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
 
 #define vec4_to_vec2( p_v ) ((vec2_t*)(p_v))
 #define vec4_to_vec3( p_v ) ((vec3_t*)(p_v))

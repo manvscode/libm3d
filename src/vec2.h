@@ -46,6 +46,8 @@ extern const vec2_t VEC2_ZERO;
 extern const vec2_t VEC2_XUNIT;
 extern const vec2_t VEC2_YUNIT;
 
+const char* vec2_to_string     ( const vec2_t* v ); /* not thread safe */
+
 /* |a|
  * |b|
  */
@@ -148,9 +150,12 @@ static inline scaler_t vec2_angle( const vec2_t* __restrict a, const vec2_t* __r
 static inline void vec2_normalize( vec2_t* v )
 {
 	#if 1 /* Need more precision */
-    scaler_t length = vec2_magnitude( v );
-    v->x /= length;
-    v->y /= length;
+	scaler_t length = vec2_magnitude( v );
+	if( length > 0.0f )
+	{
+		v->x /= length;
+		v->y /= length;
+	}
 	#else
     scaler_t inverse_length = fast_inverse_sqrt( v->x * v->x + v->y * v->y );
     v->x *= inverse_length;
@@ -204,9 +209,6 @@ static inline vec2_t vec2_lerp( const vec2_t* __restrict a, const vec2_t* __rest
 		linear_interpolation( s, a->y, b->y )
 	);
 }
-
-
-const char* vec2_to_string     ( const vec2_t* v ); /* not thread safe */
 
 #define     vec2_area          vec2_determinant
 

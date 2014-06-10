@@ -21,7 +21,6 @@
 #ifndef _MATHEMATICS_H_
 #define _MATHEMATICS_H_
 #include <math.h>
-#include "lib3dmath-config.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
