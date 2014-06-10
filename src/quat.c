@@ -116,6 +116,9 @@ quat_t quat_from_mat3( const mat3_t* m )
 		}
 	}
 
+	printf( "JOE: mat3 = \n%s\n", mat3_to_string( m ) );
+	printf( "JOE: quat = \n%s\n", quat_to_string( &q ) );
+
 	return q;
 }
 
@@ -208,6 +211,9 @@ quat_t quat_from_mat4( const mat4_t* m )
 			q.w = (m->m[1] + m->m[4]) / s;
 		}
 	}
+
+	printf( "JOE: mat4 = \n%s\n", mat4_to_string( m ) );
+	printf( "JOE: quat = \n%s\n", quat_to_string( &q ) );
 
 	return q;
 }

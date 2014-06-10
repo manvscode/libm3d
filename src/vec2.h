@@ -165,15 +165,13 @@ static inline void vec2_normalize( vec2_t* v )
 
 static inline bool vec2_is_normalized( const vec2_t* v )
 {
+	scaler_t length = vec2_magnitude( v );
 	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return (fabsl(v->x - 1.0) < SCALAR_EPSILON) &&
-           (fabsl(v->y - 1.0) < SCALAR_EPSILON);
+    return (fabsl(length - 1.0f) < SCALAR_EPSILON);
 	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return (fabs(v->x - 1.0) < SCALAR_EPSILON) &&
-           (fabs(v->y - 1.0) < SCALAR_EPSILON);
+    return (fabs(length - 1.0f) < SCALAR_EPSILON);
 	#else /* default: use float */
-    return (fabsf(v->x - 1.0f) < SCALAR_EPSILON) &&
-           (fabsf(v->y - 1.0f) < SCALAR_EPSILON);
+    return (fabsf(length - 1.0f) < SCALAR_EPSILON);
 	#endif
 }
 

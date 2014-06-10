@@ -21,6 +21,7 @@
 #ifndef _MATHEMATICS_H_
 #define _MATHEMATICS_H_
 #include <math.h>
+#include <float.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -53,11 +54,18 @@ extern "C" {
 	#endif
 #endif
 
+static inline bool scaler_compare( scaler_t a, scaler_t b )
+{
+	return fabs( a - b ) < SCALAR_EPSILON;	
+}
+
+
 #define HALF_PI               (M_PI_2)
 #define PI                    (M_PI)
 #define TWO_PI                (2*M_PI)
 #define RADIANS_PER_DEGREE    (M_PI / 180.0)
 #define DEGREES_PER_RANDIAN   (180.0 / M_PI)
+#define EASING_EPSILON        (0.0001)
 
 #define to_radians( degrees )  ((degrees)*RADIANS_PER_DEGREE)
 #define to_degrees( radians )  ((radians)/RADIANS_PER_DEGREE)
@@ -120,12 +128,24 @@ static inline scaler_t fast_inverse_sqrt( scaler_t number )
 
 
 
-#define linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
+#if 0
+static inline scaler_t lerp( scaler_t a, scaler_t x0, scaler_t x1 )
+{
+	return x0 + (x1 - x0) * a;
+}
+
+static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1, scaler_t x2, scaler_t x3 )
+{
+	return lerp( b, lerp( a, x0, x1 ), lerp( a, x2, x3 ) );
+}
+#endif
+
+#if 1
 #define lerp                                           linear_interpolation
+#define linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
 #define bilear_interpolation( a, b, x0, x1, x2, x3 )   (lerp( b, lerp( a, x0, x1 ), lerp( a, x2, x3 ) ))
 #define bilerp                                         bilear_interpolation
-
-
+#endif
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
 /* 

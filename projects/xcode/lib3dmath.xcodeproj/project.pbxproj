@@ -23,6 +23,7 @@
 		087C820C180D7C3A003D5A59 /* vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FC180D7C3A003D5A59 /* vec3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		087C820D180D7C3A003D5A59 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81FD180D7C3A003D5A59 /* vec4.c */; };
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D83B84681946AD3900201CD5 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		087C81FC180D7C3A003D5A59 /* vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec3.h; path = ../../src/vec3.h; sourceTree = "<group>"; };
 		087C81FD180D7C3A003D5A59 /* vec4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vec4.c; path = ../../src/vec4.c; sourceTree = "<group>"; };
 		087C81FE180D7C3A003D5A59 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec4.h; path = ../../src/vec4.h; sourceTree = "<group>"; };
+		D83B84671946AD3900201CD5 /* lib3dmath-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "lib3dmath-config.h"; path = "../../src/lib3dmath-config.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		087C81EE180D7C03003D5A59 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D83B84671946AD3900201CD5 /* lib3dmath-config.h */,
 				087C81EF180D7C3A003D5A59 /* mat2.c */,
 				087C81F0180D7C3A003D5A59 /* mat2.h */,
 				087C81F1180D7C3A003D5A59 /* mat3.c */,
@@ -105,6 +108,7 @@
 				087C8208180D7C3A003D5A59 /* quat.h in Headers */,
 				087C8204180D7C3A003D5A59 /* mat4.h in Headers */,
 				087C820A180D7C3A003D5A59 /* vec2.h in Headers */,
+				D83B84681946AD3900201CD5 /* lib3dmath-config.h in Headers */,
 				087C8200180D7C3A003D5A59 /* mat2.h in Headers */,
 				087C820C180D7C3A003D5A59 /* vec3.h in Headers */,
 				087C8202180D7C3A003D5A59 /* mat3.h in Headers */,
@@ -139,7 +143,7 @@
 		0855E683180D7BDA00E1CF69 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Joe Marrero";
 			};
 			buildConfigurationList = 0855E686180D7BDA00E1CF69 /* Build configuration list for PBXProject "lib3dmath" */;
@@ -210,6 +214,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -241,6 +246,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 			};
 			name = Release;
@@ -251,7 +257,7 @@
 				EXECUTABLE_PREFIX = "";
 				PRODUCT_NAME = lib3dmath;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -262,7 +268,7 @@
 				EXECUTABLE_PREFIX = "";
 				PRODUCT_NAME = lib3dmath;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
