@@ -1,8 +1,11 @@
 #ifndef _TEST_H_
 #define _TEST_H_
 
-#include <time.h>
+#include <stdbool.h>
 #include <string.h>
+#include <float.h>
+#include <math.h>
+#include <time.h>
 
 #define COLOR_BEGIN(bg,fg)                    "\e[" #bg ";" #fg "m"
 #define COLOR_END                             "\e[m"
@@ -22,9 +25,31 @@
 #define COLOR_RED_STR(s)                      COLOR_STRING(0,31,s)
 #define COLOR_CYAN_STR(s)                     COLOR_STRING(0,36,s)
 
-typedef bool (*test_fxn)( void );
+typedef bool   (*test_fxn)      ( void );
+typedef size_t (*test_size_fxn) ( void );
 
-static inline bool test_eval_feature( unsigned int i, const char* feature, test_fxn test )
+static inline bool test_nil( void ) { return false; }
+
+static inline bool integer_equals( long a, long b )
+{
+	return a == b;
+}
+
+static inline bool float_equals( float a, float b )
+{
+	return fabsf( a - b ) < FLT_EPSILON;	
+}
+
+static inline bool double_equals( double a, double b )
+{
+	return fabs( a - b ) < DBL_EPSILON;	
+}
+static inline bool long_double_equals( long double a, long double b )
+{
+	return fabsl( a - b ) < LDBL_EPSILON;	
+}
+
+static inline bool test_feature( unsigned int i, const char* feature, test_fxn test )
 {
 	bool is_passed = test();
 	printf( "%s%5u%s: %s... %s\n", COLOR_CYAN, i, COLOR_END, feature, is_passed ? COLOR_GREEN_STR("ok") : COLOR_RED_STR("failed") );
@@ -38,7 +63,7 @@ typedef struct test_feature {
 
 
 
-static inline bool test_eval_features( const char* suite, const test_feature_t features[], size_t count )
+static inline bool test_features( const char* suite, const test_feature_t features[], size_t count )
 {
 	bool is_passed = true;
 
@@ -48,7 +73,7 @@ static inline bool test_eval_features( const char* suite, const test_feature_t f
 	printf( "%s: %s%-30s%s\n", COLOR_CYAN_STR("Suite"), COLOR_YELLOW, suite, COLOR_END );
 	for( size_t i = 0; is_passed && i < count; i++ )
 	{
-		is_passed = test_eval_feature( i + 1, features[ i ].feature, features[ i ].function );
+		is_passed = test_feature( i + 1, features[ i ].feature, features[ i ].function );
 	}
 
 	printf( "----------------------\n" );
@@ -58,5 +83,34 @@ static inline bool test_eval_features( const char* suite, const test_feature_t f
 }
 
 
+typedef struct test_suite {
+	const char* suite;
+	const test_feature_t* features;
+	test_size_fxn count;
+} test_suite_t;
+
+static inline bool test_suites( const test_suite_t suites[], size_t count )
+{
+	bool is_passed = true;
+
+	for( size_t i = 0; is_passed && i < count; i++ )
+	{
+		size_t feature_count = suites[ i ].count();
+		is_passed = test_features( suites[ i ].suite, suites[ i ].features, feature_count );
+	}
+
+	printf( "\n" );
+
+	if( is_passed )
+	{
+		printf( "%sAll Suites%s: %s\n\n", COLOR_CYAN, COLOR_END, COLOR_GREEN_STR("PASSED.") );
+	}
+	else
+	{
+		printf( "%sOne or more suites have%s: %s\n\n", COLOR_CYAN, COLOR_END, COLOR_RED_STR("FAILED.") );
+	}
+
+	return is_passed;
+}
 
 #endif /* _TEST_H_ */

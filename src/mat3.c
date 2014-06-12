@@ -97,8 +97,6 @@ vec3_t mat3_mult_vector( const mat3_t* __restrict m, const vec3_t* __restrict v 
 
 bool mat3_invert( mat3_t* m )
 {
-    //assert( false );
-
 	scaler_t det = mat3_determinant( m );
 
 	if( fabs(det) > SCALAR_EPSILON ) // testing if not zero
@@ -125,26 +123,25 @@ void mat3_transpose( mat3_t* m )
 {
     assert( m );
 
-	scaler_t tmp1 = m->m[ 1 ];
-	scaler_t tmp2 = m->m[ 2 ];
-	scaler_t tmp3 = m->m[ 5 ];
+	scaler_t tmp1 = m->m[1];
+	scaler_t tmp2 = m->m[2];
+	scaler_t tmp3 = m->m[5];
 
-	m->m[ 1 ] = m->m[ 3 ];
-	m->m[ 2 ] = m->m[ 6 ];
-	m->m[ 5 ] = m->m[ 7 ];
+	m->m[1] = m->m[3];
+	m->m[2] = m->m[6];
+	m->m[5] = m->m[7];
 
-	m->m[ 3 ] = tmp1;
-	m->m[ 6 ] = tmp2;
-	m->m[ 7 ] = tmp3;
+	m->m[3] = tmp1;
+	m->m[6] = tmp2;
+	m->m[7] = tmp3;
 }
 
-mat3_t mat3_cofactor( mat3_t* m )
+mat3_t mat3_cofactor( const mat3_t* m )
 {
 	assert( m );
 	// | m0 m3 m6 |
 	// | m1 m4 m7 |
 	// | m2 m5 m8 |
-
 	return MAT3(
 		+(m->m[4] * m->m[8] - m->m[5] * m->m[7]),
 		-(m->m[3] * m->m[8] - m->m[5] * m->m[6]),

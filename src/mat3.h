@@ -51,16 +51,16 @@ extern const mat3_t MAT3_ZERO;
  */
 #define MAT3(a,b,c,d,e,f,g,h,i)  ((mat3_t){ .m = { (a), (b), (c), (d), (e), (f), (g), (h), (i) } })
 
-void          mat3_identity    ( mat3_t* m );
-void          mat3_zero        ( mat3_t* m );
-scaler_t      mat3_determinant ( const mat3_t* m );
-mat3_t        mat3_mult_matrix ( const mat3_t* __restrict a, const mat3_t* __restrict b );
-vec3_t        mat3_mult_vector ( const mat3_t* __restrict m, const vec3_t* __restrict v );
-bool          mat3_invert      ( mat3_t* m );
-void          mat3_transpose   ( mat3_t* m );
-mat3_t        mat3_cofactor    ( mat3_t* m );
-void          mat3_adjoint     ( mat3_t* m );
-const char*   mat3_to_string   ( const mat3_t* m );
+void        mat3_identity    ( mat3_t* m );
+void        mat3_zero        ( mat3_t* m );
+scaler_t    mat3_determinant ( const mat3_t* m );
+mat3_t      mat3_mult_matrix ( const mat3_t* __restrict a, const mat3_t* __restrict b );
+vec3_t      mat3_mult_vector ( const mat3_t* __restrict m, const vec3_t* __restrict v );
+bool        mat3_invert      ( mat3_t* m );
+void        mat3_transpose   ( mat3_t* m );
+mat3_t      mat3_cofactor    ( const mat3_t* m );
+void        mat3_adjoint     ( mat3_t* m );
+const char* mat3_to_string   ( const mat3_t* m );
 
 #define mat3_x_vector( p_m )   ((vec3_t*) &(p_m)->m[0])
 #define mat3_y_vector( p_m )   ((vec3_t*) &(p_m)->m[3])

@@ -49,15 +49,15 @@ extern const mat2_t MAT2_ZERO;
  */
 #define MAT2(a,b,c,d)  ((mat2_t){ .m = { (a), (b), (c), (d) } })
 
-void          mat2_initialize  ( mat2_t* m, scaler_t a, scaler_t b, scaler_t c, scaler_t d );
-void          mat2_identity    ( mat2_t* m );
-void          mat2_zero        ( mat2_t* m );
-scaler_t      mat2_determinant ( const mat2_t* m );
-mat2_t        mat2_mult_matrix ( const mat2_t* __restrict a, const mat2_t* __restrict b );
-vec2_t        mat2_mult_vector ( const mat2_t* __restrict m, const vec2_t* __restrict v );
-bool          mat2_invert      ( mat2_t* m );
-void          mat2_transpose   ( mat2_t* m );
-const char*   mat2_to_string   ( const mat2_t* m );
+void        mat2_initialize  ( mat2_t* m, scaler_t a, scaler_t b, scaler_t c, scaler_t d );
+void        mat2_identity    ( mat2_t* m );
+void        mat2_zero        ( mat2_t* m );
+scaler_t    mat2_determinant ( const mat2_t* m );
+mat2_t      mat2_mult_matrix ( const mat2_t* __restrict a, const mat2_t* __restrict b );
+vec2_t      mat2_mult_vector ( const mat2_t* __restrict m, const vec2_t* __restrict v );
+bool        mat2_invert      ( mat2_t* m );
+void        mat2_transpose   ( mat2_t* m );
+const char* mat2_to_string   ( const mat2_t* m );
 
 #define mat2_x_vector( p_m )   ((vec2_t*) &(p_m)->m[0])
 #define mat2_y_vector( p_m )   ((vec2_t*) &(p_m)->m[2])

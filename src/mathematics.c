@@ -221,85 +221,51 @@ long double minld( long double x, long double y )
 	return x < y ? x : y;
 }
 
-int clampi( int value, int min, int max )
+unsigned int clampui( unsigned int value, unsigned int min, unsigned int max )
 {
-	value = integer_max( max, value );
-	return integer_min( value, min );
+	value = integer_min( value, max );
+	return integer_max( value, min );
 }
 
-long clampl( int value, int min, int max )
+unsigned long clampul( unsigned long value, unsigned long min, unsigned long max )
 {
-	value = integer_max( max, value );
-	return integer_min( value, min );
+	value = integer_min( value, max );
+	return integer_max( value, min );
+}
+
+int clampi( int value, int min, int max )
+{
+	#ifdef SAFE_CLAMP
+	return value > max ? max : (value < min ? min : value);
+	#else
+	value = integer_min( value, max );
+	return integer_max( value, min );
+	#endif
+}
+
+long clampl( long value, long min, long max )
+{
+	#ifdef SAFE_CLAMP
+	return value > max ? max : (value < min ? min : value);
+	#else
+	value = integer_min( value, max );
+	return integer_max( value, min );
+	#endif
 }
 
 float clampf( float value, float min, float max )
 {
-	if( value > max )
-	{
-		return max;
-	}
-	else if( value < min )
-	{
-		return min;
-	}
-
-	return value;
+	return value > max ? max : (value < min ? min : value);
 }
 
 double clampd( double value, double min, double max )
 {
-	if( value > max )
-	{
-		return max;
-	}
-	else if( value < min )
-	{
-		return min;
-	}
-
-	return value;
+	return value > max ? max : (value < min ? min : value);
 }
 
 long double clampld( long double value, long double min, long double max )
 {
-	if( value > max )
-	{
-		return max;
-	}
-	else if( value < min )
-	{
-		return min;
-	}
-
-	return value;
+	return value > max ? max : (value < min ? min : value);
 }
 
-bool is_even( int n )
-{
-	return (n & 1) == 0;
-}
-
-bool is_odd( int n )
-{
-	return (n & 1) == 1;
-}
-
-bool is_power_of_2( int x )
-{
-	return (x & (x - 1)) == 0;
-}
-
-int next_power_of_2( int v )
-{
-	int r = v;
-	r--;
-	r |= r >> 1;
-	r |= r >> 2;
-	r |= r >> 4;
-	r |= r >> 8;
-	r |= r >> 16;
-	r++;
-	return r;
-}
 

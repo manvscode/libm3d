@@ -2,32 +2,30 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <vec3.h>
-#include <mat3.h>
 #include "test.h"
 
-bool test_vec3_literals( void );
-bool test_vec3_addition( void );
-bool test_vec3_subtraction( void );
-bool test_vec3_scaler_multiply( void );
-bool test_vec3_magnitude( void );
-bool test_vec3_dot_product( void );
-bool test_vec3_distance( void );
-bool test_vec3_angle( void );
+bool test_vec3_literals        ( void );
+bool test_vec3_addition        ( void );
+bool test_vec3_subtraction     ( void );
+bool test_vec3_scaler_multiply ( void );
+bool test_vec3_magnitude       ( void );
+bool test_vec3_dot_product     ( void );
+bool test_vec3_cross_product   ( void );
+bool test_vec3_distance        ( void );
+bool test_vec3_angle           ( void );
+bool test_vec3_normalize       ( void );
+bool test_vec3_is_normalized   ( void );
+bool test_vec3_negate          ( void );
+bool test_vec3_zero            ( void );
 
-bool test_vec3_normalize( void );
-bool test_vec3_is_normalized( void );
-bool test_vec3_negate( void );
-bool test_vec3_zero( void );
-
-bool test_vec3_nil( void ) { return false; }
-
-const test_feature_t vec3_functions[] = {
+const test_feature_t vec3_tests[] = {
 	{ "Testing vec3 literals",                 test_vec3_literals },
 	{ "Testing vec3 addition",                 test_vec3_addition },
-	{ "Testing vec4 subtraction",              test_vec3_subtraction },
+	{ "Testing vec3 subtraction",              test_vec3_subtraction },
 	{ "Testing vec3 scaler multiply",          test_vec3_scaler_multiply },
 	{ "Testing vec3 magnitude (i.e. length)",  test_vec3_magnitude },
 	{ "Testing vec3 dot product",              test_vec3_dot_product },
+	{ "Testing vec3 cross product",            test_vec3_cross_product },
 	{ "Testing vec3 distance",                 test_vec3_distance },
 	{ "Testing vec3 angle",                    test_vec3_angle },
 	{ "Testing vec3 normalize",                test_vec3_normalize },
@@ -36,12 +34,19 @@ const test_feature_t vec3_functions[] = {
 	{ "Testing vec3 zero",                     test_vec3_zero },
 };
 
+size_t vec3_test_suite_size( void )
+{
+	return sizeof(vec3_tests) / sizeof(vec3_tests[0]);
+}
+
+#ifdef TEST_VEC3_STANDALONE
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );
-	bool result = test_eval_features( "3D Vector Functions", vec3_functions, sizeof(vec3_functions) / sizeof(vec3_functions[0]) );
+	bool result = test_features( "3D Vector Functions", vec3_tests, vec3_test_suite_size() );
 	return result ? 0 : 1;
 }
+#endif
 
 bool test_vec3_literals( void )
 {
@@ -100,6 +105,27 @@ bool test_vec3_dot_product( void )
 
 	return scaler_compare( r1, 14.0f ) &&
 	       scaler_compare( r2, 17.0f );
+}
+
+bool test_vec3_cross_product( void )
+{
+	vec3_t a = VEC3( 1, 0, 0 );
+	vec3_t b = VEC3( 0, 1, 0 );
+	vec3_t c1 = vec3_cross_product( &a, &b );
+
+	bool r1 = scaler_compare( c1.x, 0.0f ) &&
+	          scaler_compare( c1.y, 0.0f ) &&
+	          scaler_compare( c1.z, 1.0f );
+
+	vec3_t c = VEC3( 3, -3, 1 );
+	vec3_t d = VEC3( 4, 9, 2 );
+	vec3_t c2 = vec3_cross_product( &c, &d );
+
+	bool r2 = scaler_compare( c2.x, -15.0f ) &&
+	          scaler_compare( c2.y, -2.0f ) &&
+	          scaler_compare( c2.z, 39.0f );
+
+	return r1 && r2;
 }
 
 bool test_vec3_distance( void )

@@ -73,38 +73,68 @@ static inline bool scaler_compare( scaler_t a, scaler_t b )
 #define integer_max( x, y )    ((x) ^ (((x) ^ (y)) & -((x) < (y))))
 #define integer_min( x, y )    ((y) ^ (((x) ^ (y)) & -((x) < (y))))
 
-float        uniformf           ( void ); /* [0.0f, 1.0f] */
-double       uniformd           ( void ); /* [0.0, 1.0] */
-long double  uniformld          ( void ); /* [0.0, 1.0] */
-int          uniform_rangei     ( int min, int max ); /* [min. max] */
-long         uniform_rangel     ( long min, long max ); /* [min. max] */
-float        uniform_rangef     ( float min, float max ); /* [min. max] */
-double       uniform_ranged     ( double min, double max ); /* [min. max] */
-float        uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
-double       uniform_unitd      ( void ); /* [-1.0, 1.0]; */
-long double  uniform_unitld     ( void ); /* [-1.0, 1.0]; */
-float        guassianf          ( float mean, float stddev );
-double       guassiand          ( double mean, double stddev );
-long double  guassianld         ( long double mean, long double stddev );
-int          maxi               ( int x, int y );
-long         maxl               ( long x, long y );
-float        maxf               ( float x, float y );
-double       maxd               ( double x, double y );
-long double  maxld              ( long double x, long double y );
-int          mini               ( int x, int y );
-long         minl               ( long x, long y );
-float        minf               ( float x, float y );
-double       mind               ( double x, double y );
-long double  minld              ( long double x, long double y );
-int          clampi             ( int value, int min, int max );
-long         clampl             ( int value, int min, int max );
-float        clampf             ( float value, float min, float max );
-double       clampd             ( double value, double min, double max );
-long double  clampld            ( long double value, long double min, long double max );
-bool         is_even            ( int n );
-bool         is_odd             ( int n );
-bool         is_power_of_2      ( int x );
-int          next_power_of_2    ( int v );
+float         uniformf           ( void ); /* [0.0f, 1.0f] */
+double        uniformd           ( void ); /* [0.0, 1.0] */
+long double   uniformld          ( void ); /* [0.0, 1.0] */
+int           uniform_rangei     ( int min, int max ); /* [min. max] */
+long          uniform_rangel     ( long min, long max ); /* [min. max] */
+float         uniform_rangef     ( float min, float max ); /* [min. max] */
+double        uniform_ranged     ( double min, double max ); /* [min. max] */
+float         uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
+double        uniform_unitd      ( void ); /* [-1.0, 1.0]; */
+long double   uniform_unitld     ( void ); /* [-1.0, 1.0]; */
+float         guassianf          ( float mean, float stddev );
+double        guassiand          ( double mean, double stddev );
+long double   guassianld         ( long double mean, long double stddev );
+int           maxi               ( int x, int y );
+long          maxl               ( long x, long y );
+float         maxf               ( float x, float y );
+double        maxd               ( double x, double y );
+long double   maxld              ( long double x, long double y );
+int           mini               ( int x, int y );
+long          minl               ( long x, long y );
+float         minf               ( float x, float y );
+double        mind               ( double x, double y );
+long double   minld              ( long double x, long double y );
+unsigned int  clampui            ( unsigned int value, unsigned int min, unsigned int max );
+unsigned long clampul            ( unsigned long value, unsigned long min, unsigned long max );
+int           clampi             ( int value, int min, int max );
+int           clampi             ( int value, int min, int max );
+long          clampl             ( long value, long min, long max );
+float         clampf             ( float value, float min, float max );
+double        clampd             ( double value, double min, double max );
+long double   clampld            ( long double value, long double min, long double max );
+
+
+
+
+static inline bool is_even( int n )
+{
+	return (n & 1) == 0;
+}
+
+static inline bool is_odd( int n )
+{
+	return (n & 1) == 1;
+}
+
+static inline bool is_power_of_2( int x )
+{
+	return (x & (x - 1)) == 0;
+}
+
+static inline int next_power_of_2( int v )
+{
+	int r = v;
+	r--;
+	r |= r >> 1;
+	r |= r >> 2;
+	r |= r >> 4;
+	r |= r >> 8;
+	r |= r >> 16;
+	r++;
+	return r;
+}
 
 
 static inline scaler_t fast_inverse_sqrt( scaler_t number )
