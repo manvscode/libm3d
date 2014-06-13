@@ -13,13 +13,13 @@ A fully-tested math library for computer graphics applications and games.
 ##  Build Instructions
 You can compile *lib3dmath* with either float or double precision.
 ### If you want to build the float version of lib3dmath:
-* autoreconf
+* autoreconf -i
 * ./configure
 * make
 * make install
 
 ### If you want to build the double version of lib3dmath:
-* autoreconf
+* autoreconf -i
 * ./configure --enable-use-double
 * make
 * make install
