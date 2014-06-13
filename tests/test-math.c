@@ -6,6 +6,7 @@
 #include <mathematics.h>
 #include "test.h"
 
+bool test_scaler_size      ( void );
 bool test_uniformf         ( void );
 bool test_uniformd         ( void );
 bool test_uniformld        ( void );
@@ -36,6 +37,7 @@ bool test_clampd           ( void );
 bool test_clampld          ( void );
 
 const test_feature_t math_tests[] = {
+	{ "Testing scaler_t size", test_scaler_size },
 	{ "Testing uniformf()", test_uniformf },
 	{ "Testing uniformd()", test_uniformd },
 	{ "Testing uniformld()", test_uniformld },
@@ -80,6 +82,17 @@ int main( int argc, char* argv[] )
 	return 0;
 }
 #endif
+
+bool test_scaler_size( void )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return sizeof(scaler_t) == sizeof(long double);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return sizeof(scaler_t) == sizeof(double);
+	#else /* default: use float */
+	return sizeof(scaler_t) == sizeof(float);
+	#endif
+}
 
 bool test_uniformf( void )
 {
