@@ -1,7 +1,7 @@
 lib3dmath
 =============
 
-A math library for computer graphics applications and games.
+A fully-tested math library for computer graphics applications and games.
 
 
 Supported Constructs
