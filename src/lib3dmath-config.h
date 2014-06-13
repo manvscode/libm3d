@@ -36,6 +36,12 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
 
+/* All scalar types are double. */
+/* #undef LIB3DMATH_USE_DOUBLE */
+
+/* All scalar types are float. */
+#define LIB3DMATH_USE_FLOAT 0
+
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #define LT_OBJDIR ".libs/"

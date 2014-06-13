@@ -95,7 +95,7 @@ bool test_mat3_determinant( void )
 		2, 7, 2
 	);
 	float d1 = mat3_determinant( &a );
-	bool test1 = scaler_compare( d1, 5.0f );
+	bool test1 = scaler_compare( d1, 5.0 );
 
 	mat3_t b = MAT3(
 		3, 6, 6,
@@ -103,7 +103,7 @@ bool test_mat3_determinant( void )
 		8, 0, 8
 	);
 	float d2 = mat3_determinant( &b );
-	bool test2 = scaler_compare( d2, 264.0f );
+	bool test2 = scaler_compare( d2, 264.0 );
 
 	return test1 && test2;
 }
@@ -173,15 +173,15 @@ bool test_mat3_inversion( void )
 	mat3_t m2 = MAT3(1, 0, 11, 2, 7, 0, 3, 1, 2);
 	mat3_invert( &m2 );
 
-	bool test2 = scaler_compare( m2.m[0], (-14.0f/195) ) &&
-	             scaler_compare( m2.m[1], (-11.0f/195) ) &&
-	             scaler_compare( m2.m[2], ( 77.0f/195) ) &&
-	             scaler_compare( m2.m[3], (  4.0f/195) ) &&
-	             scaler_compare( m2.m[4], ( 31.0f/195) ) &&
-	             scaler_compare( m2.m[5], (-22.0f/195) ) &&
-	             scaler_compare( m2.m[6], ( 19.0f/195) ) &&
-	             scaler_compare( m2.m[7], (  1.0f/195) ) &&
-	             scaler_compare( m2.m[8], ( -7.0f/195) );
+	bool test2 = scaler_compare( m2.m[0], (-14.0/195) ) &&
+	             scaler_compare( m2.m[1], (-11.0/195) ) &&
+	             scaler_compare( m2.m[2], ( 77.0/195) ) &&
+	             scaler_compare( m2.m[3], (  4.0/195) ) &&
+	             scaler_compare( m2.m[4], ( 31.0/195) ) &&
+	             scaler_compare( m2.m[5], (-22.0/195) ) &&
+	             scaler_compare( m2.m[6], ( 19.0/195) ) &&
+	             scaler_compare( m2.m[7], (  1.0/195) ) &&
+	             scaler_compare( m2.m[8], ( -7.0/195) );
 
 	mat3_t m3 = MAT3(
 		1, 0, 11,
@@ -190,15 +190,15 @@ bool test_mat3_inversion( void )
 	);
 	mat3_invert( &m3 );
 
-	bool test3 = scaler_compare( m3.m[0], (-14.0f/195) ) &&
-		         scaler_compare( m3.m[1], (-11.0f/195) ) &&
-		         scaler_compare( m3.m[2], ( 77.0f/195) ) &&
-		         scaler_compare( m3.m[3], (  4.0f/195) ) &&
-		         scaler_compare( m3.m[4], ( 31.0f/195) ) &&
-		         scaler_compare( m3.m[5], (-22.0f/195) ) &&
-		         scaler_compare( m3.m[6], ( 19.0f/195) ) &&
-		         scaler_compare( m3.m[7], (  1.0f/195) ) &&
-		         scaler_compare( m3.m[8], ( -7.0f/195) );
+	bool test3 = scaler_compare( m3.m[0], (-14.0/195) ) &&
+		         scaler_compare( m3.m[1], (-11.0/195) ) &&
+		         scaler_compare( m3.m[2], ( 77.0/195) ) &&
+		         scaler_compare( m3.m[3], (  4.0/195) ) &&
+		         scaler_compare( m3.m[4], ( 31.0/195) ) &&
+		         scaler_compare( m3.m[5], (-22.0/195) ) &&
+		         scaler_compare( m3.m[6], ( 19.0/195) ) &&
+		         scaler_compare( m3.m[7], (  1.0/195) ) &&
+		         scaler_compare( m3.m[8], ( -7.0/195) );
 
 	return test1 && test2 && test3;
 }

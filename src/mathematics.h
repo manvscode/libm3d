@@ -22,11 +22,12 @@
 #define _MATHEMATICS_H_
 #include <math.h>
 #include <float.h>
+#include <stdbool.h>
+#include "lib3dmath-config.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdbool.h>
 
 #if defined(LIB3DMATH_USE_LONG_DOUBLE)
 	#ifndef SCALAR_T
@@ -56,7 +57,13 @@ extern "C" {
 
 static inline bool scaler_compare( scaler_t a, scaler_t b )
 {
-	return fabs( a - b ) < SCALAR_EPSILON;	
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return fabsl( a - b ) < SCALAR_EPSILON;
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return fabs( a - b ) < SCALAR_EPSILON;
+	#else
+	return fabsf( a - b ) < SCALAR_EPSILON;
+	#endif
 }
 
 

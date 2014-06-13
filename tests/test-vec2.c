@@ -51,8 +51,8 @@ int main( int argc, char* argv[] )
 bool test_vec2_literals( void )
 {
 	vec2_t v = VEC2( 1, 2 );
-	return scaler_compare( v.x, 1.0f ) &&
-	       scaler_compare( v.y, 2.0f );
+	return scaler_compare( v.x, 1.0 ) &&
+	       scaler_compare( v.y, 2.0 );
 }
 
 bool test_vec2_addition( void )
@@ -60,8 +60,8 @@ bool test_vec2_addition( void )
 	vec2_t a = VEC2( 0, 1 );
 	vec2_t b = VEC2( 4, -1 );
 	vec2_t r = vec2_add( &a, &b );
-	return scaler_compare( r.x, 4.0f ) &&
-	       scaler_compare( r.y, 0.0f );
+	return scaler_compare( r.x, 4.0 ) &&
+	       scaler_compare( r.y, 0.0 );
 }
 
 bool test_vec2_subtraction( void )
@@ -69,17 +69,17 @@ bool test_vec2_subtraction( void )
 	vec2_t a = VEC2( 2, 2 );
 	vec2_t b = VEC2( -2, 2 );
 	vec2_t r = vec2_subtract( &a, &b );
-	return scaler_compare( r.x, 4.0f ) &&
-	       scaler_compare( r.y, 0.0f );
+	return scaler_compare( r.x, 4.0 ) &&
+	       scaler_compare( r.y, 0.0 );
 }
 
 bool test_vec2_scaler_multiply( void )
 {
 	vec2_t a = VEC2( 3, 2 );
-	scaler_t s = 0.5f;
+	scaler_t s = 0.5;
 	vec2_t r = vec2_multiply( &a, s );
-	return scaler_compare( r.x, 1.5f ) &&
-	       scaler_compare( r.y, 1.0f );
+	return scaler_compare( r.x, 1.5 ) &&
+	       scaler_compare( r.y, 1.0 );
 }
 
 bool test_vec2_magnitude( void )
@@ -99,8 +99,8 @@ bool test_vec2_dot_product( void )
 	vec2_t d = VEC2( 5, 3 );
 	scaler_t r2 = vec2_dot_product( &c, &d );
 
-	return scaler_compare( r1, 13.0f ) &&
-	       scaler_compare( r2, 11.0f );
+	return scaler_compare( r1, 13.0 ) &&
+	       scaler_compare( r2, 11.0 );
 }
 
 bool test_vec2_cross_product( void )
@@ -130,8 +130,8 @@ bool test_vec2_distance( void )
 	vec2_t d = VEC2( 5, 1 );
 	scaler_t r2 = vec2_distance( &c, &d );
 
-	return scaler_compare( r1, 0.0f ) &&
-	       scaler_compare( r2, 4.0f );
+	return scaler_compare( r1, 0.0 ) &&
+	       scaler_compare( r2, 4.0 );
 }
 
 bool test_vec2_angle( void )
@@ -144,20 +144,20 @@ bool test_vec2_angle( void )
 	vec2_t d = VEC2( 0, 1 );
 	scaler_t r2 = vec2_angle( &c, &d );
 
-	return scaler_compare( r1, 45.0f * RADIANS_PER_DEGREE ) &&
-	       scaler_compare( r2, 90.0f * RADIANS_PER_DEGREE );
+	return scaler_compare( r1, 45.0 * RADIANS_PER_DEGREE ) &&
+	       scaler_compare( r2, 90.0 * RADIANS_PER_DEGREE );
 }
 
 bool test_vec2_normalize( void )
 {
-	vec2_t a = VEC2( 3.123f, 12.5f );
+	vec2_t a = VEC2( 3.123, 12.5 );
 	vec2_normalize( &a );
-	return scaler_compare( vec2_magnitude(&a), 1.0f );
+	return scaler_compare( vec2_magnitude(&a), 1.0 );
 }
 
 bool test_vec2_is_normalized( void )
 {
-	vec2_t a = VEC2( 3.123f, 12.5f );
+	vec2_t a = VEC2( 3.123, 12.5 );
 	vec2_normalize( &a );
 	return vec2_is_normalized( &a );
 }
@@ -166,19 +166,19 @@ bool test_vec2_negate( void )
 {
 	vec2_t a = VEC2( 1, 2 );
 	vec2_negate( &a );
-	return scaler_compare( a.x, -1.0f ) &&
-	       scaler_compare( a.y, -2.0f );
+	return scaler_compare( a.x, -1.0 ) &&
+	       scaler_compare( a.y, -2.0 );
 }
 
 bool test_vec2_zero( void )
 {
 	vec2_t a = VEC2( 1, 2 );
 	vec2_zero( &a );
-	bool r1 = scaler_compare( a.x, 0.0f ) &&
-	          scaler_compare( a.y, 0.0f );
+	bool r1 = scaler_compare( a.x, 0.0 ) &&
+	          scaler_compare( a.y, 0.0 );
 
-	bool r2 = scaler_compare( VEC2_ZERO.x, 0.0f ) &&
-	          scaler_compare( VEC2_ZERO.y, 0.0f );
+	bool r2 = scaler_compare( VEC2_ZERO.x, 0.0 ) &&
+	          scaler_compare( VEC2_ZERO.y, 0.0 );
 
 	return r1 && r2;
 }

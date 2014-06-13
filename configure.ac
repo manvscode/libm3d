@@ -18,8 +18,6 @@ AH_BOTTOM([
 #endif /* _LIB3DMATH_H_ */
 ])
 
-#AC_DEFINE([LIB3DMATH_USE_DOUBLE], [1], [All scalar types are doubles.])
-
 DFLAGS="$DFLAGS"
 
 CFLAGS="$DFLAGS $CFLAGS"
@@ -32,13 +30,27 @@ LT_INIT([static])
 AC_PROG_LIBTOOL
 AM_PROG_LIBTOOL
 
+
+# -------------------------------------------------
+AC_ARG_ENABLE([use_double],
+	[AS_HELP_STRING([--enable-use-double], [Enable scaler types to be double instead of float.])],
+	[:],
+	[enable_use_double=no])
+AM_CONDITIONAL([ENABLE_USE_DOUBLE], [test "x$enable_use_double" = "xyes"])
+
+AM_COND_IF([ENABLE_USE_DOUBLE],
+	[AC_DEFINE([LIB3DMATH_USE_DOUBLE], [1], [All scalar types are double.])
+	 AC_MSG_NOTICE([scaler_t is a double.])],
+	[AC_DEFINE([LIB3DMATH_USE_FLOAT], [0], [All scalar types are float.])
+	AC_MSG_NOTICE([scaler_t is a float.])
+])
 # -------------------------------------------------
 AC_ARG_ENABLE([tests],
-	[AS_HELP_STRING([--disable-tests], [Enable test programs.])],
+	[AS_HELP_STRING([--enable-tests], [Enable test programs.])],
 	[:],
 	[enable_tests=no])
 
-AM_CONDITIONAL([ENABLE_TESTS], [test "$enable_tests" = "yes"])
+AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" = "xyes"])
 # -------------------------------------------------
 
 AC_PROG_INSTALL

@@ -102,6 +102,7 @@ static inline scaler_t vec4_dot_product( const vec4_t* __restrict a, const vec4_
     return a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
 }
 
+#if 0
 static inline vec4_t vec4_cross_product( const vec4_t* __restrict a, const vec4_t* __restrict b, const vec4_t* __restrict c )
 {
     vec4_t result;
@@ -109,6 +110,7 @@ static inline vec4_t vec4_cross_product( const vec4_t* __restrict a, const vec4_
     assert( false );
     return result;
 }
+#endif
 
 static inline scaler_t vec4_magnitude( const vec4_t* v )
 {

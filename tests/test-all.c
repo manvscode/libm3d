@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "test.h"
+#include "../src/mathematics.h"
 
 extern const test_feature_t math_tests[];
 extern size_t math_test_suite_size( void );
@@ -45,5 +46,13 @@ const test_suite_t suites[] = {
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );
+
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	printf( "%s: %s%-30s%s\n\n", COLOR_CYAN_STR("Type of scaler_t"), COLOR_GREEN, "long double", COLOR_END );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	printf( "%s: %s%-30s%s\n\n", COLOR_CYAN_STR("Type of scaler_t"), COLOR_GREEN, "double", COLOR_END );
+	#else /* default: use float */
+	printf( "%s: %s%-30s%s\n\n", COLOR_CYAN_STR("Type of scaler_t"), COLOR_GREEN, "float", COLOR_END );
+	#endif
 	return test_suites( suites, sizeof(suites)/sizeof(suites[0]) );
 }

@@ -117,7 +117,7 @@ bool test_mat4_determinant( void )
 		0,  1, 0,  1
 	);
 	float d1 = mat4_determinant( &a );
-	bool test1 = scaler_compare( d1, 28.0f );
+	bool test1 = scaler_compare( d1, 28.0 );
 
 	mat4_t b = MAT4(
 		 3,  6,  6,  0,
@@ -126,7 +126,7 @@ bool test_mat4_determinant( void )
 		-1,  1,  0,  1
 	);
 	float d2 = mat4_determinant( &b );
-	bool test2 = scaler_compare( d2, 240.0f );
+	bool test2 = scaler_compare( d2, 240.0 );
 
 	return test1 && test2;
 }
@@ -282,22 +282,22 @@ bool test_mat4_inversion( void )
 		 8,  1,  0,  1
 	);
 	mat4_invert( &b );
-	bool r2 = scaler_compare( b.m[ 0], (  -9.0f/481) ) &&
-	          scaler_compare( b.m[ 1], (  -7.0f/962) ) &&
-	          scaler_compare( b.m[ 2], ( -22.0f/481) ) &&
-	          scaler_compare( b.m[ 3], ( 139.0f/962) ) &&
-	          scaler_compare( b.m[ 4], (  38.0f/481) ) &&
-	          scaler_compare( b.m[ 5], (  83.0f/962) ) &&
-	          scaler_compare( b.m[ 6], ( -14.0f/481) ) &&
-	          scaler_compare( b.m[ 7], (   1.0f/962) ) &&
-	          scaler_compare( b.m[ 8], ( -75.0f/481) ) &&
-	          scaler_compare( b.m[ 9], (  51.0f/481) ) &&
-	          scaler_compare( b.m[10], ( -23.0f/481) ) &&
-	          scaler_compare( b.m[11], (  18.0f/481) ) &&
-	          scaler_compare( b.m[12], (  34.0f/481) ) &&
-	          scaler_compare( b.m[13], ( -27.0f/962) ) &&
-	          scaler_compare( b.m[14], ( 190.0f/481) ) &&
-	          scaler_compare( b.m[15], (-151.0f/962) );
+	bool r2 = scaler_compare( b.m[ 0], (  -9.0/481) ) &&
+	          scaler_compare( b.m[ 1], (  -7.0/962) ) &&
+	          scaler_compare( b.m[ 2], ( -22.0/481) ) &&
+	          scaler_compare( b.m[ 3], ( 139.0/962) ) &&
+	          scaler_compare( b.m[ 4], (  38.0/481) ) &&
+	          scaler_compare( b.m[ 5], (  83.0/962) ) &&
+	          scaler_compare( b.m[ 6], ( -14.0/481) ) &&
+	          scaler_compare( b.m[ 7], (   1.0/962) ) &&
+	          scaler_compare( b.m[ 8], ( -75.0/481) ) &&
+	          scaler_compare( b.m[ 9], (  51.0/481) ) &&
+	          scaler_compare( b.m[10], ( -23.0/481) ) &&
+	          scaler_compare( b.m[11], (  18.0/481) ) &&
+	          scaler_compare( b.m[12], (  34.0/481) ) &&
+	          scaler_compare( b.m[13], ( -27.0/962) ) &&
+	          scaler_compare( b.m[14], ( 190.0/481) ) &&
+	          scaler_compare( b.m[15], (-151.0/962) );
 
 	mat4_t c = MAT4(
 		 1,  0,  0,  5,
@@ -306,22 +306,22 @@ bool test_mat4_inversion( void )
 		 0,  0,  0,  1
 	);
 	mat4_invert( &c );
-	bool r3 = scaler_compare( c.m[ 0], 1.0f ) &&
-	          scaler_compare( c.m[ 1], 0.0f ) &&
-	          scaler_compare( c.m[ 2], 0.0f ) &&
-	          scaler_compare( c.m[ 3], -5.0f ) &&
-	          scaler_compare( c.m[ 4], 0.0f ) &&
-	          scaler_compare( c.m[ 5], (1.0f/7) ) &&
-	          scaler_compare( c.m[ 6], 0.0f ) &&
-	          scaler_compare( c.m[ 7], 0.0f ) &&
-	          scaler_compare( c.m[ 8], (-5.0f/2) ) &&
-	          scaler_compare( c.m[ 9], (-1.0f/14) ) &&
-	          scaler_compare( c.m[10], ( 1.0f/2) ) &&
-	          scaler_compare( c.m[11], (25.0f/2) ) &&
-	          scaler_compare( c.m[12], 0.0f ) &&
-	          scaler_compare( c.m[13], 0.0f ) &&
-	          scaler_compare( c.m[14], 0.0f ) &&
-	          scaler_compare( c.m[15], 1.0f );
+	bool r3 = scaler_compare( c.m[ 0], 1.0 ) &&
+	          scaler_compare( c.m[ 1], 0.0 ) &&
+	          scaler_compare( c.m[ 2], 0.0 ) &&
+	          scaler_compare( c.m[ 3], -5.0 ) &&
+	          scaler_compare( c.m[ 4], 0.0 ) &&
+	          scaler_compare( c.m[ 5], (1.0/7) ) &&
+	          scaler_compare( c.m[ 6], 0.0 ) &&
+	          scaler_compare( c.m[ 7], 0.0 ) &&
+	          scaler_compare( c.m[ 8], (-5.0/2) ) &&
+	          scaler_compare( c.m[ 9], (-1.0/14) ) &&
+	          scaler_compare( c.m[10], ( 1.0/2) ) &&
+	          scaler_compare( c.m[11], (25.0/2) ) &&
+	          scaler_compare( c.m[12], 0.0 ) &&
+	          scaler_compare( c.m[13], 0.0 ) &&
+	          scaler_compare( c.m[14], 0.0 ) &&
+	          scaler_compare( c.m[15], 1.0 );
 
 	return r1 && r2 && r3;
 }

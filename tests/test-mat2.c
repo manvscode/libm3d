@@ -78,14 +78,14 @@ bool test_mat2_determinant( void )
 	    -1, 1
 	);
 	float d1 = mat2_determinant( &a );
-	bool test1 = scaler_compare( d1, 5.0f );
+	bool test1 = scaler_compare( d1, 5.0 );
 
 	mat2_t b = MAT2(
 		3, 6,
 	    1, 3
 	);
 	float d2 = mat2_determinant( &b );
-	bool test2 = scaler_compare( d2, 3.0f );
+	bool test2 = scaler_compare( d2, 3.0 );
 
 	return test1 && test2;
 }
@@ -129,26 +129,26 @@ bool test_mat2_inversion( void )
 	mat2_t m1 = MAT2(1, 4, 3, 0);
 	mat2_invert( &m1 );
 	bool test1 = scaler_compare( m1.m[0], 0 ) &&
-	             scaler_compare( m1.m[1], (1.0f/3) ) &&
-	             scaler_compare( m1.m[2], (1.0f/4) ) &&
-	             scaler_compare( m1.m[3], (-1.0f/12) );
+	             scaler_compare( m1.m[1], (1.0/3) ) &&
+	             scaler_compare( m1.m[2], (1.0/4) ) &&
+	             scaler_compare( m1.m[3], (-1.0/12) );
 
 	mat2_t m2 = MAT2(1, 0, 11, 2);
 	mat2_invert( &m2 );
-	bool test2 = scaler_compare( m2.m[0], 1.0f ) &&
-	             scaler_compare( m2.m[1], 0.0f ) &&
-	             scaler_compare( m2.m[2], (-11.0f/2) ) &&
-	             scaler_compare( m2.m[3], (  1.0f/2) );
+	bool test2 = scaler_compare( m2.m[0], 1.0 ) &&
+	             scaler_compare( m2.m[1], 0.0 ) &&
+	             scaler_compare( m2.m[2], (-11.0/2) ) &&
+	             scaler_compare( m2.m[3], (  1.0/2) );
 
 	mat2_t m3 = MAT2(
 		1, 0,
 		2, 7
 	);
 	mat2_invert( &m3 );
-	bool test3 = scaler_compare( m3.m[0], 1.0f ) &&
-		         scaler_compare( m3.m[1], 0.0f ) &&
-		         scaler_compare( m3.m[2], (-2.0f/7) ) &&
-		         scaler_compare( m3.m[3], ( 1.0f/7) );
+	bool test3 = scaler_compare( m3.m[0], 1.0 ) &&
+		         scaler_compare( m3.m[1], 0.0 ) &&
+		         scaler_compare( m3.m[2], (-2.0/7) ) &&
+		         scaler_compare( m3.m[3], ( 1.0/7) );
 
 	return test1 && test2 && test3;
 }
