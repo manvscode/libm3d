@@ -1,10 +1,9 @@
-lib3dmath
+# lib3dmath
 =============
 
 A fully-tested math library for computer graphics applications and games.
 
-Supported Constructs
-=============
+## Supported Constructs
 * 2D Vectors
 * 3D Vectors
 * 4D Vectors
@@ -13,35 +12,33 @@ Supported Constructs
 * 4x4 Matrices
 * Quaternions
 
-Build Instructions
-=============
-If you want to build the float version of lib3dmath:
+##  Build Instructions
+### If you want to build the float version of lib3dmath:
 * autoreconf
 * ./configure
 * make
 * make install
 
-If you want to build the double version of lib3dmath:
+### If you want to build the double version of lib3dmath:
 * autoreconf
 * ./configure --enable-use-double
 * make
 * make install
 
 
-Supported Environments
-=============
+##  Supported Environments
 * Mac OS X
 * Linux
 * iOS
 
-Testing
-=============
+##  Testing
 If you want to enable the test programs, you just need to use the
 --enable-tests configure flag.
 
-License
-=============
-    Copyright (C) 2013 by Joseph A. Marrero, http://www.manvscode.com/
+# License
+You may use *lib3dmath* is a commercial product as long as the below copyright is retained in the source directory and on all source files.
+
+    Copyright (C) 2013-2014 by Joseph A. Marrero, http://www.manvscode.com/
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
