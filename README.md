@@ -1,6 +1,4 @@
 # lib3dmath
-=============
-
 A fully-tested math library for computer graphics applications and games.
 
 ## Supported Constructs
@@ -13,6 +11,7 @@ A fully-tested math library for computer graphics applications and games.
 * Quaternions
 
 ##  Build Instructions
+You can compile *lib3dmath* with either float or double precision.
 ### If you want to build the float version of lib3dmath:
 * autoreconf
 * ./configure
@@ -24,7 +23,6 @@ A fully-tested math library for computer graphics applications and games.
 * ./configure --enable-use-double
 * make
 * make install
-
 
 ##  Supported Environments
 * Mac OS X
