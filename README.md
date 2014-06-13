@@ -16,23 +16,28 @@ Supported Constructs
 Build Instructions
 =============
 If you want to build the float version of lib3dmath:
- * autoreconf
- * ./configure
- * make
- * make install
+* autoreconf
+* ./configure
+* make
+* make install
 
 If you want to build the double version of lib3dmath:
- * autoreconf
- * ./configure --enable-use-double
- * make
- * make install
+* autoreconf
+* ./configure --enable-use-double
+* make
+* make install
 
 
 Supported Environments
 =============
- * Mac OS X
- * Linux
- * iOS
+* Mac OS X
+* Linux
+* iOS
+
+Testing
+=============
+If you want to enable the test programs, you just need to use the
+--enable-tests configure flag.
 
 License
 =============
