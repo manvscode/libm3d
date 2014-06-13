@@ -3,7 +3,6 @@ lib3dmath
 
 A fully-tested math library for computer graphics applications and games.
 
-
 Supported Constructs
 =============
 * 2D Vectors
@@ -13,6 +12,27 @@ Supported Constructs
 * 3x3 Matrices
 * 4x4 Matrices
 * Quaternions
+
+Build Instructions
+=============
+If you want to build the float version of lib3dmath:
+ * autoreconf
+ * ./configure
+ * make
+ * make install
+
+If you want to build the double version of lib3dmath:
+ * autoreconf
+ * ./configure --enable-use-double
+ * make
+ * make install
+
+
+Supported Environments
+=============
+ * Mac OS X
+ * Linux
+ * iOS
 
 License
 =============
