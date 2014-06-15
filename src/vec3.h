@@ -222,6 +222,15 @@ static inline vec3_t vec3_lerp( const vec3_t* __restrict a, const vec3_t* __rest
 	);
 }
 
+static inline scaler_t vec3_max_component( const vec3_t* v )
+{
+	return scaler_max( scaler_max(v->x, v->y), v->z );
+}
+
+static inline scaler_t vec3_min_component( const vec3_t* v )
+{
+	return scaler_min( scaler_min(v->x, v->y), v->z );
+}
 
 #define vec3_to_vec2( p_v ) ((vec2_t*)(p_v))
 

@@ -208,6 +208,16 @@ static inline vec2_t vec2_lerp( const vec2_t* __restrict a, const vec2_t* __rest
 	);
 }
 
+static inline scaler_t vec2_max_component( const vec2_t* v )
+{
+	return scaler_max(v->x, v->y);
+}
+
+static inline scaler_t vec2_min_component( const vec2_t* v )
+{
+	return scaler_min(v->x, v->y);
+}
+
 #define     vec2_area          vec2_determinant
 
 #ifdef __cplusplus

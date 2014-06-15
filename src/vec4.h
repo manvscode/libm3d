@@ -239,6 +239,16 @@ static inline vec4_t vec4_lerp( const vec4_t* __restrict a, const vec4_t* __rest
 	);
 }
 
+static inline scaler_t vec4_max_component( const vec4_t* v )
+{
+	return scaler_max( scaler_max( scaler_max(v->x, v->y), v->z ), v->w );
+}
+
+static inline scaler_t vec4_min_component( const vec4_t* v )
+{
+	return scaler_min( scaler_min( scaler_min(v->x, v->y), v->z ), v->w );
+}
+
 #define vec4_to_vec2( p_v ) ((vec2_t*)(p_v))
 #define vec4_to_vec3( p_v ) ((vec3_t*)(p_v))
 

@@ -29,44 +29,6 @@
 extern "C" {
 #endif
 
-#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
-#elif defined(LIB3DMATH_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
-#else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T 
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
-#endif
-
-static inline bool scaler_compare( scaler_t a, scaler_t b )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return fabsl( a - b ) < SCALAR_EPSILON;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return fabs( a - b ) < SCALAR_EPSILON;
-	#else
-	return fabsf( a - b ) < SCALAR_EPSILON;
-	#endif
-}
-
-
 #define HALF_PI               (M_PI_2)
 #define PI                    (M_PI)
 #define TWO_PI                (2*M_PI)
@@ -113,8 +75,6 @@ double        clampd             ( double value, double min, double max );
 long double   clampld            ( long double value, long double min, long double max );
 
 
-
-
 static inline bool is_even( int n )
 {
 	return (n & 1) == 0;
@@ -141,26 +101,6 @@ static inline int next_power_of_2( int v )
 	r |= r >> 16;
 	r++;
 	return r;
-}
-
-
-static inline scaler_t fast_inverse_sqrt( scaler_t number )
-{
-	long i;
-	scaler_t x2, y;
-	const scaler_t threehalfs = 1.5F;
-
-	x2 = number * 0.5F;
-	y  = number;
-	i  = * (long *) &y;                       /* evil floating point bit level hacking */
-	i  = 0x5f3759df - ( i >> 1 );               /* what the fuck? */
-	y  = * (scaler_t *) &i;
-	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 1st iteration */
-	#if 1
-	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 2nd iteration, this can be removed */
-	#endif
-
-	return y;
 }
 
 
@@ -205,7 +145,112 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 	double:  guassiand, \
 	default: guassianf \
 );
+#define max(a, b) _Generic( (a), \
+	int:     maxi, \
+	long:    maxl, \
+	float:   maxf, \
+	double:  maxd, \
+	long double:  maxld, \
+	default: maxf \
+);
+#define min(a, b) _Generic( (a), \
+	int:     mini, \
+	long:    minl, \
+	float:   minf, \
+	double:  mind, \
+	long double:  minld, \
+	default: minf \
+);
+
+#define clamp(a, b) _Generic( (a), \
+	int:     clampi, \
+	long:    clampl, \
+	float:   clampf, \
+	double:  mind, \
+	long double:  clampld, \
+	default: clampf \
+);
 #endif
+
+
+#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	#ifndef SCALAR_T
+	#define SCALAR_T
+	typedef long double scaler_t;
+	#endif
+	#ifndef SCALAR_EPSILON
+	#define SCALAR_EPSILON LDBL_EPSILON
+	#endif
+#elif defined(LIB3DMATH_USE_DOUBLE)
+	#ifndef SCALAR_T
+	#define SCALAR_T
+	typedef double scaler_t;
+	#endif
+	#ifndef SCALAR_EPSILON
+	#define SCALAR_EPSILON DBL_EPSILON
+	#endif
+#else /* default: use float */
+	#ifndef SCALAR_T
+	#define SCALAR_T
+	typedef float scaler_t;
+	#endif
+	#ifndef SCALAR_EPSILON
+	#define SCALAR_EPSILON FLT_EPSILON
+	#endif
+#endif
+
+static inline bool scaler_compare( scaler_t a, scaler_t b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return fabsl( a - b ) < SCALAR_EPSILON;
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return fabs( a - b ) < SCALAR_EPSILON;
+	#else
+	return fabsf( a - b ) < SCALAR_EPSILON;
+	#endif
+}
+
+static inline scaler_t scaler_max( scaler_t a, scaler_t b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return maxld( a, b );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return maxd( a, b );
+	#else
+	return maxf( a, b );
+	#endif
+}
+
+static inline scaler_t scaler_min( scaler_t a, scaler_t b )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return minld( a, b );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return mind( a, b );
+	#else
+	return minf( a, b );
+	#endif
+}
+
+static inline scaler_t fast_inverse_sqrt( scaler_t number )
+{
+	long i;
+	scaler_t x2, y;
+	const scaler_t threehalfs = 1.5F;
+
+	x2 = number * 0.5F;
+	y  = number;
+	i  = * (long *) &y;                       /* evil floating point bit level hacking */
+	i  = 0x5f3759df - ( i >> 1 );               /* what the fuck? */
+	y  = * (scaler_t *) &i;
+	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 1st iteration */
+	#if 1
+	y  = y * ( threehalfs - ( x2 * y * y ) );   /* 2nd iteration, this can be removed */
+	#endif
+
+	return y;
+}
+
 
 //#include "vec2.h"
 //#include "vec3.h"
