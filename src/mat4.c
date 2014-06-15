@@ -279,6 +279,48 @@ void mat4_adjoint( mat4_t* m )
 	*m = cofactor_matrix;
 }
 
+mat4_t mat4_from_axis3_angle( const vec3_t* axis, scaler_t angle )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	scaler_t sin_a           = sinl(angle);
+	scaler_t cos_a           = cosl(angle);
+	scaler_t one_minus_cos_a = 1 - cosl(angle);
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	scaler_t sin_a           = sin(angle);
+	scaler_t cos_a           = cos(angle);
+	scaler_t one_minus_cos_a = 1 - cos(angle);
+	#else
+	scaler_t sin_a           = sinf(angle);
+	scaler_t cos_a           = cosf(angle);
+	scaler_t one_minus_cos_a = 1 - cosf(angle);
+	#endif
+
+	vec3_t ax = *axis;
+    vec3_normalize( &ax );
+
+	return MAT4(
+		cos_a + (ax.x * ax.x) * one_minus_cos_a,
+		ax.y * ax.x * one_minus_cos_a + ax.z * sin_a,
+		ax.z * ax.x * one_minus_cos_a - ax.y * sin_a,
+		0.0f,
+
+		ax.x * ax.y * one_minus_cos_a - ax.z * sin_a,
+		cos_a + (ax.y * ax.y) * one_minus_cos_a,
+		ax.z * ax.y * one_minus_cos_a + ax.x * sin_a,
+		0.0f,
+
+		ax.x * ax.z * one_minus_cos_a + ax.y * sin_a,
+		ax.y * ax.z * one_minus_cos_a - ax.x * sin_a,
+		cos_a + (ax.z * ax.z) * one_minus_cos_a,
+		0.0f,
+
+		0.0f,
+		0.0f,
+		0.0f,
+		1.0f
+	);
+}
+
 const char* mat4_to_string( const mat4_t* m )
 {
 	static char string_buffer[ 128 ];

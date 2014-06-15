@@ -28,6 +28,7 @@
 #error "Need a C99 compiler."
 #endif
 #include "mathematics.h"
+#include "vec3.h"
 #include "vec4.h"
 #ifdef __cplusplus
 extern "C" {
@@ -51,16 +52,17 @@ extern const mat4_t MAT4_ZERO;
  */
 #define MAT4(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P)  ((mat4_t){ .m = { (A), (B), (C), (D), (E), (F), (G), (H), (I), (J), (K), (L), (M), (N), (O), (P) } })
 
-void        mat4_identity    ( mat4_t* m );
-void        mat4_zero        ( mat4_t* m );
-scaler_t    mat4_determinant ( const mat4_t* m );
-mat4_t      mat4_mult_matrix ( const mat4_t* __restrict a, const mat4_t* __restrict b );
-vec4_t      mat4_mult_vector ( const mat4_t* __restrict m, const vec4_t* __restrict v );
-bool        mat4_invert      ( mat4_t* m );
-void        mat4_transpose   ( mat4_t* m );
-mat4_t      mat4_cofactor    ( const mat4_t* m );
-void        mat4_adjoint     ( mat4_t* m );
-const char* mat4_to_string   ( const mat4_t* m );
+void        mat4_identity         ( mat4_t* m );
+void        mat4_zero             ( mat4_t* m );
+scaler_t    mat4_determinant      ( const mat4_t* m );
+mat4_t      mat4_mult_matrix      ( const mat4_t* __restrict a, const mat4_t* __restrict b );
+vec4_t      mat4_mult_vector      ( const mat4_t* __restrict m, const vec4_t* __restrict v );
+bool        mat4_invert           ( mat4_t* m );
+void        mat4_transpose        ( mat4_t* m );
+mat4_t      mat4_cofactor         ( const mat4_t* m );
+void        mat4_adjoint          ( mat4_t* m );
+mat4_t      mat4_from_axis3_angle ( const vec3_t* axis, scaler_t angle );
+const char* mat4_to_string        ( const mat4_t* m );
 
 #define mat4_x_vector( p_m )   ((vec4_t*) &(p_m)->m[0])
 #define mat4_y_vector( p_m )   ((vec4_t*) &(p_m)->m[4])

@@ -23,7 +23,8 @@
 		087C820C180D7C3A003D5A59 /* vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FC180D7C3A003D5A59 /* vec3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		087C820D180D7C3A003D5A59 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81FD180D7C3A003D5A59 /* vec4.c */; };
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D83B84681946AD3900201CD5 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; };
+		D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D82D14DE194DF23200752193 /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		087C81FC180D7C3A003D5A59 /* vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec3.h; path = ../../src/vec3.h; sourceTree = "<group>"; };
 		087C81FD180D7C3A003D5A59 /* vec4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vec4.c; path = ../../src/vec4.c; sourceTree = "<group>"; };
 		087C81FE180D7C3A003D5A59 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec4.h; path = ../../src/vec4.h; sourceTree = "<group>"; };
+		D82D14DD194DF23200752193 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = ../../src/easing.h; sourceTree = "<group>"; };
 		D83B84671946AD3900201CD5 /* lib3dmath-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "lib3dmath-config.h"; path = "../../src/lib3dmath-config.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				D83B84671946AD3900201CD5 /* lib3dmath-config.h */,
+				D82D14DD194DF23200752193 /* easing.h */,
 				087C81EF180D7C3A003D5A59 /* mat2.c */,
 				087C81F0180D7C3A003D5A59 /* mat2.h */,
 				087C81F1180D7C3A003D5A59 /* mat3.c */,
@@ -105,24 +108,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */,
+				087C8206180D7C3A003D5A59 /* mathematics.h in Headers */,
+				D82D14DE194DF23200752193 /* easing.h in Headers */,
 				087C8208180D7C3A003D5A59 /* quat.h in Headers */,
 				087C8204180D7C3A003D5A59 /* mat4.h in Headers */,
 				087C820A180D7C3A003D5A59 /* vec2.h in Headers */,
-				D83B84681946AD3900201CD5 /* lib3dmath-config.h in Headers */,
 				087C8200180D7C3A003D5A59 /* mat2.h in Headers */,
 				087C820C180D7C3A003D5A59 /* vec3.h in Headers */,
 				087C8202180D7C3A003D5A59 /* mat3.h in Headers */,
 				087C820E180D7C3A003D5A59 /* vec4.h in Headers */,
-				087C8206180D7C3A003D5A59 /* mathematics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0855E68A180D7BDA00E1CF69 /* lib3dmath */ = {
+		0855E68A180D7BDA00E1CF69 /* lib3dmath-static */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath" */;
+			buildConfigurationList = 0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath-static" */;
 			buildPhases = (
 				0855E687180D7BDA00E1CF69 /* Sources */,
 				0855E688180D7BDA00E1CF69 /* Frameworks */,
@@ -132,7 +136,7 @@
 			);
 			dependencies = (
 			);
-			name = lib3dmath;
+			name = "lib3dmath-static";
 			productName = 3dmath;
 			productReference = 0855E68B180D7BDA00E1CF69 /* lib3dmath.a */;
 			productType = "com.apple.product-type.library.static";
@@ -158,7 +162,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0855E68A180D7BDA00E1CF69 /* lib3dmath */,
+				0855E68A180D7BDA00E1CF69 /* lib3dmath-static */,
 			);
 		};
 /* End PBXProject section */
@@ -254,9 +258,10 @@
 		0855E690180D7BDA00E1CF69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				EXECUTABLE_PREFIX = "";
 				PRODUCT_NAME = lib3dmath;
-				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -265,9 +270,10 @@
 		0855E691180D7BDA00E1CF69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				EXECUTABLE_PREFIX = "";
 				PRODUCT_NAME = lib3dmath;
-				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -285,7 +291,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath" */ = {
+		0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath-static" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0855E690180D7BDA00E1CF69 /* Debug */,
