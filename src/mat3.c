@@ -99,9 +99,25 @@ bool mat3_invert( mat3_t* m )
 {
 	scaler_t det = mat3_determinant( m );
 
-	if( fabs(det) > SCALAR_EPSILON ) // testing if not zero
+	if( scaler_abs(det) > SCALAR_EPSILON ) // testing if not zero
 	{
-		mat3_adjoint( m );
+		#if 0
+		mat3_adjoint( m ); // TODO: Optimize out the temporary array by inlining this.
+		#else /* This is the above line of code inlined. */
+		*m = MAT3(
+			+(m->m[4] * m->m[8] - m->m[5] * m->m[7]),
+			-(m->m[1] * m->m[8] - m->m[2] * m->m[7]),
+			+(m->m[1] * m->m[5] - m->m[2] * m->m[4]),
+
+			-(m->m[3] * m->m[8] - m->m[5] * m->m[6]),
+			+(m->m[0] * m->m[8] - m->m[2] * m->m[6]),
+			-(m->m[0] * m->m[5] - m->m[2] * m->m[3]),
+
+			+(m->m[3] * m->m[7] - m->m[4] * m->m[6]),
+			-(m->m[0] * m->m[7] - m->m[1] * m->m[6]),
+			+(m->m[0] * m->m[4] - m->m[1] * m->m[3])
+		);
+		#endif
 
 		m->m[ 0 ] /= det;
 		m->m[ 1 ] /= det;
