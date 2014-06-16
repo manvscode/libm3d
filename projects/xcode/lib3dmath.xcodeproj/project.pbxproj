@@ -25,9 +25,9 @@
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DE194DF23200752193 /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8FBAE86194F815000C94819 /* scaler-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE83194F815000C94819 /* scaler-double.h */; };
-		D8FBAE87194F815000C94819 /* scaler-float.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE84194F815000C94819 /* scaler-float.h */; };
-		D8FBAE88194F815000C94819 /* scaler-long-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE85194F815000C94819 /* scaler-long-double.h */; };
+		D8FBAE86194F815000C94819 /* scaler-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE83194F815000C94819 /* scaler-double.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8FBAE87194F815000C94819 /* scaler-float.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE84194F815000C94819 /* scaler-float.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8FBAE88194F815000C94819 /* scaler-long-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE85194F815000C94819 /* scaler-long-double.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
