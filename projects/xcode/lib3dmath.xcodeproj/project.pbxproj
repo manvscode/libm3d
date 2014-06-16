@@ -25,6 +25,9 @@
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DE194DF23200752193 /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8FBAE86194F815000C94819 /* scaler-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE83194F815000C94819 /* scaler-double.h */; };
+		D8FBAE87194F815000C94819 /* scaler-float.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE84194F815000C94819 /* scaler-float.h */; };
+		D8FBAE88194F815000C94819 /* scaler-long-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE85194F815000C94819 /* scaler-long-double.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		087C81FE180D7C3A003D5A59 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec4.h; path = ../../src/vec4.h; sourceTree = "<group>"; };
 		D82D14DD194DF23200752193 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = ../../src/easing.h; sourceTree = "<group>"; };
 		D83B84671946AD3900201CD5 /* lib3dmath-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "lib3dmath-config.h"; path = "../../src/lib3dmath-config.h"; sourceTree = "<group>"; };
+		D8FBAE83194F815000C94819 /* scaler-double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scaler-double.h"; path = "../../src/scaler-double.h"; sourceTree = "<group>"; };
+		D8FBAE84194F815000C94819 /* scaler-float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scaler-float.h"; path = "../../src/scaler-float.h"; sourceTree = "<group>"; };
+		D8FBAE85194F815000C94819 /* scaler-long-double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scaler-long-double.h"; path = "../../src/scaler-long-double.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				D83B84671946AD3900201CD5 /* lib3dmath-config.h */,
+				D8FBAE83194F815000C94819 /* scaler-double.h */,
+				D8FBAE84194F815000C94819 /* scaler-float.h */,
+				D8FBAE85194F815000C94819 /* scaler-long-double.h */,
 				D82D14DD194DF23200752193 /* easing.h */,
 				087C81EF180D7C3A003D5A59 /* mat2.c */,
 				087C81F0180D7C3A003D5A59 /* mat2.h */,
@@ -108,6 +117,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8FBAE86194F815000C94819 /* scaler-double.h in Headers */,
+				D8FBAE88194F815000C94819 /* scaler-long-double.h in Headers */,
+				D8FBAE87194F815000C94819 /* scaler-float.h in Headers */,
 				D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */,
 				087C8206180D7C3A003D5A59 /* mathematics.h in Headers */,
 				D82D14DE194DF23200752193 /* easing.h in Headers */,

@@ -174,141 +174,13 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 
 
 #if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T
-	typedef long double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON LDBL_EPSILON
-	#endif
+#include "scaler-long-double.h"
 #elif defined(LIB3DMATH_USE_DOUBLE)
-	#ifndef SCALAR_T
-	#define SCALAR_T
-	typedef double scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON DBL_EPSILON
-	#endif
+#include "scaler-double.h"
 #else /* default: use float */
-	#ifndef SCALAR_T
-	#define SCALAR_T
-	typedef float scaler_t;
-	#endif
-	#ifndef SCALAR_EPSILON
-	#define SCALAR_EPSILON FLT_EPSILON
-	#endif
+#include "scaler-float.h"
 #endif
 
-static inline bool scaler_compare( scaler_t a, scaler_t b )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return fabsl( a - b ) < SCALAR_EPSILON;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return fabs( a - b ) < SCALAR_EPSILON;
-	#else
-	return fabsf( a - b ) < SCALAR_EPSILON;
-	#endif
-}
-
-static inline scaler_t scaler_max( scaler_t a, scaler_t b )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return maxld( a, b );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return maxd( a, b );
-	#else
-	return maxf( a, b );
-	#endif
-}
-
-static inline scaler_t scaler_min( scaler_t a, scaler_t b )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return minld( a, b );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return mind( a, b );
-	#else
-	return minf( a, b );
-	#endif
-}
-
-static inline scaler_t scaler_abs( scaler_t s )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return fabsl( s );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return fabs( s );
-	#else
-	return fabsf( s );
-	#endif
-}
-
-static inline scaler_t scaler_sqrt( scaler_t s )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return sqrtl( s );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return sqrt( s );
-	#else
-	return sqrtf( s );
-	#endif
-}
-
-static inline scaler_t scaler_sin( scaler_t a )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return sinl( a );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return sin( a );
-	#else
-	return sinf( a );
-	#endif
-}
-
-static inline scaler_t scaler_asin( scaler_t a )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return asinl( a );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return asin( a );
-	#else
-	return asinf( a );
-	#endif
-}
-
-static inline scaler_t scaler_cos( scaler_t a )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return cosl( a );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return cos( a );
-	#else
-	return cosf( a );
-	#endif
-}
-
-static inline scaler_t scaler_acos( scaler_t a )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return acosl( a );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return acos( a );
-	#else
-	return acosf( a );
-	#endif
-}
-
-static inline char* scaler_type_string( void )
-{
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return "long double";
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return "double";
-	#else
-	return "float";
-	#endif
-
-}
 
 static inline scaler_t fast_inverse_sqrt( scaler_t number )
 {
@@ -328,14 +200,6 @@ static inline scaler_t fast_inverse_sqrt( scaler_t number )
 
 	return y;
 }
-
-
-//#include "vec2.h"
-//#include "vec3.h"
-//#include "vec4.h"
-//#include "mat2.h"
-//#include "mat3.h"
-//#include "mat4.h"
 
 #ifdef __cplusplus
 } /* C linkage */
