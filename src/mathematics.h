@@ -37,7 +37,7 @@ extern "C" {
 #define EASING_EPSILON        (0.0001)
 
 #define to_radians( degrees )  ((degrees)*RADIANS_PER_DEGREE)
-#define to_degrees( radians )  ((radians)/RADIANS_PER_DEGREE)
+#define to_degrees( radians )  ((radians)*DEGREES_PER_RANDIAN)
 
 #define integer_max( x, y )    ((x) ^ (((x) ^ (y)) & -((x) < (y))))
 #define integer_min( x, y )    ((y) ^ (((x) ^ (y)) & -((x) < (y))))
