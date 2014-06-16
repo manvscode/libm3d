@@ -34,13 +34,7 @@ quat_t quat_from_mat3( const mat3_t* m )
 
 	if( trace > 0.0f )
 	{
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		scaler_t s = 0.5 / sqrtl( trace );
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		scaler_t s = 0.5 / sqrt( trace );
-		#else
-		scaler_t s = 0.5 / sqrtf( trace );
-		#endif
+		scaler_t s = 0.5 / scaler_sqrt( trace );
 
 		q.w = 0.25 / s;
 		q.x = (m->m[7] - m->m[5]) * s;
@@ -49,50 +43,20 @@ quat_t quat_from_mat3( const mat3_t* m )
 	}
 	else
 	{
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		scaler_t max_diagonal_elem = maxld( m->m[0], maxld( m->m[4], m->m[8] ) );
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		scaler_t max_diagonal_elem = maxd( m->m[0], maxd( m->m[4], m->m[8] ) );
-		#else
-		scaler_t max_diagonal_elem = maxf( m->m[0], maxf( m->m[4], m->m[8] ) );
-		#endif
+		scaler_t max_diagonal_elem = scaler_max( m->m[0], scaler_max( m->m[4], m->m[8] ) );
 
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		if( fabsl(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		if( fabs(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
-		#else
-		if( fabsf(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
-		#endif
+		if( scaler_abs(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
 		{
-			#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-			scaler_t s = sqrtl( 1.0 + m->m[0] - m->m[4] - m->m[8] ) * 2.0;
-			#elif defined(LIB3DMATH_USE_DOUBLE)
-			scaler_t s = sqrt( 1.0 + m->m[0] - m->m[4] - m->m[8] ) * 2.0;
-			#else
-			scaler_t s = sqrtf( 1.0 + m->m[0] - m->m[4] - m->m[8] ) * 2.0;
-			#endif
+			scaler_t s = scaler_sqrt( 1.0 + m->m[0] - m->m[4] - m->m[8] ) * 2.0;
 
 			q.x = 0.5 / s;
 			q.y = (m->m[1] + m->m[3]) / s;
 			q.z = (m->m[2] + m->m[6]) / s;
 			q.w = (m->m[5] + m->m[7]) / s;
 		}
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		else if( fabsl(m->m[4] - max_diagonal_elem) < SCALAR_EPSILON )
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		else if( fabs(m->m[4] - max_diagonal_elem) < SCALAR_EPSILON )
-		#else
-		else if( fabsf(m->m[4] - max_diagonal_elem) < SCALAR_EPSILON )
-		#endif
+		else if( scaler_abs(m->m[4] - max_diagonal_elem) < SCALAR_EPSILON )
 		{
-			#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-			scaler_t s = sqrtl( 1.0 + m->m[4] - m->m[0] - m->m[8] ) * 2.0;
-			#elif defined(LIB3DMATH_USE_DOUBLE)
-			scaler_t s = sqrt( 1.0 + m->m[4] - m->m[0] - m->m[8] ) * 2.0;
-			#else
-			scaler_t s = sqrtf( 1.0 + m->m[4] - m->m[0] - m->m[8] ) * 2.0;
-			#endif
+			scaler_t s = scaler_sqrt( 1.0 + m->m[4] - m->m[0] - m->m[8] ) * 2.0;
 
 			q.x = (m->m[1] + m->m[3]) / s;
 			q.y = 0.5 / s;
@@ -101,13 +65,7 @@ quat_t quat_from_mat3( const mat3_t* m )
 		}
 		else
 		{
-			#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-			scaler_t s = sqrtl( 1.0 + m->m[8] - m->m[0] - m->m[4] ) * 2.0;
-			#elif defined(LIB3DMATH_USE_DOUBLE)
-			scaler_t s = sqrt( 1.0 + m->m[8] - m->m[0] - m->m[4] ) * 2.0;
-			#else
-			scaler_t s = sqrtf( 1.0 + m->m[8] - m->m[0] - m->m[4] ) * 2.0;
-			#endif
+			scaler_t s = scaler_sqrt( 1.0 + m->m[8] - m->m[0] - m->m[4] ) * 2.0;
 
 			q.x = (m->m[2] + m->m[6]) / s;
 			q.y = (m->m[5] + m->m[7]) / s;
@@ -115,9 +73,6 @@ quat_t quat_from_mat3( const mat3_t* m )
 			q.w = (m->m[1] + m->m[3]) / s;
 		}
 	}
-
-	printf( "JOE: mat3 = \n%s\n", mat3_to_string( m ) );
-	printf( "JOE: quat = \n%s\n", quat_to_string( &q ) );
 
 	return q;
 }
@@ -130,13 +85,7 @@ quat_t quat_from_mat4( const mat4_t* m )
 
 	if( trace > 0.0f )
 	{
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		scaler_t s = 0.5 / sqrtl( trace );
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		scaler_t s = 0.5 / sqrt( trace );
-		#else
-		scaler_t s = 0.5 / sqrtf( trace );
-		#endif
+		scaler_t s = 0.5 / scaler_sqrt( trace );
 
 		q.w = 0.25 / s;
 		q.x = (m->m[9] - m->m[6]) * s;
@@ -145,50 +94,20 @@ quat_t quat_from_mat4( const mat4_t* m )
 	}
 	else
 	{
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		scaler_t max_diagonal_elem = maxld( m->m[0], maxld( m->m[5], m->m[10] ) );
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		scaler_t max_diagonal_elem = maxd( m->m[0], maxd( m->m[5], m->m[10] ) );
-		#else
-		scaler_t max_diagonal_elem = maxf( m->m[0], maxf( m->m[5], m->m[10] ) );
-		#endif
+		scaler_t max_diagonal_elem = scaler_max( m->m[0], scaler_max( m->m[5], m->m[10] ) );
 
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		if( fabsl(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		if( fabs(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
-		#else
-		if( fabsf(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
-		#endif
+		if( scaler_abs(m->m[0] - max_diagonal_elem) < SCALAR_EPSILON )
 		{
-			#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-			scaler_t s = sqrtl( 1.0 + m->m[0] - m->m[5] - m->m[10] ) * 2.0;
-			#elif defined(LIB3DMATH_USE_DOUBLE)
-			scaler_t s = sqrt( 1.0 + m->m[0] - m->m[5] - m->m[10] ) * 2.0;
-			#else
-			scaler_t s = sqrtf( 1.0 + m->m[0] - m->m[5] - m->m[10] ) * 2.0;
-			#endif
+			scaler_t s = scaler_sqrt( 1.0 + m->m[0] - m->m[5] - m->m[10] ) * 2.0;
 
 			q.x = 0.5 / s;
 			q.y = (m->m[1] + m->m[4]) / s;
 			q.z = (m->m[2] + m->m[8]) / s;
 			q.w = (m->m[6] + m->m[9]) / s;
 		}
-		#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-		else if( fabsl(m->m[5] - max_diagonal_elem) < SCALAR_EPSILON )
-		#elif defined(LIB3DMATH_USE_DOUBLE)
-		else if( fabs(m->m[5] - max_diagonal_elem) < SCALAR_EPSILON )
-		#else
-		else if( fabsf(m->m[5] - max_diagonal_elem) < SCALAR_EPSILON )
-		#endif
+		else if( scaler_abs(m->m[5] - max_diagonal_elem) < SCALAR_EPSILON )
 		{
-			#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-			scaler_t s = sqrtl( 1.0 + m->m[5] - m->m[0] - m->m[10] ) * 2.0;
-			#elif defined(LIB3DMATH_USE_DOUBLE)
-			scaler_t s = sqrt( 1.0 + m->m[5] - m->m[0] - m->m[10] ) * 2.0;
-			#else
-			scaler_t s = sqrtf( 1.0 + m->m[5] - m->m[0] - m->m[10] ) * 2.0;
-			#endif
+			scaler_t s = scaler_sqrt( 1.0 + m->m[5] - m->m[0] - m->m[10] ) * 2.0;
 
 			q.x = (m->m[1] + m->m[4]) / s;
 			q.y = 0.5 / s;
@@ -197,13 +116,7 @@ quat_t quat_from_mat4( const mat4_t* m )
 		}
 		else
 		{
-			#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-			scaler_t s = sqrtl( 1.0 + m->m[10] - m->m[0] - m->m[5] ) * 2.0;
-			#elif defined(LIB3DMATH_USE_DOUBLE)
-			scaler_t s = sqrt( 1.0 + m->m[10] - m->m[0] - m->m[5] ) * 2.0;
-			#else
-			scaler_t s = sqrtf( 1.0 + m->m[10] - m->m[0] - m->m[5] ) * 2.0;
-			#endif
+			scaler_t s = scaler_sqrt( 1.0 + m->m[10] - m->m[0] - m->m[5] ) * 2.0;
 
 			q.x = (m->m[2] + m->m[8]) / s;
 			q.y = (m->m[6] + m->m[9]) / s;
@@ -211,9 +124,6 @@ quat_t quat_from_mat4( const mat4_t* m )
 			q.w = (m->m[1] + m->m[4]) / s;
 		}
 	}
-
-	printf( "JOE: mat4 = \n%s\n", mat4_to_string( m ) );
-	printf( "JOE: quat = \n%s\n", quat_to_string( &q ) );
 
 	return q;
 }

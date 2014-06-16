@@ -85,7 +85,7 @@ bool mat2_invert( mat2_t* m )
 	/* inv(A) = (1/det(A)) * transpose( cofactors(A) ) */
 	scaler_t det = mat2_determinant( m );
 
-	if( fabs(det) > SCALAR_EPSILON ) // testing if not zero
+	if( scaler_abs(det) > SCALAR_EPSILON ) // testing if not zero
 	{
 		/* |a  c|  cofactors and transpose  | d  -c|
 		 * |b  d|  ---------------------->  |-b   a|

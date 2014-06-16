@@ -168,7 +168,7 @@ bool mat4_invert( mat4_t* m )
 	scaler_t d4 = m->m[4] * (m->m[9] * m->m[14] - m->m[13] * m->m[10]) - m->m[5] * (m->m[8] * m->m[14] - m->m[12] * m->m[10]) + m->m[6] * (m->m[8] * m->m[13] - m->m[12] * m->m[9]);
 	scaler_t det = m->m[0]*d1 - m->m[1]*d2 + m->m[2]*d3 - m->m[3]*d4;
 
-	if( fabs(det) > SCALAR_EPSILON ) // testing if not zero
+	if( scaler_abs(det) > SCALAR_EPSILON ) // testing if not zero
 	{
 		mat4_t cofactor_matrix;
 		cofactor_matrix.m[ 0] = +(d1);

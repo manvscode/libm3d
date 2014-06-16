@@ -183,17 +183,20 @@ long maxl( long x, long y )
 
 float maxf( float x, float y )
 {
-	return x > y ? x : y;
+	//return x > y ? x : y;
+	return fmaxf( x, y );
 }
 
 double maxd( double x, double y )
 {
-	return x > y ? x : y;
+	//return x > y ? x : y;
+	return fmax( x, y );
 }
 
 long double maxld( long double x, long double y )
 {
-	return x > y ? x : y;
+	//return x > y ? x : y;
+	return fmaxl( x, y );
 }
 
 int mini( int x, int y )
@@ -208,17 +211,20 @@ long minl( long x, long y )
 
 float minf( float x, float y )
 {
-	return x < y ? x : y;
+	//return x < y ? x : y;
+	return fminf( x, y );
 }
 
 double mind( double x, double y )
 {
-	return x < y ? x : y;
+	//return x < y ? x : y;
+	return fmin( x, y );
 }
 
 long double minld( long double x, long double y )
 {
-	return x < y ? x : y;
+	//return x < y ? x : y;
+	return fminl( x, y );
 }
 
 unsigned int clampui( unsigned int value, unsigned int min, unsigned int max )

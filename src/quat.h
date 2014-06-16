@@ -45,13 +45,7 @@ typedef vec4_t quat_t;
 
 static inline scaler_t quat_magnitude( const quat_t* q )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return sqrtl( q->x * q->x + q->y * q->y + q->z * q->z + q->w * q->w );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return sqrt( q->x * q->x + q->y * q->y + q->z * q->z + q->w * q->w );
-	#else
-    return sqrtf( q->x * q->x + q->y * q->y + q->z * q->z + q->w * q->w );
-	#endif
+    return scaler_sqrt( q->x * q->x + q->y * q->y + q->z * q->z + q->w * q->w );
 }
 
 static inline void quat_normalize( quat_t* q )
@@ -66,65 +60,28 @@ static inline void quat_normalize( quat_t* q )
 
 static inline quat_t quat_from_axis3_angle( const vec3_t* axis, scaler_t angle )
 {
-	//vec3_normalize( axis );
-
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
 	quat_t q = QUAT(
-		axis->x * sinl( angle / 2.0f ),
-		axis->y * sinl( angle / 2.0f ),
-		axis->z * sinl( angle / 2.0f ),
-		cosl( angle / 2.0f )
+		axis->x * scaler_sin( angle / 2.0f ),
+		axis->y * scaler_sin( angle / 2.0f ),
+		axis->z * scaler_sin( angle / 2.0f ),
+		scaler_cos( angle / 2.0f )
 	);
-	#elif defined(QUAT_USE_DOUBLE)
-	quat_t q = QUAT(
-		axis->x * sin( angle / 2.0f ),
-		axis->y * sin( angle / 2.0f ),
-		axis->z * sin( angle / 2.0f ),
-		cos( angle / 2.0f )
-	);
-	#else
-	quat_t q = QUAT(
-		axis->x * sinf( angle / 2.0f ),
-		axis->y * sinf( angle / 2.0f ),
-		axis->z * sinf( angle / 2.0f ),
-		cosf( angle / 2.0f )
-	);
-	#endif
 
 	quat_normalize( &q );
-
 	return q;
 }
 
 static inline quat_t quat_from_axis4_angle( const vec4_t* axis, scaler_t angle )
 {
 	//vec4_normalize( axis );
-
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
 	quat_t q = QUAT(
-		axis->x * sinl( angle / 2.0f ),
-		axis->y * sinl( angle / 2.0f ),
-		axis->z * sinl( angle / 2.0f ),
-		cosl( angle / 2.0f )
+		axis->x * scaler_sin( angle / 2.0f ),
+		axis->y * scaler_sin( angle / 2.0f ),
+		axis->z * scaler_sin( angle / 2.0f ),
+		scaler_cos( angle / 2.0f )
 	);
-	#elif defined(QUAT_USE_DOUBLE)
-	quat_t q = QUAT(
-		axis->x * sin( angle / 2.0f ),
-		axis->y * sin( angle / 2.0f ),
-		axis->z * sin( angle / 2.0f ),
-		cos( angle / 2.0f )
-	);
-	#else
-	quat_t q = QUAT(
-		axis->x * sinf( angle / 2.0f ),
-		axis->y * sinf( angle / 2.0f ),
-		axis->z * sinf( angle / 2.0f ),
-		cosf( angle / 2.0f )
-	);
-	#endif
 
 	quat_normalize( &q );
-
 	return q;
 }
 
@@ -242,72 +199,28 @@ static inline mat4_t quat_to_mat4( const quat_t* q )
 
 static inline scaler_t quat_angle( const quat_t* q )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	return acosl( q->w ) * 2.0;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	return acos( q->w ) * 2.0;
-	#else
-	return acosf( q->w ) * 2.0f;
-	#endif
+	return scaler_acos( q->w ) * 2.0f;
 }
 
 static inline void quat_extract_axis3_and_angle( const quat_t* q, vec3_t* axis, scaler_t* angle )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	*angle = acosl( q->w ) * 2.0;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	*angle = acos( q->w ) * 2.0;
-	#else
-	*angle = acosf( q->w ) * 2.0f;
-	#endif
+	*angle = scaler_acos( q->w ) * 2.0f;
 
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	scaler_t sin_angle = sinl( 0.5f * (*angle) );
+	scaler_t sin_angle = scaler_sin( 0.5f * (*angle) );
 	axis->x = q->x / sin_angle;
 	axis->y = q->y / sin_angle;
 	axis->z = q->z / sin_angle;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	scaler_t sin_angle = sin( 0.5f * (*angle) );
-	axis->x = q->x / sin_angle;
-	axis->y = q->y / sin_angle;
-	axis->z = q->z / sin_angle;
-	#else
-	scaler_t sin_angle = sinf( 0.5f * (*angle) );
-	axis->x = q->x / sin_angle;
-	axis->y = q->y / sin_angle;
-	axis->z = q->z / sin_angle;
-	#endif
 }
 
 static inline void quat_extract_axis4_and_angle( const quat_t* q, vec4_t* axis, scaler_t* angle )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	*angle = acosl( q->w ) * 2.0;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	*angle = acos( q->w ) * 2.0;
-	#else
-	*angle = acosf( q->w ) * 2.0f;
-	#endif
+	*angle = scaler_acos( q->w ) * 2.0f;
 
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	scaler_t sin_angle = sinl( 0.5f * (*angle) );
+	scaler_t sin_angle = scaler_sin( 0.5f * (*angle) );
 	axis->x = q->x / sin_angle;
 	axis->y = q->y / sin_angle;
 	axis->z = q->z / sin_angle;
 	axis->w = 0.0f;
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	scaler_t sin_angle = sin( 0.5f * (*angle) );
-	axis->x = q->x / sin_angle;
-	axis->y = q->y / sin_angle;
-	axis->z = q->z / sin_angle;
-	axis->w = 0.0f;
-	#else
-	scaler_t sin_angle = sinf( 0.5f * (*angle) );
-	axis->x = q->x / sin_angle;
-	axis->y = q->y / sin_angle;
-	axis->z = q->z / sin_angle;
-	axis->w = 0.0f;
-	#endif
 }
 
 static inline quat_t quat_lerp( const quat_t* __restrict a, const quat_t* __restrict b, scaler_t s )

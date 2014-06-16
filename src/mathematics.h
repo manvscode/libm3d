@@ -232,6 +232,84 @@ static inline scaler_t scaler_min( scaler_t a, scaler_t b )
 	#endif
 }
 
+static inline scaler_t scaler_abs( scaler_t s )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return fabsl( s );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return fabs( s );
+	#else
+	return fabsf( s );
+	#endif
+}
+
+static inline scaler_t scaler_sqrt( scaler_t s )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return sqrtl( s );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return sqrt( s );
+	#else
+	return sqrtf( s );
+	#endif
+}
+
+static inline scaler_t scaler_sin( scaler_t a )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return sinl( a );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return sin( a );
+	#else
+	return sinf( a );
+	#endif
+}
+
+static inline scaler_t scaler_asin( scaler_t a )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return asinl( a );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return asin( a );
+	#else
+	return asinf( a );
+	#endif
+}
+
+static inline scaler_t scaler_cos( scaler_t a )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return cosl( a );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return cos( a );
+	#else
+	return cosf( a );
+	#endif
+}
+
+static inline scaler_t scaler_acos( scaler_t a )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return acosl( a );
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return acos( a );
+	#else
+	return acosf( a );
+	#endif
+}
+
+static inline char* scaler_type_string( void )
+{
+	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	return "long double";
+	#elif defined(LIB3DMATH_USE_DOUBLE)
+	return "double";
+	#else
+	return "float";
+	#endif
+
+}
+
 static inline scaler_t fast_inverse_sqrt( scaler_t number )
 {
 	long i;

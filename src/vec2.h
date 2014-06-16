@@ -103,33 +103,15 @@ static inline scaler_t vec2_determinant( const vec2_t* __restrict a, const vec2_
 
 static inline scaler_t vec2_magnitude( const vec2_t* v )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return sqrtl( v->x * v->x + v->y * v->y );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return sqrt( v->x * v->x + v->y * v->y );
-	#else /* default: use float */
-    return sqrtf( v->x * v->x + v->y * v->y );
-	#endif
+    return scaler_sqrt( v->x * v->x + v->y * v->y );
 }
 
 static inline scaler_t vec2_distance( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return sqrtl(
+    return scaler_sqrt(
 		(a->x - b->x) * (a->x - b->x) +
 		(a->y - b->y) * (a->y - b->y)
 	);
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return sqrt(
-		(a->x - b->x) * (a->x - b->x) +
-		(a->y - b->y) * (a->y - b->y)
-	);
-	#else /* default: use float */
-    return sqrtf(
-		(a->x - b->x) * (a->x - b->x) +
-		(a->y - b->y) * (a->y - b->y)
-	);
-	#endif
 }
 
 static inline scaler_t vec2_angle( const vec2_t* __restrict a, const vec2_t* __restrict b ) /* in radians */
@@ -138,13 +120,7 @@ static inline scaler_t vec2_angle( const vec2_t* __restrict a, const vec2_t* __r
     scaler_t a_length    = vec2_magnitude( a );
     scaler_t b_length    = vec2_magnitude( b );
 
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return acosl( dot_product / ( a_length * b_length ) );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return acos( dot_product / ( a_length * b_length ) );
-	#else /* default: use float */
-    return acosf( dot_product / ( a_length * b_length ) );
-	#endif
+    return scaler_acos( dot_product / ( a_length * b_length ) );
 }
 
 static inline void vec2_normalize( vec2_t* v )
@@ -166,13 +142,7 @@ static inline void vec2_normalize( vec2_t* v )
 static inline bool vec2_is_normalized( const vec2_t* v )
 {
 	scaler_t length = vec2_magnitude( v );
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return (fabsl(length - 1.0f) < SCALAR_EPSILON);
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return (fabs(length - 1.0f) < SCALAR_EPSILON);
-	#else /* default: use float */
-    return (fabsf(length - 1.0f) < SCALAR_EPSILON);
-	#endif
+    return scaler_abs(length - 1.0f) < SCALAR_EPSILON;
 }
 
 static inline void vec2_negate( vec2_t* v )
@@ -183,16 +153,8 @@ static inline void vec2_negate( vec2_t* v )
 
 static inline bool vec2_compare( const vec2_t* __restrict a, const vec2_t* __restrict b )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-    return (fabsl(a->x - b->x) < SCALAR_EPSILON) &&
-           (fabsl(a->y - b->y) < SCALAR_EPSILON);
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-    return (fabs(a->x - b->x) < SCALAR_EPSILON) &&
-           (fabs(a->y - b->y) < SCALAR_EPSILON);
-	#else /* default: use float */
-    return (fabsf(a->x - b->x) < SCALAR_EPSILON) &&
-           (fabsf(a->y - b->y) < SCALAR_EPSILON);
-	#endif
+    return (scaler_abs(a->x - b->x) < SCALAR_EPSILON) &&
+           (scaler_abs(a->y - b->y) < SCALAR_EPSILON);
 }
 
 static inline void vec2_zero( vec2_t* v )
