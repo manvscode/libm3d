@@ -182,19 +182,9 @@ void mat3_adjoint( mat3_t* m )
 
 mat3_t mat3_from_axis3_angle( const vec3_t* axis, scaler_t angle )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	scaler_t sin_a           = sinl(angle);
-	scaler_t cos_a           = cosl(angle);
-	scaler_t one_minus_cos_a = 1 - cosl(angle);
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	scaler_t sin_a           = sin(angle);
-	scaler_t cos_a           = cos(angle);
-	scaler_t one_minus_cos_a = 1 - cos(angle);
-	#else
-	scaler_t sin_a           = sinf(angle);
-	scaler_t cos_a           = cosf(angle);
-	scaler_t one_minus_cos_a = 1 - cosf(angle);
-	#endif
+	scaler_t sin_a           = scaler_sin(angle);
+	scaler_t cos_a           = scaler_cos(angle);
+	scaler_t one_minus_cos_a = 1 - cos_a;
 
     vec3_t ax = *axis;
     vec3_normalize( &ax );

@@ -68,7 +68,6 @@ mat4_t mat4_mult_matrix( const mat4_t* __restrict a, const mat4_t* __restrict b 
 	// |a01 a05 a09 a13| * |b01 b05 b09 b13|
 	// |a02 a06 a10 a14|   |b02 b06 b10 b14|
 	// |a03 a07 a11 a15|   |b03 b07 b11 b15|
-#if 1
 	return MAT4(
 		a->m[ 0] * b->m[ 0]  +  a->m[ 4] * b->m[ 1]  +  a->m[ 8] * b->m[ 2]  +  a->m[12] * b->m[ 3],
 		a->m[ 1] * b->m[ 0]  +  a->m[ 5] * b->m[ 1]  +  a->m[ 9] * b->m[ 2]  +  a->m[13] * b->m[ 3],
@@ -90,30 +89,6 @@ mat4_t mat4_mult_matrix( const mat4_t* __restrict a, const mat4_t* __restrict b 
 		a->m[ 2] * b->m[12]  +  a->m[ 6] * b->m[13]  +  a->m[10] * b->m[14]  +  a->m[14] * b->m[15],
 		a->m[ 3] * b->m[12]  +  a->m[ 7] * b->m[13]  +  a->m[11] * b->m[14]  +  a->m[15] * b->m[15]
 	);
-#else
-	return MAT4( // JOE: Fix this something is broken here!
-		a->m[ 0] * b->m[ 0]  +  a->m[ 4] * b->m[ 1]  +  a->m[ 8] * b->m[ 2]  +  a->m[12] * b->m[ 3],
-		a->m[ 1] * b->m[ 0]  +  a->m[ 5] * b->m[ 1]  +  a->m[ 9] * b->m[ 2]  +  a->m[13] * b->m[ 3],
-		a->m[ 2] * b->m[ 0]  +  a->m[ 6] * b->m[ 1]  +  a->m[10] * b->m[ 2]  +  a->m[14] * b->m[ 3],
-		a->m[ 3] * b->m[ 0]  +  a->m[ 7] * b->m[ 1]  +  a->m[11] * b->m[ 2]  +  a->m[15] * b->m[ 3],
-
-
-		a->m[ 0] * b->m[ 4]  +  a->m[ 4] * b->m[ 5]  +  a->m[ 8] * b->m[ 6]  +  a->m[12] * b->m[ 7],
-		a->m[ 1] * b->m[ 4]  +  a->m[ 5] * b->m[ 5]  +  a->m[ 9] * b->m[ 6]  +  a->m[13] * b->m[ 7],
-		a->m[ 2] * b->m[ 4]  +  a->m[ 6] * b->m[ 5]  +  a->m[10] * b->m[ 6]  +  a->m[14] * b->m[ 7],
-		a->m[ 3] * b->m[ 4]  +  a->m[ 7] * b->m[ 5]  +  a->m[11] * b->m[ 6]  +  a->m[15] * b->m[ 7],
-
-		a->m[ 0] * b->m[ 8]  +  a->m[ 4] * b->m[ 9]  +  a->m[ 8] * b->m[10]  +  a->m[12] * b->m[11],
-		a->m[ 1] * b->m[ 8]  +  a->m[ 5] * b->m[ 9]  +  a->m[ 9] * b->m[10]  +  a->m[13] * b->m[11],
-		a->m[ 2] * b->m[ 8]  +  a->m[ 6] * b->m[ 9]  +  a->m[10] * b->m[10]  +  a->m[14] * b->m[11],
-		a->m[ 3] * b->m[ 8]  +  a->m[ 7] * b->m[ 9]  +  a->m[11] * b->m[10]  +  a->m[15] * b->m[11],
-
-		a->m[ 0] * b->m[12]  +  a->m[ 4] * b->m[13]  +  a->m[ 8] * b->m[14]  +  a->m[12] * b->m[15],
-		a->m[ 1] * b->m[12]  +  a->m[ 5] * b->m[13]  +  a->m[ 9] * b->m[14]  +  a->m[13] * b->m[15],
-		a->m[ 2] * b->m[12]  +  a->m[ 6] * b->m[13]  +  a->m[10] * b->m[14]  +  a->m[14] * b->m[15],
-		a->m[ 3] * b->m[12]  +  a->m[ 7] * b->m[13]  +  a->m[11] * b->m[14]  +  a->m[15] * b->m[15]
-	);
-#endif
 }
 
 vec4_t mat4_mult_vector( const mat4_t* __restrict m, const vec4_t* __restrict v )
@@ -281,19 +256,9 @@ void mat4_adjoint( mat4_t* m )
 
 mat4_t mat4_from_axis3_angle( const vec3_t* axis, scaler_t angle )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
-	scaler_t sin_a           = sinl(angle);
-	scaler_t cos_a           = cosl(angle);
-	scaler_t one_minus_cos_a = 1 - cosl(angle);
-	#elif defined(LIB3DMATH_USE_DOUBLE)
-	scaler_t sin_a           = sin(angle);
-	scaler_t cos_a           = cos(angle);
-	scaler_t one_minus_cos_a = 1 - cos(angle);
-	#else
-	scaler_t sin_a           = sinf(angle);
-	scaler_t cos_a           = cosf(angle);
-	scaler_t one_minus_cos_a = 1 - cosf(angle);
-	#endif
+	scaler_t sin_a           = scaler_sin(angle);
+	scaler_t cos_a           = scaler_cos(angle);
+	scaler_t one_minus_cos_a = 1 - cos_a;
 
 	vec3_t ax = *axis;
     vec3_normalize( &ax );
