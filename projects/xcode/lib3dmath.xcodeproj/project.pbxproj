@@ -272,6 +272,8 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
 				PRODUCT_NAME = lib3dmath;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = macosx;
@@ -284,6 +286,8 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_UNROLL_LOOPS = YES;
 				PRODUCT_NAME = lib3dmath;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
 				SDKROOT = macosx;
