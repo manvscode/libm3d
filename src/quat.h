@@ -154,7 +154,7 @@ static inline quat_t quat_conjugate( const quat_t* q )
 	);
 }
 
-static inline vec3_t quat_rotate3( const quat_t* q, const vec3_t* v )
+static inline vec3_t quat_multiply_vec3( const quat_t* q, const vec3_t* v )
 {
 	quat_t q_v = quat_from_vec3( v );
 	q_v.w = 0.0f;
@@ -166,7 +166,12 @@ static inline vec3_t quat_rotate3( const quat_t* q, const vec3_t* v )
 	return VEC3( q_result.x, q_result.y, q_result.z );
 }
 
-static inline vec4_t quat_rotate4( const quat_t* q, const vec4_t* v )
+static inline vec3_t quat_rotate3( const quat_t* q, const vec3_t* v )
+{
+	return quat_multiply_vec3( q, v );
+}
+
+static inline vec4_t quat_multiply_vec4( const quat_t* q, const vec4_t* v )
 {
 	quat_t q_v = *v;
 	q_v.w = 0.0f;
@@ -176,6 +181,11 @@ static inline vec4_t quat_rotate4( const quat_t* q, const vec4_t* v )
 	quat_t q_result = quat_multiply( q, &q_v_inverse );
 
 	return VEC4( q_result.x, q_result.y, q_result.z, 0.0f );
+}
+
+static inline vec4_t quat_rotate4( const quat_t* q, const vec4_t* v )
+{
+	return quat_multiply_vec4( q, v );
 }
 
 static inline mat3_t quat_to_mat3( const quat_t* q )
