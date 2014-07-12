@@ -25,7 +25,6 @@
 #include "mathematics.h"
 #include "quat.h"
 
-
 quat_t quat_from_mat3( const mat3_t* m )
 {
 	quat_t q;

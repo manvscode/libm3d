@@ -32,7 +32,6 @@
 extern "C" {
 #endif
 
-
 /*
  * Three Dimensional Vectors
  */

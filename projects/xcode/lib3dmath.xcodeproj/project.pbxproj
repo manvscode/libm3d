@@ -25,6 +25,31 @@
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DE194DF23200752193 /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8C3632D1971003000728622 /* transforms.c in Sources */ = {isa = PBXBuildFile; fileRef = D8C3632C1971003000728622 /* transforms.c */; };
+		D8C3632E1971003000728622 /* transforms.c in Sources */ = {isa = PBXBuildFile; fileRef = D8C3632C1971003000728622 /* transforms.c */; };
+		D8C363301971003B00728622 /* transforms.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C3632F1971003B00728622 /* transforms.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8C363311971003B00728622 /* transforms.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C3632F1971003B00728622 /* transforms.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6E1196937FA0035430B /* quat.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81F7180D7C3A003D5A59 /* quat.c */; };
+		D8DFF6E2196937FA0035430B /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81FD180D7C3A003D5A59 /* vec4.c */; };
+		D8DFF6E3196937FA0035430B /* vec3.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81FB180D7C3A003D5A59 /* vec3.c */; };
+		D8DFF6E4196937FA0035430B /* vec2.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81F9180D7C3A003D5A59 /* vec2.c */; };
+		D8DFF6E5196937FA0035430B /* mat3.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81F1180D7C3A003D5A59 /* mat3.c */; };
+		D8DFF6E6196937FA0035430B /* mat2.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81EF180D7C3A003D5A59 /* mat2.c */; };
+		D8DFF6E7196937FA0035430B /* mathematics.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81F5180D7C3A003D5A59 /* mathematics.c */; };
+		D8DFF6E8196937FA0035430B /* mat4.c in Sources */ = {isa = PBXBuildFile; fileRef = 087C81F3180D7C3A003D5A59 /* mat4.c */; };
+		D8DFF6EB196937FA0035430B /* scaler-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE83194F815000C94819 /* scaler-double.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6EC196937FA0035430B /* scaler-long-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE85194F815000C94819 /* scaler-long-double.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6ED196937FA0035430B /* scaler-float.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE84194F815000C94819 /* scaler-float.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6EE196937FA0035430B /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6EF196937FA0035430B /* mathematics.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81F6180D7C3A003D5A59 /* mathematics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F0196937FA0035430B /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F1196937FA0035430B /* quat.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81F8180D7C3A003D5A59 /* quat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F2196937FA0035430B /* mat4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81F4180D7C3A003D5A59 /* mat4.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F3196937FA0035430B /* vec2.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FA180D7C3A003D5A59 /* vec2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F4196937FA0035430B /* mat2.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81F0180D7C3A003D5A59 /* mat2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F5196937FA0035430B /* vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FC180D7C3A003D5A59 /* vec3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F6196937FA0035430B /* mat3.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81F2180D7C3A003D5A59 /* mat3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8DFF6F7196937FA0035430B /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8FBAE86194F815000C94819 /* scaler-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE83194F815000C94819 /* scaler-double.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8FBAE87194F815000C94819 /* scaler-float.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE84194F815000C94819 /* scaler-float.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8FBAE88194F815000C94819 /* scaler-long-double.h in Headers */ = {isa = PBXBuildFile; fileRef = D8FBAE85194F815000C94819 /* scaler-long-double.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +75,9 @@
 		087C81FE180D7C3A003D5A59 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec4.h; path = ../../src/vec4.h; sourceTree = "<group>"; };
 		D82D14DD194DF23200752193 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = ../../src/easing.h; sourceTree = "<group>"; };
 		D83B84671946AD3900201CD5 /* lib3dmath-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "lib3dmath-config.h"; path = "../../src/lib3dmath-config.h"; sourceTree = "<group>"; };
+		D8C3632C1971003000728622 /* transforms.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transforms.c; path = ../../src/transforms.c; sourceTree = "<group>"; };
+		D8C3632F1971003B00728622 /* transforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transforms.h; path = ../../src/transforms.h; sourceTree = "<group>"; };
+		D8DFF6FB196937FA0035430B /* lib3dmath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib3dmath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FBAE83194F815000C94819 /* scaler-double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scaler-double.h"; path = "../../src/scaler-double.h"; sourceTree = "<group>"; };
 		D8FBAE84194F815000C94819 /* scaler-float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scaler-float.h"; path = "../../src/scaler-float.h"; sourceTree = "<group>"; };
 		D8FBAE85194F815000C94819 /* scaler-long-double.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "scaler-long-double.h"; path = "../../src/scaler-long-double.h"; sourceTree = "<group>"; };
@@ -57,6 +85,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		0855E688180D7BDA00E1CF69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8DFF6E9196937FA0035430B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -78,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				0855E68B180D7BDA00E1CF69 /* lib3dmath.a */,
+				D8DFF6FB196937FA0035430B /* lib3dmath.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +142,8 @@
 				087C81FC180D7C3A003D5A59 /* vec3.h */,
 				087C81FD180D7C3A003D5A59 /* vec4.c */,
 				087C81FE180D7C3A003D5A59 /* vec4.h */,
+				D8C3632C1971003000728622 /* transforms.c */,
+				D8C3632F1971003B00728622 /* transforms.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -130,6 +168,28 @@
 				087C820C180D7C3A003D5A59 /* vec3.h in Headers */,
 				087C8202180D7C3A003D5A59 /* mat3.h in Headers */,
 				087C820E180D7C3A003D5A59 /* vec4.h in Headers */,
+				D8C363301971003B00728622 /* transforms.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8DFF6EA196937FA0035430B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8DFF6EB196937FA0035430B /* scaler-double.h in Headers */,
+				D8DFF6EC196937FA0035430B /* scaler-long-double.h in Headers */,
+				D8DFF6ED196937FA0035430B /* scaler-float.h in Headers */,
+				D8DFF6EE196937FA0035430B /* lib3dmath-config.h in Headers */,
+				D8DFF6EF196937FA0035430B /* mathematics.h in Headers */,
+				D8DFF6F0196937FA0035430B /* easing.h in Headers */,
+				D8DFF6F1196937FA0035430B /* quat.h in Headers */,
+				D8DFF6F2196937FA0035430B /* mat4.h in Headers */,
+				D8DFF6F3196937FA0035430B /* vec2.h in Headers */,
+				D8DFF6F4196937FA0035430B /* mat2.h in Headers */,
+				D8DFF6F5196937FA0035430B /* vec3.h in Headers */,
+				D8DFF6F6196937FA0035430B /* mat3.h in Headers */,
+				D8DFF6F7196937FA0035430B /* vec4.h in Headers */,
+				D8C363311971003B00728622 /* transforms.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +211,23 @@
 			name = "lib3dmath-static";
 			productName = 3dmath;
 			productReference = 0855E68B180D7BDA00E1CF69 /* lib3dmath.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D8DFF6DF196937FA0035430B /* lib3dmath-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8DFF6F8196937FA0035430B /* Build configuration list for PBXNativeTarget "lib3dmath-ios" */;
+			buildPhases = (
+				D8DFF6E0196937FA0035430B /* Sources */,
+				D8DFF6E9196937FA0035430B /* Frameworks */,
+				D8DFF6EA196937FA0035430B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "lib3dmath-ios";
+			productName = 3dmath;
+			productReference = D8DFF6FB196937FA0035430B /* lib3dmath.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -175,6 +252,7 @@
 			projectRoot = "";
 			targets = (
 				0855E68A180D7BDA00E1CF69 /* lib3dmath-static */,
+				D8DFF6DF196937FA0035430B /* lib3dmath-ios */,
 			);
 		};
 /* End PBXProject section */
@@ -191,7 +269,24 @@
 				087C8201180D7C3A003D5A59 /* mat3.c in Sources */,
 				087C81FF180D7C3A003D5A59 /* mat2.c in Sources */,
 				087C8205180D7C3A003D5A59 /* mathematics.c in Sources */,
+				D8C3632D1971003000728622 /* transforms.c in Sources */,
 				087C8203180D7C3A003D5A59 /* mat4.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8DFF6E0196937FA0035430B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8DFF6E1196937FA0035430B /* quat.c in Sources */,
+				D8DFF6E2196937FA0035430B /* vec4.c in Sources */,
+				D8DFF6E3196937FA0035430B /* vec3.c in Sources */,
+				D8DFF6E4196937FA0035430B /* vec2.c in Sources */,
+				D8DFF6E5196937FA0035430B /* mat3.c in Sources */,
+				D8DFF6E6196937FA0035430B /* mat2.c in Sources */,
+				D8DFF6E7196937FA0035430B /* mathematics.c in Sources */,
+				D8C3632E1971003000728622 /* transforms.c in Sources */,
+				D8DFF6E8196937FA0035430B /* mat4.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +390,34 @@
 			};
 			name = Release;
 		};
+		D8DFF6F9196937FA0035430B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_UNROLL_LOOPS = YES;
+				PRODUCT_NAME = lib3dmath;
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8DFF6FA196937FA0035430B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				EXECUTABLE_PREFIX = "";
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_UNROLL_LOOPS = YES;
+				PRODUCT_NAME = lib3dmath;
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PRODUCT_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -312,6 +435,15 @@
 			buildConfigurations = (
 				0855E690180D7BDA00E1CF69 /* Debug */,
 				0855E691180D7BDA00E1CF69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8DFF6F8196937FA0035430B /* Build configuration list for PBXNativeTarget "lib3dmath-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8DFF6F9196937FA0035430B /* Debug */,
+				D8DFF6FA196937FA0035430B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

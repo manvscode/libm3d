@@ -17,6 +17,7 @@ AH_TOP([
 AH_BOTTOM([
 #endif /* _LIB3DMATH_H_ */
 ])
+AX_EXT
 
 DFLAGS="$DFLAGS"
 
