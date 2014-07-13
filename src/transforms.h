@@ -120,6 +120,24 @@ static inline mat4_t shear( scaler_t s )
 	);
 }
 
+/* Beware of gimbal lock when any angle is set to +/- HALF_PI */
+static inline mat4_t euler_transform( scaler_t h /*heading*/, scaler_t p /*pitch*/, scaler_t r /*roll*/ )
+{
+	const scaler_t sin_h = scaler_sin( h );
+	const scaler_t cos_h = scaler_cos( h );
+	const scaler_t sin_p = scaler_sin( p );
+	const scaler_t cos_p = scaler_cos( p );
+	const scaler_t sin_r = scaler_sin( r );
+	const scaler_t cos_r = scaler_cos( r );
+
+	return MAT4(
+		cos_r * cos_h - sin_r * sin_p * sin_h,   sin_r * cos_h + cos_r * sin_p * sin_h,   -cos_p * sin_h,   0,
+		                       -sin_r * cos_p,                           cos_r * cos_p,            sin_p,   0,
+		cos_r * sin_h + sin_r * sin_p * cos_h,   sin_r * sin_h - cos_r * sin_p * cos_h,    cos_p * cos_h,   0,
+		                                    0,                                       0,                0,   1
+	);
+}
+
 static inline mat4_t orientation( vec3_t* f, vec3_t* l, vec3_t* u )
 {
 	assert( f );
@@ -147,6 +165,11 @@ static inline mat4_t change_handedness()
 		 0, 1,  0, 0,
 		 0, 0,  0, 1
 	);
+}
+
+static inline mat4_t rigid_body_transform( const mat4_t* orientation, const mat4_t* translation )
+{
+	return mat4_mult_matrix( translation, orientation );
 }
 
 mat4_t rotate_xyz               ( const char* order, ... );
