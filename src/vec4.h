@@ -28,6 +28,7 @@
 #error "Need a C99 compiler."
 #endif
 #include "mathematics.h"
+#include "vec3.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -58,6 +59,9 @@ const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
  * |d|
  */
 #define VEC4(a,b,c,d)  (vec4_t){ .x = (a), .y = (b), .z = (c), .w = (d) }
+
+#define vec4_to_vec2( p_v ) ((vec2_t*)(p_v))
+#define vec4_to_vec3( p_v ) ((vec3_t*)(p_v))
 
 static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
@@ -102,15 +106,12 @@ static inline scaler_t vec4_dot_product( const vec4_t* __restrict a, const vec4_
     return a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
 }
 
-#if 0
-static inline vec4_t vec4_cross_product( const vec4_t* __restrict a, const vec4_t* __restrict b, const vec4_t* __restrict c )
+/* 3D cross product because we use homogenous coordinates. */
+static inline vec4_t vec4_cross_product( const vec4_t* __restrict a, const vec4_t* __restrict b )
 {
-    vec4_t result;
-    // TODO: Implement this!
-    assert( false );
-    return result;
+	vec3_t result = vec3_cross_product(  vec4_to_vec3(a), vec4_to_vec3(b) );
+	return VEC4( result.x, result.y, result.z, 0 );
 }
-#endif
 
 static inline scaler_t vec4_magnitude( const vec4_t* v )
 {
@@ -202,9 +203,6 @@ static inline scaler_t vec4_min_component( const vec4_t* v )
 {
 	return scaler_min( scaler_min( scaler_min(v->x, v->y), v->z ), v->w );
 }
-
-#define vec4_to_vec2( p_v ) ((vec2_t*)(p_v))
-#define vec4_to_vec3( p_v ) ((vec3_t*)(p_v))
 
 
 #ifdef __cplusplus

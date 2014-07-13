@@ -66,6 +66,34 @@ mat4_t rotate_xyz( const char* order, ... )
 	return result;
 }
 
+mat3_t rotate_from_vec3_to_vec3( const vec3_t* s, const vec3_t* t )
+{
+	const vec3_t v = vec3_cross_product( s, t );
+	const scaler_t e = vec3_dot_product( s, t );
+	const scaler_t h = 1 / (1 + e);
+
+	return MAT3(
+		  e + h * v.x * v.x,   h * v.x * v.y + v.z,   h * v.x * v.z - v.y,
+		h * v.x * v.y - v.z,     e + h * v.y * v.y,   h * v.y * v.z + v.x,
+		h * v.x * v.z + v.y,   h * v.y * v.z - v.x,   e + h * v.z * v.z
+	);
+}
+
+mat4_t rotate_from_vec4_to_vec4( const vec4_t* s, const vec4_t* t )
+{
+	const vec3_t v = vec3_cross_product( vec4_to_vec3(s), vec4_to_vec3(t) );
+	const scaler_t e = vec3_dot_product( vec4_to_vec3(s), vec4_to_vec3(t) );
+	const scaler_t h = 1 / (1 + e);
+
+	return MAT4(
+		  e + h * v.x * v.x,   h * v.x * v.y + v.z,   h * v.x * v.z - v.y,  0,
+		h * v.x * v.y - v.z,     e + h * v.y * v.y,   h * v.y * v.z + v.x,  0,
+		h * v.x * v.z + v.y,   h * v.y * v.z - v.x,     e + h * v.z * v.z,  0,
+		                  0,                     0,                     0,  1
+	);
+}
+
+
 /*
 mat4_t rotate_xyz( scaler_t xa, scaler_t ya, scaler_t za )
 {

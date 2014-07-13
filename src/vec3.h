@@ -56,6 +56,8 @@ const char* vec3_to_string     ( const vec3_t* v ); /* not thread safe */
  */
 #define VEC3(a,b,c)  ((vec3_t){ .x = (a), .y = (b), .z = (c) })
 
+#define vec3_to_vec2( p_v ) ((vec2_t*)(p_v))
+
 static inline vec3_t vec3_add( const vec3_t* __restrict a, const vec3_t* __restrict b )
 {
 	return VEC3(
@@ -188,8 +190,6 @@ static inline scaler_t vec3_min_component( const vec3_t* v )
 {
 	return scaler_min( scaler_min(v->x, v->y), v->z );
 }
-
-#define vec3_to_vec2( p_v ) ((vec2_t*)(p_v))
 
 #ifdef __cplusplus
 } /* C linkage */
