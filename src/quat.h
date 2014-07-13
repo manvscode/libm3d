@@ -109,9 +109,9 @@ static inline quat_t quat_from_vec4( const vec4_t* v )
 	);
 }
 
-quat_t      quat_from_mat3               ( const mat3_t* m );
-quat_t      quat_from_mat4               ( const mat4_t* m );
-quat_t      quat_slerp                   ( const quat_t* a, const quat_t* b, scaler_t t );
+quat_t quat_from_mat3  ( const mat3_t* m );
+quat_t quat_from_mat4  ( const mat4_t* m );
+quat_t quat_slerp      ( const quat_t* a, const quat_t* b, scaler_t t );
 
 
 

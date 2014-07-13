@@ -128,23 +128,15 @@ quat_t quat_from_mat4( const mat4_t* m )
 }
 
 
-quat_t quat_slerp( const quat_t* a, const quat_t* b, scaler_t t )
+quat_t quat_slerp( const quat_t* q, const quat_t* r, scaler_t t )
 {
-	scaler_t dot = a->w * b->w + a->x * b->x + a->y * b->y + a->z * b->z;
+	const scaler_t theta     = scaler_acos( vec4_dot_product( q, r ) );
+	const scaler_t sin_theta = scaler_sin( theta );
+	const scaler_t alpha     = scaler_sin( theta * (1 - t) ) / sin_theta;
+	const scaler_t beta      = scaler_sin( theta * t ) / sin_theta;
 
-	if( fabs(dot) > 1.0f )
-	{
-		return *a;
-	}
-
-	//scaler_t sin_of_omega = sqrt( 1.0f - dot * dot );
-
-	quat_t result;
-
-	// TODO: Implement this!
-	assert( false );
-
-	return result;
+	return vec4_add( &QUAT(alpha * q->x,  alpha * q->y,  alpha * q->z,  alpha * q->w),
+	                 &QUAT(beta * r->x, beta * r->y, beta * r->z, beta * r->w) );
 }
 
 

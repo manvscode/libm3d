@@ -149,10 +149,10 @@ static inline mat4_t change_handedness()
 	);
 }
 
-mat4_t rotate_xyz( const char* order, ... );
-mat3_t rotate_from_vec3_to_vec3( const vec3_t* s, const vec3_t* t );
-mat4_t rotate_from_vec4_to_vec4( const vec4_t* s, const vec4_t* t );
-mat4_t look_at( const pt3_t* eye, const pt3_t* target, const vec3_t* up );
+mat4_t rotate_xyz               ( const char* order, ... );
+mat3_t rotate_from_vec3_to_vec3 ( const vec3_t* s, const vec3_t* t );
+mat4_t rotate_from_vec4_to_vec4 ( const vec4_t* s, const vec4_t* t );
+mat4_t look_at                  ( const pt3_t* eye, const pt3_t* target, const vec3_t* up );
 
 #ifdef __cplusplus
 } /* C linkage */
