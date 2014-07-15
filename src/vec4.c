@@ -28,6 +28,7 @@
 #include "vec3.h"
 
 const vec4_t VEC4_ZERO  = (vec4_t){ .x = 0.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f };
+const vec4_t VEC4_ONE   = (vec4_t){ .x = 1.0f, .y = 1.0f, .z = 1.0f, .w = 1.0f };
 const vec4_t VEC4_XUNIT = (vec4_t){ .x = 1.0f, .y = 0.0f, .z = 0.0f, .w = 0.0f };
 const vec4_t VEC4_YUNIT = (vec4_t){ .x = 0.0f, .y = 1.0f, .z = 0.0f, .w = 0.0f };
 const vec4_t VEC4_ZUNIT = (vec4_t){ .x = 0.0f, .y = 0.0f, .z = 1.0f, .w = 0.0f };

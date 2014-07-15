@@ -46,6 +46,7 @@ typedef struct vec4 {
 typedef vec4_t pt4_t;
 
 extern const vec4_t VEC4_ZERO;
+extern const vec4_t VEC4_ONE;
 extern const vec4_t VEC4_XUNIT;
 extern const vec4_t VEC4_YUNIT;
 extern const vec4_t VEC4_ZUNIT;

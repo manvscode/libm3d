@@ -43,6 +43,7 @@ typedef struct vec2 {
 typedef vec2_t pt2_t;
 
 extern const vec2_t VEC2_ZERO;
+extern const vec2_t VEC2_ONE;
 extern const vec2_t VEC2_XUNIT;
 extern const vec2_t VEC2_YUNIT;
 
