@@ -25,6 +25,10 @@
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DE194DF23200752193 /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D89CE3B71979941C00710BD8 /* geometric-tools.h in Headers */ = {isa = PBXBuildFile; fileRef = D89CE3B61979941C00710BD8 /* geometric-tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D89CE3B81979941C00710BD8 /* geometric-tools.h in Headers */ = {isa = PBXBuildFile; fileRef = D89CE3B61979941C00710BD8 /* geometric-tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D89CE3C61979A0DA00710BD8 /* geometric-tools.c in Sources */ = {isa = PBXBuildFile; fileRef = D89CE3C51979A0DA00710BD8 /* geometric-tools.c */; };
+		D89CE3C71979A0DA00710BD8 /* geometric-tools.c in Sources */ = {isa = PBXBuildFile; fileRef = D89CE3C51979A0DA00710BD8 /* geometric-tools.c */; };
 		D8C3632D1971003000728622 /* transforms.c in Sources */ = {isa = PBXBuildFile; fileRef = D8C3632C1971003000728622 /* transforms.c */; };
 		D8C3632E1971003000728622 /* transforms.c in Sources */ = {isa = PBXBuildFile; fileRef = D8C3632C1971003000728622 /* transforms.c */; };
 		D8C363301971003B00728622 /* transforms.h in Headers */ = {isa = PBXBuildFile; fileRef = D8C3632F1971003B00728622 /* transforms.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -75,6 +79,8 @@
 		087C81FE180D7C3A003D5A59 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec4.h; path = ../../src/vec4.h; sourceTree = "<group>"; };
 		D82D14DD194DF23200752193 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = ../../src/easing.h; sourceTree = "<group>"; };
 		D83B84671946AD3900201CD5 /* lib3dmath-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "lib3dmath-config.h"; path = "../../src/lib3dmath-config.h"; sourceTree = "<group>"; };
+		D89CE3B61979941C00710BD8 /* geometric-tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "geometric-tools.h"; path = "../../src/geometric-tools.h"; sourceTree = "<group>"; };
+		D89CE3C51979A0DA00710BD8 /* geometric-tools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "geometric-tools.c"; path = "../../src/geometric-tools.c"; sourceTree = "<group>"; };
 		D8C3632C1971003000728622 /* transforms.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transforms.c; path = ../../src/transforms.c; sourceTree = "<group>"; };
 		D8C3632F1971003B00728622 /* transforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = transforms.h; path = ../../src/transforms.h; sourceTree = "<group>"; };
 		D8DFF6FB196937FA0035430B /* lib3dmath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = lib3dmath.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +127,7 @@
 		087C81EE180D7C03003D5A59 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D89CE3C51979A0DA00710BD8 /* geometric-tools.c */,
 				D83B84671946AD3900201CD5 /* lib3dmath-config.h */,
 				D8FBAE83194F815000C94819 /* scaler-double.h */,
 				D8FBAE84194F815000C94819 /* scaler-float.h */,
@@ -144,6 +151,7 @@
 				087C81FE180D7C3A003D5A59 /* vec4.h */,
 				D8C3632C1971003000728622 /* transforms.c */,
 				D8C3632F1971003B00728622 /* transforms.h */,
+				D89CE3B61979941C00710BD8 /* geometric-tools.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -168,6 +176,7 @@
 				087C820C180D7C3A003D5A59 /* vec3.h in Headers */,
 				087C8202180D7C3A003D5A59 /* mat3.h in Headers */,
 				087C820E180D7C3A003D5A59 /* vec4.h in Headers */,
+				D89CE3B71979941C00710BD8 /* geometric-tools.h in Headers */,
 				D8C363301971003B00728622 /* transforms.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +198,7 @@
 				D8DFF6F5196937FA0035430B /* vec3.h in Headers */,
 				D8DFF6F6196937FA0035430B /* mat3.h in Headers */,
 				D8DFF6F7196937FA0035430B /* vec4.h in Headers */,
+				D89CE3B81979941C00710BD8 /* geometric-tools.h in Headers */,
 				D8C363311971003B00728622 /* transforms.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,9 +223,9 @@
 			productReference = 0855E68B180D7BDA00E1CF69 /* lib3dmath.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		D8DFF6DF196937FA0035430B /* lib3dmath-ios */ = {
+		D8DFF6DF196937FA0035430B /* lib3dmath-static-ios */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8DFF6F8196937FA0035430B /* Build configuration list for PBXNativeTarget "lib3dmath-ios" */;
+			buildConfigurationList = D8DFF6F8196937FA0035430B /* Build configuration list for PBXNativeTarget "lib3dmath-static-ios" */;
 			buildPhases = (
 				D8DFF6E0196937FA0035430B /* Sources */,
 				D8DFF6E9196937FA0035430B /* Frameworks */,
@@ -225,7 +235,7 @@
 			);
 			dependencies = (
 			);
-			name = "lib3dmath-ios";
+			name = "lib3dmath-static-ios";
 			productName = 3dmath;
 			productReference = D8DFF6FB196937FA0035430B /* lib3dmath.a */;
 			productType = "com.apple.product-type.library.static";
@@ -252,7 +262,7 @@
 			projectRoot = "";
 			targets = (
 				0855E68A180D7BDA00E1CF69 /* lib3dmath-static */,
-				D8DFF6DF196937FA0035430B /* lib3dmath-ios */,
+				D8DFF6DF196937FA0035430B /* lib3dmath-static-ios */,
 			);
 		};
 /* End PBXProject section */
@@ -269,6 +279,7 @@
 				087C8201180D7C3A003D5A59 /* mat3.c in Sources */,
 				087C81FF180D7C3A003D5A59 /* mat2.c in Sources */,
 				087C8205180D7C3A003D5A59 /* mathematics.c in Sources */,
+				D89CE3C61979A0DA00710BD8 /* geometric-tools.c in Sources */,
 				D8C3632D1971003000728622 /* transforms.c in Sources */,
 				087C8203180D7C3A003D5A59 /* mat4.c in Sources */,
 			);
@@ -285,6 +296,7 @@
 				D8DFF6E5196937FA0035430B /* mat3.c in Sources */,
 				D8DFF6E6196937FA0035430B /* mat2.c in Sources */,
 				D8DFF6E7196937FA0035430B /* mathematics.c in Sources */,
+				D89CE3C71979A0DA00710BD8 /* geometric-tools.c in Sources */,
 				D8C3632E1971003000728622 /* transforms.c in Sources */,
 				D8DFF6E8196937FA0035430B /* mat4.c in Sources */,
 			);
@@ -439,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8DFF6F8196937FA0035430B /* Build configuration list for PBXNativeTarget "lib3dmath-ios" */ = {
+		D8DFF6F8196937FA0035430B /* Build configuration list for PBXNativeTarget "lib3dmath-static-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8DFF6F9196937FA0035430B /* Debug */,
