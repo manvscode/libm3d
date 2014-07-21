@@ -18,6 +18,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#include <stdlib.h>
 #include "geometric-tools.h"
 
 vec3_t normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_t* v3 )
@@ -51,7 +52,6 @@ vec3_t normal_from_triangles( const vec3_t* points[], size_t max_points )
 	const size_t number_of_triangles = max_points / 3;
 
 	vec3_t normal = VEC3_ZERO;
-	bool first_normal = true;
 
 	for( size_t i = 0; i < max_points; i += 3 )
 	{
