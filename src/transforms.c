@@ -22,6 +22,48 @@
 #include <assert.h>
 #include "transforms.h"
 
+mat4_t projection_orthographic( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
+{
+	return MAT4(
+		2.0 / (right - left)          , 0.0                           ,  0.0                      , 0.0,
+		0.0                           , 2.0 / (top - bottom)          ,  0.0                      , 0.0,
+		0.0                           , 0.0                           , -2.0 / (far - near)       , 0.0,
+		-(right + left)/(right - left), -(top + bottom)/(top - bottom), -(far + near)/(far - near), 1.0
+	);
+}
+
+mat4_t projection_frustum( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
+{
+	scaler_t A = 2.0 * near / (right - left);
+	scaler_t B = (right + left) / (right - left);
+	scaler_t C = 2.0 * near / (top - bottom);
+	scaler_t D = (top + bottom) / (top - bottom);
+	scaler_t E = -(far + near) / (far - near);
+	scaler_t F = -(2.0 * far * near) / (far - near);
+
+	return MAT4(
+		  A,  0.0,    B,  0.0,
+		0.0,    C,    D,  0.0,
+		0.0,  0.0,    E,    F,
+		0.0,  0.0, -1.0,  0.0
+	);
+}
+
+
+mat4_t projection_perspective( scaler_t fov /* in radians */, scaler_t aspect, scaler_t near, scaler_t far )
+{
+	scaler_t A = 1.0 / tan(fov * 0.5);
+	scaler_t B = -far / (far - near);
+	scaler_t C = -(far * near)/ (far - near);
+
+	return MAT4(
+	    A/aspect,  0.0,  0.0,  0.0,
+	         0.0,    A,  0.0,  0.0,
+	         0.0,  0.0,    B, -1.0,
+	         0.0,  0.0,    C,  0.0
+	);
+}
+
 mat4_t rotate_xyz( const char* order, ... )
 {
 	assert( order );

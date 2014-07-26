@@ -25,6 +25,8 @@
 		087C820E180D7C3A003D5A59 /* vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 087C81FE180D7C3A003D5A59 /* vec4.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */ = {isa = PBXBuildFile; fileRef = D83B84671946AD3900201CD5 /* lib3dmath-config.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D14DE194DF23200752193 /* easing.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D14DD194DF23200752193 /* easing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D86B84D9198341E500CC40F2 /* geometric-tools.h in Headers */ = {isa = PBXBuildFile; fileRef = D86B84D6198341E500CC40F2 /* geometric-tools.h */; };
+		D86B84DA198341E500CC40F2 /* geometric-tools.h in Headers */ = {isa = PBXBuildFile; fileRef = D86B84D6198341E500CC40F2 /* geometric-tools.h */; };
 		D89CE3B71979941C00710BD8 /* geometric-tools.h in Headers */ = {isa = PBXBuildFile; fileRef = D89CE3B61979941C00710BD8 /* geometric-tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D89CE3B81979941C00710BD8 /* geometric-tools.h in Headers */ = {isa = PBXBuildFile; fileRef = D89CE3B61979941C00710BD8 /* geometric-tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D89CE3C61979A0DA00710BD8 /* geometric-tools.c in Sources */ = {isa = PBXBuildFile; fileRef = D89CE3C51979A0DA00710BD8 /* geometric-tools.c */; };
@@ -79,6 +81,7 @@
 		087C81FE180D7C3A003D5A59 /* vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vec4.h; path = ../../src/vec4.h; sourceTree = "<group>"; };
 		D82D14DD194DF23200752193 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = easing.h; path = ../../src/easing.h; sourceTree = "<group>"; };
 		D83B84671946AD3900201CD5 /* lib3dmath-config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "lib3dmath-config.h"; path = "../../src/lib3dmath-config.h"; sourceTree = "<group>"; };
+		D86B84D6198341E500CC40F2 /* geometric-tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "geometric-tools.h"; path = "../../src/geometric-tools.h"; sourceTree = "<group>"; };
 		D89CE3B61979941C00710BD8 /* geometric-tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "geometric-tools.h"; path = "../../src/geometric-tools.h"; sourceTree = "<group>"; };
 		D89CE3C51979A0DA00710BD8 /* geometric-tools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "geometric-tools.c"; path = "../../src/geometric-tools.c"; sourceTree = "<group>"; };
 		D8C3632C1971003000728622 /* transforms.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transforms.c; path = ../../src/transforms.c; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D89CE3C51979A0DA00710BD8 /* geometric-tools.c */,
+				D86B84D6198341E500CC40F2 /* geometric-tools.h */,
 				D83B84671946AD3900201CD5 /* lib3dmath-config.h */,
 				D8FBAE83194F815000C94819 /* scaler-double.h */,
 				D8FBAE84194F815000C94819 /* scaler-float.h */,
@@ -167,6 +171,7 @@
 				D8FBAE88194F815000C94819 /* scaler-long-double.h in Headers */,
 				D8FBAE87194F815000C94819 /* scaler-float.h in Headers */,
 				D82D14DC194DF1F500752193 /* lib3dmath-config.h in Headers */,
+				D86B84D9198341E500CC40F2 /* geometric-tools.h in Headers */,
 				087C8206180D7C3A003D5A59 /* mathematics.h in Headers */,
 				D82D14DE194DF23200752193 /* easing.h in Headers */,
 				087C8208180D7C3A003D5A59 /* quat.h in Headers */,
@@ -189,6 +194,7 @@
 				D8DFF6EC196937FA0035430B /* scaler-long-double.h in Headers */,
 				D8DFF6ED196937FA0035430B /* scaler-float.h in Headers */,
 				D8DFF6EE196937FA0035430B /* lib3dmath-config.h in Headers */,
+				D86B84DA198341E500CC40F2 /* geometric-tools.h in Headers */,
 				D8DFF6EF196937FA0035430B /* mathematics.h in Headers */,
 				D8DFF6F0196937FA0035430B /* easing.h in Headers */,
 				D8DFF6F1196937FA0035430B /* quat.h in Headers */,

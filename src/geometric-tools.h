@@ -20,9 +20,15 @@
  */
 #ifndef _GEOMETRIC_TOOLS_H_
 #define _GEOMETRIC_TOOLS_H_
+#include "vec2.h"
 #include "vec3.h"
+#include "vec4.h"
+#include "mat4.h"
 
-vec3_t normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_t* v3 );
-vec3_t normal_from_triangles( const vec3_t* points[], size_t max_points );
+vec3_t normal_from_triangle  ( const vec3_t* v1, const vec3_t* v2, const vec3_t* v3 );
+vec3_t normal_from_triangles ( const vec3_t* points[], size_t max_points );
+
+vec4_t point_unproject ( const vec2_t* position, const mat4_t* projection, const mat4_t* model, int viewport[] );
+vec2_t point_project   ( const vec4_t* point, const mat4_t* projection, const mat4_t* model, int viewport[] );
 
 #endif /* _GEOMETRIC_TOOLS_H_ */
