@@ -56,10 +56,13 @@ static inline void quat_normalize( quat_t* q )
 {
 	scaler_t magnitude = quat_magnitude( q );
 
-	q->w /= magnitude;
-	q->x /= magnitude;
-	q->y /= magnitude;
-	q->z /= magnitude;
+	if( magnitude > 0.0f )
+	{
+		q->w /= magnitude;
+		q->x /= magnitude;
+		q->y /= magnitude;
+		q->z /= magnitude;
+	}
 }
 
 static inline quat_t quat_from_axis3_angle( const vec3_t* axis, scaler_t angle )
