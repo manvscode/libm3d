@@ -36,7 +36,7 @@ If you want to enable the test programs, you just need to use the
 --enable-tests configure flag.
 
 # License
-You may use *lib3dmath* is a commercial product as long as the below copyright is retained in the source directory and on all source files.
+You may use *lib3dmath* in a commercial product as long as the below copyright is retained in the source directory and on all source files.
 
     Copyright (C) 2013-2014 by Joseph A. Marrero, http://www.manvscode.com/
     
