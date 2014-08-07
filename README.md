@@ -9,6 +9,8 @@ A fully-tested math library for computer graphics applications and games.
 * 3x3 Matrices
 * 4x4 Matrices
 * Quaternions
+* Transformations
+* Geometric Tools
 
 ##  Build Instructions
 You can compile *lib3dmath* with either float or double precision.
