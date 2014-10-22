@@ -22,7 +22,7 @@
 #include <math.h>
 #include "mathematics.h"
 
-float uniformi( void )
+int uniformi( void )
 {
 	return rand( );
 }

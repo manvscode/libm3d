@@ -20,13 +20,6 @@
  */
 #ifndef _VEC4_H_
 #define _VEC4_H_
-#include <float.h>
-#include <limits.h>
-#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
-#include <stdbool.h>
-#else
-#error "Need a C99 compiler."
-#endif
 #include "mathematics.h"
 #include "vec3.h"
 #ifdef __cplusplus
@@ -64,7 +57,7 @@ const char* vec4_to_string      ( const vec4_t* v ); /* not thread safe */
 #define vec4_to_vec2( p_v ) ((vec2_t*)(p_v))
 #define vec4_to_vec3( p_v ) ((vec3_t*)(p_v))
 
-static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restrict b )
+static inline vec4_t vec4_add( const vec4_t* restrict a, const vec4_t* restrict b )
 {
 	return VEC4(
 		a->x + b->x,
@@ -74,7 +67,7 @@ static inline vec4_t vec4_add( const vec4_t* __restrict a, const vec4_t* __restr
 	);
 }
 
-static inline vec4_t vec4_subtract( const vec4_t* __restrict a, const vec4_t* __restrict b )
+static inline vec4_t vec4_subtract( const vec4_t* restrict a, const vec4_t* restrict b )
 {
 	return VEC4(
 		a->x - b->x,
@@ -102,13 +95,13 @@ static inline void vec4_scale( vec4_t* v, scaler_t s )
     v->w *= s;
 }
 
-static inline scaler_t vec4_dot_product( const vec4_t* __restrict a, const vec4_t* __restrict b )
+static inline scaler_t vec4_dot_product( const vec4_t* restrict a, const vec4_t* restrict b )
 {
     return a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
 }
 
 /* 3D cross product because we use homogenous coordinates. */
-static inline vec4_t vec4_cross_product( const vec4_t* __restrict a, const vec4_t* __restrict b )
+static inline vec4_t vec4_cross_product( const vec4_t* restrict a, const vec4_t* restrict b )
 {
 	vec3_t result = vec3_cross_product(  vec4_to_vec3(a), vec4_to_vec3(b) );
 	return VEC4( result.x, result.y, result.z, 0 );
@@ -119,7 +112,7 @@ static inline scaler_t vec4_magnitude( const vec4_t* v )
     return scaler_sqrt( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
 }
 
-static inline scaler_t vec4_distance( const vec4_t* __restrict a, const vec4_t* __restrict b )
+static inline scaler_t vec4_distance( const vec4_t* restrict a, const vec4_t* restrict b )
 {
     return scaler_sqrt(
 		(a->x - b->x) * (a->x - b->x) +
@@ -129,7 +122,7 @@ static inline scaler_t vec4_distance( const vec4_t* __restrict a, const vec4_t* 
 	);
 }
 
-static inline scaler_t vec4_angle( const vec4_t* __restrict a, const vec4_t* __restrict b ) /* in radians */
+static inline scaler_t vec4_angle( const vec4_t* restrict a, const vec4_t* restrict b ) /* in radians */
 {
     scaler_t dot_product = vec4_dot_product( a, b );
     scaler_t a_length    = vec4_magnitude( a );
@@ -172,7 +165,7 @@ static inline void vec4_negate( vec4_t* v )
     v->w = -v->w;
 }
 
-static inline bool vec4_compare( const vec4_t* __restrict a, const vec4_t* __restrict b )
+static inline bool vec4_compare( const vec4_t* restrict a, const vec4_t* restrict b )
 {
     return (scaler_abs(a->x - b->x) < SCALAR_EPSILON) &&
            (scaler_abs(a->y - b->y) < SCALAR_EPSILON) &&
@@ -185,7 +178,7 @@ static inline void vec4_zero( vec4_t* v )
 	*v = VEC4_ZERO;
 }
 
-static inline vec4_t vec4_lerp( const vec4_t* __restrict a, const vec4_t* __restrict b, scaler_t s )
+static inline vec4_t vec4_lerp( const vec4_t* restrict a, const vec4_t* restrict b, scaler_t s )
 {
 	return VEC4(
 		linear_interpolation( s, a->x, b->x ),

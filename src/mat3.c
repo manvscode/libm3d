@@ -59,7 +59,7 @@ scaler_t mat3_determinant( const mat3_t* m )
 	return det;
 }
 
-mat3_t mat3_mult_matrix( const mat3_t* __restrict a, const mat3_t* __restrict b )
+mat3_t mat3_mult_matrix( const mat3_t* restrict a, const mat3_t* restrict b )
 {
     assert( a && b );
 
@@ -81,7 +81,7 @@ mat3_t mat3_mult_matrix( const mat3_t* __restrict a, const mat3_t* __restrict b 
 	);
 }
 
-vec3_t mat3_mult_vector( const mat3_t* __restrict m, const vec3_t* __restrict v )
+vec3_t mat3_mult_vector( const mat3_t* restrict m, const vec3_t* restrict v )
 {
     assert( m && v );
 

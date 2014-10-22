@@ -22,11 +22,6 @@
 #define _VEC2_H_
 #include <float.h>
 #include <limits.h>
-#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
-#include <stdbool.h>
-#else
-#error "Need a C99 compiler."
-#endif
 #include "mathematics.h"
 #ifdef __cplusplus
 extern "C" {
@@ -54,7 +49,7 @@ const char* vec2_to_string     ( const vec2_t* v ); /* not thread safe */
  */
 #define VEC2(a,b)  ((vec2_t){ .x = (a), .y = (b) })
 
-static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restrict b )
+static inline vec2_t vec2_add( const vec2_t* restrict a, const vec2_t* restrict b )
 {
 	return VEC2(
 		a->x + b->x,
@@ -62,7 +57,7 @@ static inline vec2_t vec2_add( const vec2_t* __restrict a, const vec2_t* __restr
 	);
 }
 
-static inline vec2_t vec2_subtract( const vec2_t* __restrict a, const vec2_t* __restrict b )
+static inline vec2_t vec2_subtract( const vec2_t* restrict a, const vec2_t* restrict b )
 {
 	return VEC2(
 		a->x - b->x,
@@ -84,7 +79,7 @@ static inline void vec2_scale( vec2_t* v, scaler_t s )
     v->y *= s;
 }
 
-static inline scaler_t vec2_dot_product( const vec2_t* __restrict a, const vec2_t* __restrict b )
+static inline scaler_t vec2_dot_product( const vec2_t* restrict a, const vec2_t* restrict b )
 {
     return a->x * b->x + a->y * b->y;
 }
@@ -97,7 +92,7 @@ static inline vec2_t vec2_cross_product( const vec2_t* v )
 	);
 }
 
-static inline scaler_t vec2_determinant( const vec2_t* __restrict a, const vec2_t* __restrict b )
+static inline scaler_t vec2_determinant( const vec2_t* restrict a, const vec2_t* restrict b )
 {
     return a->x * b->y - b->x * a->y;
 }
@@ -107,7 +102,7 @@ static inline scaler_t vec2_magnitude( const vec2_t* v )
     return scaler_sqrt( v->x * v->x + v->y * v->y );
 }
 
-static inline scaler_t vec2_distance( const vec2_t* __restrict a, const vec2_t* __restrict b )
+static inline scaler_t vec2_distance( const vec2_t* restrict a, const vec2_t* restrict b )
 {
     return scaler_sqrt(
 		(a->x - b->x) * (a->x - b->x) +
@@ -115,7 +110,7 @@ static inline scaler_t vec2_distance( const vec2_t* __restrict a, const vec2_t* 
 	);
 }
 
-static inline scaler_t vec2_angle( const vec2_t* __restrict a, const vec2_t* __restrict b ) /* in radians */
+static inline scaler_t vec2_angle( const vec2_t* restrict a, const vec2_t* restrict b ) /* in radians */
 {
     scaler_t dot_product = vec2_dot_product( a, b );
     scaler_t a_length    = vec2_magnitude( a );
@@ -152,7 +147,7 @@ static inline void vec2_negate( vec2_t* v )
     v->y = -v->y;
 }
 
-static inline bool vec2_compare( const vec2_t* __restrict a, const vec2_t* __restrict b )
+static inline bool vec2_compare( const vec2_t* restrict a, const vec2_t* restrict b )
 {
     return (scaler_abs(a->x - b->x) < SCALAR_EPSILON) &&
            (scaler_abs(a->y - b->y) < SCALAR_EPSILON);
@@ -163,7 +158,7 @@ static inline void vec2_zero( vec2_t* v )
 	*v = VEC2_ZERO;
 }
 
-static inline vec2_t vec2_lerp( const vec2_t* __restrict a, const vec2_t* __restrict b, scaler_t s )
+static inline vec2_t vec2_lerp( const vec2_t* restrict a, const vec2_t* restrict b, scaler_t s )
 {
 	return VEC2(
 		linear_interpolation( s, a->x, b->x ),

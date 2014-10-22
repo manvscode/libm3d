@@ -60,7 +60,7 @@ scaler_t mat4_determinant( const mat4_t* m )
 	return m->m[0]*d1 - m->m[1]*d2 + m->m[2]*d3 - m->m[3]*d4;
 }
 
-mat4_t mat4_mult_matrix( const mat4_t* __restrict a, const mat4_t* __restrict b )
+mat4_t mat4_mult_matrix( const mat4_t* restrict a, const mat4_t* restrict b )
 {
     assert( a && b );
     assert( a != b );
@@ -91,7 +91,7 @@ mat4_t mat4_mult_matrix( const mat4_t* __restrict a, const mat4_t* __restrict b 
 	);
 }
 
-vec4_t mat4_mult_vector( const mat4_t* __restrict m, const vec4_t* __restrict v )
+vec4_t mat4_mult_vector( const mat4_t* restrict m, const vec4_t* restrict v )
 {
     assert( m && v );
 	// |m00x + m01y + m02z + m03w|   | m00 m04 m08 m12|    |x|

@@ -20,13 +20,7 @@
  */
 #ifndef _TRANSFORMS_H_
 #define _TRANSFORMS_H_
-#include <float.h>
-#include <limits.h>
-#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
-#include <stdbool.h>
-#else
-#error "Need a C99 compiler."
-#endif
+#include <assert.h>
 #include "mathematics.h"
 #include "vec3.h"
 #include "vec4.h"
@@ -155,7 +149,7 @@ static inline mat4_t orientation( vec3_t* f, vec3_t* l, vec3_t* u )
 	);
 }
 
-static inline mat4_t change_handedness()
+static inline mat4_t change_handedness( void )
 {
 	// convert from our coordinate system (looking down X)
 	// to OpenGL's coordinate system (looking down -Z)

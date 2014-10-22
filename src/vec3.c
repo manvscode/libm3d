@@ -25,11 +25,11 @@
 #include <string.h>
 #include "vec3.h"
 
-const vec3_t VEC3_ZERO  = (vec3_t){ .x = 0.0f, .y = 0.0f, .z = 0.0f };
-const vec3_t VEC3_ONE   = (vec3_t){ .x = 1.0f, .y = 1.0f, .z = 1.0f };
-const vec3_t VEC3_XUNIT = (vec3_t){ .x = 1.0f, .y = 0.0f, .z = 0.0f };
-const vec3_t VEC3_YUNIT = (vec3_t){ .x = 0.0f, .y = 1.0f, .z = 0.0f };
-const vec3_t VEC3_ZUNIT = (vec3_t){ .x = 0.0f, .y = 0.0f, .z = 1.0f };
+const vec3_t VEC3_ZERO  = { .x = 0.0f, .y = 0.0f, .z = 0.0f };
+const vec3_t VEC3_ONE   = { .x = 1.0f, .y = 1.0f, .z = 1.0f };
+const vec3_t VEC3_XUNIT = { .x = 1.0f, .y = 0.0f, .z = 0.0f };
+const vec3_t VEC3_YUNIT = { .x = 0.0f, .y = 1.0f, .z = 0.0f };
+const vec3_t VEC3_ZUNIT = { .x = 0.0f, .y = 0.0f, .z = 1.0f };
 
 
 const char* vec3_to_string( const vec3_t* v ) /* not thread safe */

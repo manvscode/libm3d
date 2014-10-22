@@ -20,10 +20,12 @@
  */
 #ifndef _MATHEMATICS_H_
 #define _MATHEMATICS_H_
-#include <math.h>
-#include <float.h>
-#include <stdbool.h>
+
+#if defined(_MSC_VER) || defined(__WIN32__) || defined(__WIN64__)
+#include "lib3dmath-config-vs2013.h"
+#else
 #include "lib3dmath-config.h"
+#endif
 #if defined(_MSC_VEC)
 #include <intrin.h>  /* Microsoft C/C++-compatible compiler */
 #elif defined(__GNUC__) && (defined(__x86_64__) || defined(__i386__))
@@ -37,7 +39,13 @@
 #elif defined(__GNUC__) && defined(__SPE__)
 #include <spe.h> /* GCC-compatible compiler, targeting PowerPC with SPE */
 #endif
-
+#include <math.h>
+#include <float.h>
+#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
+#include <stdbool.h>
+#else
+#error "Need a C99 compiler."
+#endif
 
 #ifdef __cplusplus
 extern "C" {

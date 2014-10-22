@@ -25,10 +25,10 @@
 #include <string.h>
 #include "vec2.h"
 
-const vec2_t VEC2_ZERO  = (vec2_t){ .x = 0.0f, .y = 0.0f };
-const vec2_t VEC2_ONE   = (vec2_t){ .x = 1.0f, .y = 1.0f };
-const vec2_t VEC2_XUNIT = (vec2_t){ .x = 1.0f, .y = 0.0f };
-const vec2_t VEC2_YUNIT = (vec2_t){ .x = 0.0f, .y = 1.0f };
+const vec2_t VEC2_ZERO  = { .x = 0.0f, .y = 0.0f };
+const vec2_t VEC2_ONE   = { .x = 1.0f, .y = 1.0f };
+const vec2_t VEC2_XUNIT = { .x = 1.0f, .y = 0.0f };
+const vec2_t VEC2_YUNIT = { .x = 0.0f, .y = 1.0f };
 
 
 const char* vec2_to_string( const vec2_t* v ) /* not thread safe */
