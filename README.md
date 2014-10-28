@@ -10,6 +10,7 @@ A fully-tested math library for computer graphics applications and games.
 * 4x4 Matrices
 * Quaternions
 * Transformations
+* Projections
 * Geometric Tools
 
 ##  Build Instructions
@@ -57,4 +58,3 @@ You may use *lib3dmath* in a commercial product as long as the below copyright i
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
-
