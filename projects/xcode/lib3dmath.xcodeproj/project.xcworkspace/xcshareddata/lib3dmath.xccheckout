@@ -10,29 +10,29 @@
 	<string>lib3dmath</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>74693A2F-BAEB-4847-9BB8-97E5B5A6C86C</key>
-		<string>ssh://bitbucket.org/manvscode/lib3dmath.git</string>
+		<key>10F52DCEC3867717959FCC8D35C29DC3E20723B5</key>
+		<string>bitbucket.org:manvscode/lib3dmath.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>projects/xcode/lib3dmath.xcodeproj/project.xcworkspace</string>
+	<string>projects/xcode/lib3dmath.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>74693A2F-BAEB-4847-9BB8-97E5B5A6C86C</key>
+		<key>10F52DCEC3867717959FCC8D35C29DC3E20723B5</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/manvscode/lib3dmath.git</string>
+	<string>bitbucket.org:manvscode/lib3dmath.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>74693A2F-BAEB-4847-9BB8-97E5B5A6C86C</string>
+	<string>10F52DCEC3867717959FCC8D35C29DC3E20723B5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>74693A2F-BAEB-4847-9BB8-97E5B5A6C86C</string>
+			<string>10F52DCEC3867717959FCC8D35C29DC3E20723B5</string>
 			<key>IDESourceControlWCCName</key>
 			<string>lib3dmath</string>
 		</dict>
