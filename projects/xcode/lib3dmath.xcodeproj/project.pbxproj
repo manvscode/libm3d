@@ -220,9 +220,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0855E68A180D7BDA00E1CF69 /* lib3dmath-static */ = {
+		0855E68A180D7BDA00E1CF69 /* lib3dmath-static-osx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath-static" */;
+			buildConfigurationList = 0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath-static-osx" */;
 			buildPhases = (
 				0855E687180D7BDA00E1CF69 /* Sources */,
 				0855E688180D7BDA00E1CF69 /* Frameworks */,
@@ -232,7 +232,7 @@
 			);
 			dependencies = (
 			);
-			name = "lib3dmath-static";
+			name = "lib3dmath-static-osx";
 			productName = 3dmath;
 			productReference = 0855E68B180D7BDA00E1CF69 /* lib3dmath.a */;
 			productType = "com.apple.product-type.library.static";
@@ -275,7 +275,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0855E68A180D7BDA00E1CF69 /* lib3dmath-static */,
+				0855E68A180D7BDA00E1CF69 /* lib3dmath-static-osx */,
 				D8DFF6DF196937FA0035430B /* lib3dmath-static-ios */,
 			);
 		};
@@ -435,7 +435,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath-static" */ = {
+		0855E68F180D7BDA00E1CF69 /* Build configuration list for PBXNativeTarget "lib3dmath-static-osx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0855E690180D7BDA00E1CF69 /* Debug */,
