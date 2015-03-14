@@ -22,29 +22,31 @@
 #define _MATHEMATICS_H_
 
 #if defined(_MSC_VER) || defined(__WIN32__) || defined(__WIN64__)
-#include "lib3dmath-config-vs2013.h"
+# include "lib3dmath-config-vs2013.h"
 #else
-#include "lib3dmath-config.h"
+# include "lib3dmath-config.h"
 #endif
+
+/* Compiler Intrinsics */
 #if defined(_MSC_VEC)
-#include <intrin.h>  /* Microsoft C/C++-compatible compiler */
+# include <intrin.h>  /* Microsoft C/C++-compatible compiler */
 #elif defined(__GNUC__) && (defined(__x86_64__) || defined(__i386__))
-#include <x86intrin.h> /* GCC-compatible compiler, targeting x86/x86-64 */
+# include <x86intrin.h> /* GCC-compatible compiler, targeting x86/x86-64 */
 #elif defined(__GNUC__) && defined(__ARM_NEON__)
-#include <arm_neon.h> /* GCC-compatible compiler, targeting ARM with NEON */
+# include <arm_neon.h> /* GCC-compatible compiler, targeting ARM with NEON */
 #elif defined(__GNUC__) && defined(__IWMMXT__)
-#include <mmintrin.h> /* GCC-compatible compiler, targeting ARM with WMMX */
+# include <mmintrin.h> /* GCC-compatible compiler, targeting ARM with WMMX */
 #elif (defined(__GNUC__) || defined(__xlC__)) && (defined(__VEC__) || defined(__ALTIVEC__))
-#include <altivec.h> /* XLC or GCC-compatible compiler, targeting PowerPC with VMX/VSX */
+# include <altivec.h> /* XLC or GCC-compatible compiler, targeting PowerPC with VMX/VSX */
 #elif defined(__GNUC__) && defined(__SPE__)
-#include <spe.h> /* GCC-compatible compiler, targeting PowerPC with SPE */
+# include <spe.h> /* GCC-compatible compiler, targeting PowerPC with SPE */
 #endif
 #include <math.h>
 #include <float.h>
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
-#include <stdbool.h>
+# include <stdbool.h>
 #else
-#error "Need a C99 compiler."
+# error "Need a C99 compiler."
 #endif
 
 #ifdef __cplusplus
@@ -196,11 +198,11 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 
 
 #if defined(LIB3DMATH_USE_LONG_DOUBLE)
-#include "scaler-long-double.h"
+# include "scaler-long-double.h"
 #elif defined(LIB3DMATH_USE_DOUBLE)
-#include "scaler-double.h"
+# include "scaler-double.h"
 #else /* default: use float */
-#include "scaler-float.h"
+# include "scaler-float.h"
 #endif
 
 
