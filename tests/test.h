@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2014 by Joseph A. Marrero, http://www.manvscode.com/
+/* Copyright (C) 2013-2015 by Joseph A. Marrero, http://www.manvscode.com/
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,16 +57,16 @@ static inline bool integer_equals( long a, long b )
 
 static inline bool float_equals( float a, float b )
 {
-	return fabsf( a - b ) < FLT_EPSILON;	
+	return fabsf( a - b ) < FLT_EPSILON;
 }
 
 static inline bool double_equals( double a, double b )
 {
-	return fabs( a - b ) < DBL_EPSILON;	
+	return fabs( a - b ) < DBL_EPSILON;
 }
 static inline bool long_double_equals( long double a, long double b )
 {
-	return fabsl( a - b ) < LDBL_EPSILON;	
+	return fabsl( a - b ) < LDBL_EPSILON;
 }
 
 static inline bool test_feature( unsigned int i, const char* feature, test_fxn test )

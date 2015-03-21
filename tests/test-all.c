@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2014 by Joseph A. Marrero, http://www.manvscode.com/
+/* Copyright (C) 2013-2015 by Joseph A. Marrero, http://www.manvscode.com/
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +47,8 @@ size_t mat4_test_suite_size( void );
 extern const test_feature_t quat_tests[];
 size_t quat_test_suite_size( void );
 
+extern const test_feature_t numerical_methods_tests[];
+size_t numerical_methods_test_suite_size( void );
 
 const test_suite_t suites[] = {
 	{ "Tests for mathematics.h", math_tests, math_test_suite_size },
@@ -60,6 +62,7 @@ const test_suite_t suites[] = {
 	{ "Tests for mat4.h", mat4_tests, mat4_test_suite_size },
 
 	//{ "Tests for quat.h", quat_tests, quat_test_suite_size },
+	{ "Tests for numerical-methods.h", numerical_methods_tests, numerical_methods_test_suite_size },
 };
 
 

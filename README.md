@@ -39,7 +39,7 @@ If you want to enable the test programs, you just need to use the
 # License
 You may use *lib3dmath* in a commercial product as long as the below copyright is retained in the source directory and on all source files.
 
-    Copyright (C) 2013-2014 by Joseph A. Marrero, http://www.manvscode.com/
+    Copyright (C) 2013-2015 by Joseph A. Marrero, http://www.manvscode.com/
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal

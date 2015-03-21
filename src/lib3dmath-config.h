@@ -42,8 +42,7 @@
 /* All scalar types are float. */
 #define LIB3DMATH_USE_FLOAT 0
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
 
 /* Name of package */
