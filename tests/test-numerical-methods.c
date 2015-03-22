@@ -21,16 +21,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <float.h>
 #include <assert.h>
 #include "../src/numerical-methods.h"
 #include "test.h"
 
+static double f(double x);
+
+bool test_bissection_method          ( void );
+bool test_fixed_point_iteration      ( void );
+bool test_secant_method              ( void );
 bool test_least_squares_linear       ( void );
 bool test_least_squares_quadratic    ( void );
 
 const test_feature_t numerical_methods_tests[] = {
-	{ "Testing Least Squares for Linear",    test_least_squares_linear },
-	{ "Testing Least Squares for Quadratic", test_least_squares_quadratic },
+	{ "Testing Bissection Method for Root Finding",     test_bissection_method },
+	{ "Testing Fixed Point Iteration for Root Finding", test_fixed_point_iteration },
+	{ "Testing Secant Method for Root Finding",         test_secant_method },
+	{ "Testing Least Squares for Linear",               test_least_squares_linear },
+	{ "Testing Least Squares for Quadratic",            test_least_squares_quadratic },
 };
 
 size_t numerical_methods_test_suite_size( void )
@@ -47,6 +56,41 @@ int main( int argc, char* argv[] )
 	return 0;
 }
 #endif
+
+double f(double x)
+{
+	return x*x*x + 4*x*x - 10;
+}
+
+bool test_bissection_method( void )
+{
+	double root = 0.0;
+	bool result = bissection_method( 1.0, 2.0, DBL_EPSILON, 100, f, &root );
+	return result && relative_errord(1.36523, root) < 0.001;
+}
+
+double g(double x)
+{
+	return sin(0.5 * x + M_PI / 8.0) + x;
+}
+
+bool test_fixed_point_iteration( void )
+{
+	double root = 0.0;
+
+	// To find the root of sin(0.5x + pi/8) = 0, we set
+	// g(x) = sin(0.5x + pi/8) - x
+	bool result = fixed_point_iteration( 3.0, DBL_EPSILON, 1000, g, &root );
+
+	return result && relative_errord(5.49778, root) < 0.001;
+}
+
+bool test_secant_method( void )
+{
+	double root = 0.0;
+	bool result = secant_method( 1.0, 2.0, DBL_EPSILON, 100, f, &root );
+	return result && relative_errord(1.36523, root) < 0.001;
+}
 
 bool test_least_squares_linear( void )
 {

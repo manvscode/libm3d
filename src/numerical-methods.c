@@ -3,6 +3,103 @@
 #include "mat2.h"
 #include "mat3.h"
 
+bool bissection_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root )
+{
+	bool found = false;
+	double f_of_a = f( a );
+
+	for( size_t i = 0; !found && i < iterations; i++ )
+	{
+		double middle = (b - a) / 2.0;
+		double p      = a + middle;
+		double f_of_p = f(p);
+
+		if( fabs(f_of_p) < epsilon )
+		{
+			*root = p;
+			found = true;
+		}
+		else if( fabs(middle) < epsilon )
+		{
+			/* Early termination since no solution was found. */
+			break;
+		}
+		else
+		{
+			if( f_of_a * f_of_p > 0.0 )
+			{
+				a      = p;
+				f_of_a = f_of_p;
+			}
+			else
+			{
+				b = p;
+			}
+		}
+	}
+
+	return found;
+}
+
+bool bissection_method_max_precision( double a, double b, double (*f)(double x), double* root )
+{
+	return bissection_method( a, b, DBL_EPSILON, 100, f, root );
+}
+
+bool fixed_point_iteration( double estimate, double epsilon, size_t iterations, double (*g)(double x), double* root )
+{
+	bool found = false;
+
+	for( size_t i = 0; !found && i < iterations; i++ )
+	{
+		double p = g(estimate);
+
+		if( fabs(p - estimate) < epsilon )
+		{
+			*root = p;
+			found = true;
+		}
+		else
+		{
+			estimate = p;
+		}
+	}
+
+	return found;
+}
+
+bool fixed_point_iteration_max_precision( double estimate, double (*g)(double x), double* root )
+{
+	return fixed_point_iteration( estimate, DBL_EPSILON, 100, g, root );
+}
+
+bool secant_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root )
+{
+	bool found   = false;
+	double alpha = f(a);
+	double beta  = f(b);
+
+	for( size_t i = 0; !found && i < iterations; i++ )
+	{
+		double p = b - beta * (b - a) / (beta - alpha);
+
+		if( fabs(p - b) < epsilon )
+		{
+			*root = p;
+			found = true;
+		}
+		else
+		{
+			a     = b;
+			alpha = beta;
+			b     = p;
+			beta  = f(p);
+		}
+	}
+
+	return found;
+}
+
 void least_squares_linear( const double x[], const double y[], size_t count, double* m, double* b )
 {
 	double alpha = 0.0;

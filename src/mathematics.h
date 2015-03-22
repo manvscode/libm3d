@@ -149,7 +149,7 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 #endif
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
-/* 
+/*
  * C11 generic functions
  */
 #define uniform_range(min_num, max_num) _Generic( (min_num), \
