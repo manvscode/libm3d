@@ -87,9 +87,6 @@ static inline bool test_features( const char* suite, const test_feature_t featur
 {
 	bool is_passed = true;
 
-	size_t len = strlen(suite);
-	size_t half_len = len / 2;
-	int w = 10;
 	printf( "%s: %s%-30s%s\n", COLOR_CYAN_STR("Suite"), COLOR_YELLOW, suite, COLOR_END );
 	for( size_t i = 0; is_passed && i < count; i++ )
 	{
