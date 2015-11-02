@@ -10,7 +10,8 @@ lib3dmath_src = vec2.c \
 				transforms.c \
 				geometric-tools.c \
 				numerical-methods.c \
-				algorithms.c
+				algorithms.c \
+				geographic.c
 
 # Add new files in alphabetical order. Thanks.
 lib3dmath_headers = easing.h \
@@ -30,6 +31,7 @@ lib3dmath_headers = easing.h \
 					projections.h \
 					geometric-tools.h \
 					algorithms.h \
+					geographic.h \
 					lib3dmath-config.h
 
 library_includedir      = $(includedir)/lib3dmath/
