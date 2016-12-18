@@ -15,9 +15,10 @@ bin_PROGRAMS = $(top_builddir)/bin/3dmath-tests \
 			   $(top_builddir)/bin/test-random-numbers \
 			   $(top_builddir)/bin/test-numerical-methods \
 			   $(top_builddir)/bin/test-algorithms \
+			   $(top_builddir)/bin/test-projections \
 			   $(top_builddir)/bin/test-geographic
 
-__top_builddir__bin_3dmath_tests_SOURCES           = test-all.c test-math.c test-vec2.c test-vec3.c test-vec4.c test-mat2.c test-mat3.c test-mat4.c test-numerical-methods.c test-geographic.c
+__top_builddir__bin_3dmath_tests_SOURCES           = test-all.c test-math.c test-vec2.c test-vec3.c test-vec4.c test-mat2.c test-mat3.c test-mat4.c test-numerical-methods.c test-projections.c test-geographic.c
 __top_builddir__bin_3dmath_tests_LDFLAGS           = -lm $(top_builddir)/lib/lib3dmath.la
 
 __top_builddir__bin_test_math_SOURCES              = test-math.c
@@ -58,6 +59,10 @@ __top_builddir__bin_test_numerical_methods_LDFLAGS = -lm $(top_builddir)/lib/lib
 __top_builddir__bin_test_algorithms_SOURCES        = test-algorithms.c
 __top_builddir__bin_test_algorithms_CFLAGS         = -DTEST_ALGORITHMS_STANDALONE
 __top_builddir__bin_test_algorithms_LDFLAGS        = -lm $(top_builddir)/lib/lib3dmath.la
+
+__top_builddir__bin_test_projections_SOURCES        = test-projections.c
+__top_builddir__bin_test_projections_CFLAGS         = -DTEST_PROJECTIONS_STANDALONE
+__top_builddir__bin_test_projections_LDFLAGS        = -lm $(top_builddir)/lib/lib3dmath.la
 
 __top_builddir__bin_test_geographic_SOURCES        = test-geographic.c
 __top_builddir__bin_test_geographic_CFLAGS         = -DTEST_GEOGRAPHIC_STANDALONE
