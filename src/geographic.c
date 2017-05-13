@@ -77,3 +77,33 @@ void wgs84_mercator_to_geographic( double x, double y, double central_meridian, 
 	*lon = RADIANS_TO_DEGREES(x / WGS84_SEMI_MAJOR_AXIS) + central_meridian;
 	*lat = RADIANS_TO_DEGREES(2.0 * atan( exp(y / WGS84_SEMI_MAJOR_AXIS) ) - M_PI_2);
 }
+
+double wgs84_geographic_geodesic_distance( double lon1, double lat1, double alt1, double lon2, double lat2, double alt2 )
+{
+	double distance = 0.0;
+
+	if( true )
+	{
+		// Lambert's formula for long lines
+		double beta1 = atan( (1 -  WGS84_FLATTENING_FACTOR) * tan(lat1) );
+		double beta2 = atan( (1 -  WGS84_FLATTENING_FACTOR) * tan(lat2) );
+
+		double p = (beta1 + beta2) / 2.0;
+		double q = (beta2 - beta1) / 2.0;
+		// central angle between (beta1, lon1) and (beta2, lon2)
+		double central_angle = 0.1; // TODO: haversine formula
+		double sin_p = sin(p);
+		double sin_q = sin(q);
+		double cos_q = cos(q);
+		double cos_p = cos(p);
+		double cos_ca2 = cos( central_angle / 2.0 );
+
+		double x = ((central_angle - sin(central_angle)) * sin_p * sin_p * cos_q * cos_q) / cos_ca2;
+		double y = ((central_angle + sin(central_angle)) * cos_p * cos_p * sin_q * sin_q) / cos_ca2;
+
+		distance = WGS84_SEMI_MAJOR_AXIS * (central_angle - (WGS84_FLATTENING_FACTOR / 2.0) * (x + y));
+	}
+	else
+	{
+	}
+}
