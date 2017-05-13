@@ -24,6 +24,7 @@
 #include <float.h>
 #include <assert.h>
 #include "../src/numerical-methods.h"
+#include "../src/mathematics.h"
 #include "test.h"
 
 static double f(double x);
