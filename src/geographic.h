@@ -38,7 +38,7 @@ void   wgs84_geographic_to_cartesian( double lon, double lat, double alt, double
 void   wgs84_cartesian_to_geographic_with_epsilon( double x, double y, double z, double* lon, double* lat, double* alt, double epsilon );
 void   wgs84_geographic_to_mercator( double lon, double lat, double central_meridian, double* x, double* y );
 void   wgs84_mercator_to_geographic( double x, double y, double central_meridian, double* lon, double* lat );
-double wgs84_geographic_geodesic_distance( double lon1, double lat1, double alt1, double lon2, double lat2, double alt2 );
+double wgs84_geographic_geodesic_distance( double lon1, double lat1, double lon2, double lat2 );
 
 static inline void wgs84_cartesian_to_geographic( double x, double y, double z, double* lon, double* lat, double* alt )
 {

@@ -28,15 +28,18 @@
 #define DEGREES_TO_RADIANS(degs)     ((degs) * M_PI / 180.0)
 #define RADIANS_TO_DEGREES(rads)     ((rads) * 180.0 / M_PI)
 
+static double wgs84_geographic_geodesic_distance_lamberts_formula( double lon1, double lat1, double lon2, double lat2 );
+static double wgs84_geographic_geodesic_distance_haversine_formula( double lon1, double lat1, double lon2, double lat2 );
+
 void wgs84_geographic_to_cartesian( double lon, double lat, double alt, double* x, double* y, double* z )
 {
-	double r_lon = DEGREES_TO_RADIANS( lon );
-	double r_lat = DEGREES_TO_RADIANS( lat );
-	double N = WGS84_SEMI_MAJOR_AXIS / sqrt(1.0 - WGS84_ECCENTRICITY_SQUARED * sin( r_lat ) * sin( r_lat ));
+	double lon_rads = DEGREES_TO_RADIANS( lon );
+	double lat_rads = DEGREES_TO_RADIANS( lat );
+	double N = WGS84_SEMI_MAJOR_AXIS / sqrt(1.0 - WGS84_ECCENTRICITY_SQUARED * sin( lat_rads ) * sin( lat_rads ));
 
-	*x = (N + alt) * cos( r_lat ) * cos( r_lon );
-	*y = (N + alt) * cos( r_lat ) * sin( r_lon );
-	*z = ((1.0 - WGS84_ECCENTRICITY_SQUARED) * N + alt) * sin( r_lat );
+	*x = (N + alt) * cos( lat_rads ) * cos( lon_rads );
+	*y = (N + alt) * cos( lat_rads ) * sin( lon_rads );
+	*z = ((1.0 - WGS84_ECCENTRICITY_SQUARED) * N + alt) * sin( lat_rads );
 }
 
 void wgs84_cartesian_to_geographic_with_epsilon( double x, double y, double z, double* lon, double* lat, double* alt, double epsilon )
@@ -78,32 +81,62 @@ void wgs84_mercator_to_geographic( double x, double y, double central_meridian, 
 	*lat = RADIANS_TO_DEGREES(2.0 * atan( exp(y / WGS84_SEMI_MAJOR_AXIS) ) - M_PI_2);
 }
 
-double wgs84_geographic_geodesic_distance( double lon1, double lat1, double alt1, double lon2, double lat2, double alt2 )
+double wgs84_geographic_geodesic_distance( double lon1, double lat1, double lon2, double lat2 )
 {
 	double distance = 0.0;
 
-	if( true )
+	if( false )
 	{
-		// Lambert's formula for long lines
-		double beta1 = atan( (1 -  WGS84_FLATTENING_FACTOR) * tan(lat1) );
-		double beta2 = atan( (1 -  WGS84_FLATTENING_FACTOR) * tan(lat2) );
-
-		double p = (beta1 + beta2) / 2.0;
-		double q = (beta2 - beta1) / 2.0;
-		// central angle between (beta1, lon1) and (beta2, lon2)
-		double central_angle = 0.1; // TODO: haversine formula
-		double sin_p = sin(p);
-		double sin_q = sin(q);
-		double cos_q = cos(q);
-		double cos_p = cos(p);
-		double cos_ca2 = cos( central_angle / 2.0 );
-
-		double x = ((central_angle - sin(central_angle)) * sin_p * sin_p * cos_q * cos_q) / cos_ca2;
-		double y = ((central_angle + sin(central_angle)) * cos_p * cos_p * sin_q * sin_q) / cos_ca2;
-
-		distance = WGS84_SEMI_MAJOR_AXIS * (central_angle - (WGS84_FLATTENING_FACTOR / 2.0) * (x + y));
+		distance = wgs84_geographic_geodesic_distance_lamberts_formula(lon1, lat1, lon2, lat2);
 	}
 	else
 	{
+		distance = wgs84_geographic_geodesic_distance_haversine_formula(lon1, lat1, lon2, lat2);
 	}
+
+	return distance;
+}
+
+// for long lines
+double wgs84_geographic_geodesic_distance_lamberts_formula( double lon1, double lat1, double lon2, double lat2 )
+{
+	double lat1_rads = DEGREES_TO_RADIANS(lat1);
+	double lat2_rads = DEGREES_TO_RADIANS(lat2);
+	double lon1_rads = DEGREES_TO_RADIANS(lon1);
+	double lon2_rads = DEGREES_TO_RADIANS(lon2);
+
+	// Lambert's formula for long lines
+	double beta1 = atan( (1.0 -  WGS84_FLATTENING_FACTOR) * tan(lat1_rads) );
+	double beta2 = atan( (1.0 -  WGS84_FLATTENING_FACTOR) * tan(lat2_rads) );
+
+	double p = (beta1 + beta2) / 2.0;
+	double q = (beta2 - beta1) / 2.0;
+
+	// central angle between (beta1, lon1) and (beta2, lon2) using haversine formula
+	double central_angle = 2 * asin(sqrt( sin(q) * sin(q) +
+		cos(beta1) * cos(beta2) * sin( (lon2_rads - lon1_rads) / 2.0 ) * sin( (lon2_rads - lon1_rads) / 2.0 )
+	));
+
+
+	double sin_p = sin(p);
+	double sin_q = sin(q);
+	double cos_q = cos(q);
+	double cos_p = cos(p);
+	double cos_ca2 = cos( central_angle / 2.0 );
+
+	double x = ((central_angle - sin(central_angle)) * sin_p * sin_p * cos_q * cos_q) / cos_ca2;
+	double y = ((central_angle + sin(central_angle)) * cos_p * cos_p * sin_q * sin_q) / cos_ca2;
+
+	return WGS84_SEMI_MAJOR_AXIS * (central_angle - (WGS84_FLATTENING_FACTOR / 2.0) * (x + y));
+}
+
+double wgs84_geographic_geodesic_distance_haversine_formula( double lon1, double lat1, double lon2, double lat2 )
+{
+	double lat1_rads = DEGREES_TO_RADIANS(lat1);
+	double lat2_rads = DEGREES_TO_RADIANS(lat2);
+	double lat_diff_rads = DEGREES_TO_RADIANS(lat2 - lat1);
+	double lon_diff_rads = DEGREES_TO_RADIANS(lon2 - lon1);
+	double a = sin(lat_diff_rads / 2.0) * sin(lat_diff_rads / 2.0) + cos(lat1_rads) * cos(lat2_rads) * sin(lon_diff_rads / 2.0) * sin(lon_diff_rads / 2.0);
+	double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
+	return WGS84_SEMI_MAJOR_AXIS * c;
 }

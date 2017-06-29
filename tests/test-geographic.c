@@ -31,12 +31,14 @@ bool test_geographic_to_cartesian   ( void );
 bool test_cartesian_to_geographic   ( void );
 bool test_geographic_to_mercator    ( void );
 bool test_mercator_to_geographic    ( void );
+bool test_distance                  ( void );
 
 const test_feature_t geographic_tests[] = {
 	{ "Testing WGS84 Geographic to Cartesian",     test_geographic_to_cartesian },
 	{ "Testing WGS84 Cartesian to Geographic",     test_cartesian_to_geographic },
 	{ "Testing WGS84 Geographic to Mercator",      test_geographic_to_mercator },
 	{ "Testing WGS84 Mercator to Geographic",      test_mercator_to_geographic },
+	{ "Testing WGS84 Geodesic Distance",           test_distance },
 };
 
 size_t geographic_test_suite_size( void )
@@ -120,4 +122,22 @@ bool test_mercator_to_geographic( void )
 	               fabs( lat - 0.0 )  < 0.1;
 
 	return result1 && result2;
+}
+
+bool test_distance( void )
+{
+	double miami_lon = -80.1918;
+	double miami_lat = 25.7617;
+
+	double london_lon = -0.1278;
+	double london_lat = 51.5074;
+
+	double miami_london_distance = wgs84_geographic_geodesic_distance( miami_lon, miami_lat, london_lon, london_lat );
+
+	// haversine 7134873.449671
+	// lamberts  7140928.774804
+	//           7122228.213423586
+	printf( "%lf", miami_london_distance);
+
+	return true;
 }
