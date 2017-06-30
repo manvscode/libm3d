@@ -132,7 +132,7 @@ bool test_distance( void )
 	double london_lon = -0.1278;
 	double london_lat = 51.5074;
 
-	double miami_london_distance = wgs84_geographic_geodesic_distance( miami_lon, miami_lat, london_lon, london_lat );
+	double miami_london_distance = wgs84_geographic_geodesic_distance_vincenty( miami_lon, miami_lat, london_lon, london_lat );
 
 	// haversine 7134873.449671
 	// lamberts  7140928.774804

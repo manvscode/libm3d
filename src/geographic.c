@@ -22,14 +22,13 @@
 #include <string.h>
 #include <limits.h>
 #include <math.h>
+#include <assert.h>
 #include "mathematics.h"
 #include "geographic.h"
 
 #define DEGREES_TO_RADIANS(degs)     ((degs) * M_PI / 180.0)
 #define RADIANS_TO_DEGREES(rads)     ((rads) * 180.0 / M_PI)
 
-static double wgs84_geographic_geodesic_distance_lamberts_formula( double lon1, double lat1, double lon2, double lat2 );
-static double wgs84_geographic_geodesic_distance_haversine_formula( double lon1, double lat1, double lon2, double lat2 );
 
 void wgs84_geographic_to_cartesian( double lon, double lat, double alt, double* x, double* y, double* z )
 {
@@ -81,24 +80,63 @@ void wgs84_mercator_to_geographic( double x, double y, double central_meridian, 
 	*lat = RADIANS_TO_DEGREES(2.0 * atan( exp(y / WGS84_SEMI_MAJOR_AXIS) ) - M_PI_2);
 }
 
-double wgs84_geographic_geodesic_distance( double lon1, double lat1, double lon2, double lat2 )
+double wgs84_geographic_geodesic_distance_vincenty( double lon1, double lat1, double lon2, double lat2 )
 {
-	double distance = 0.0;
+	double lon1_rads = DEGREES_TO_RADIANS(lon1);
+	double lat1_rads = DEGREES_TO_RADIANS(lat1);
+	double lon2_rads = DEGREES_TO_RADIANS(lon2);
+	double lat2_rads = DEGREES_TO_RADIANS(lat2);
 
-	if( false )
-	{
-		distance = wgs84_geographic_geodesic_distance_lamberts_formula(lon1, lat1, lon2, lat2);
-	}
-	else
-	{
-		distance = wgs84_geographic_geodesic_distance_haversine_formula(lon1, lat1, lon2, lat2);
-	}
+	double L = lon2_rads - lon1_rads;
+	double tan_u1 = (1 - WGS84_FLATTENING_FACTOR) * tan(lat1_rads);
+	double cos_u1 = 1 / sqrt(1 + tan_u1 * tan_u1);
+   	double sin_u1 = tan_u1 * cos_u1;
+	double tan_u2 = (1 - WGS84_FLATTENING_FACTOR) * tan(lat2_rads);
+	double cos_u2 = 1 / sqrt(1 + tan_u2 * tan_u2);
+   	double sin_u2 = tan_u2 * cos_u2;
 
-	return distance;
+	double sin_phi, cos_phi, phi, cos_alpha_sqrd, cos_2_phi_sub_m;
+
+	double lambda = L;
+	double lambda_prime;
+	int iterations = 0;
+
+	do {
+		double sin_lambda = sin(lambda);
+		double cos_lambda = cos(lambda);
+		double sin_phi = sqrt( (cos_u2 * sin_lambda) * (cos_u2 * sin_lambda) + (cos_u1 * sin_u2 - sin_u1 * cos_u2 * cos_lambda) * (cos_u1 * sin_u2 - sin_u1 * cos_u2 * cos_lambda) );
+		if (sin_phi == 0) return 0;  // co-incident points
+		cos_phi = sin_u1 * sin_u2 + cos_u1 * cos_u2 * cos_lambda;
+		phi = atan2(sin_phi, cos_phi);
+		double sin_alpha = cos_u1 * cos_u2 * sin_lambda / sin_phi;
+		cos_alpha_sqrd = 1 - sin_alpha * sin_alpha;
+		cos_2_phi_sub_m = cos_phi - 2 * sin_u1 * sin_u2 / cos_alpha_sqrd;
+
+		assert( isnan(cos_2_phi_sub_m) != 0 ); // TODO: Can this happen equatorial line: cos_alpha_sqrd=0 (§6)
+
+		double C = WGS84_FLATTENING_FACTOR / 16 * cos_alpha_sqrd * (4 + WGS84_FLATTENING_FACTOR * (4 - 3 * cos_alpha_sqrd));
+		lambda_prime = lambda;
+		lambda = L + (1 - C) * WGS84_FLATTENING_FACTOR * sin_alpha * (phi + C * sin_phi * (cos_2_phi_sub_m + C * cos_phi * (-1 + 2 * cos_2_phi_sub_m * cos_2_phi_sub_m)));
+
+		if( fabs(lambda) > M_PI )
+		{
+			// TODO: antipodal points
+		}
+
+	} while( fabs(lambda - lambda_prime) > SCALAR_EPSILON && ++iterations<200 );
+	//if (iterations>=200) throw new Error('Formula failed to converge');
+
+	double u_sqrd = cos_alpha_sqrd * (WGS84_SEMI_MAJOR_AXIS*WGS84_SEMI_MAJOR_AXIS - WGS84_SEMI_MINOR_AXIS*WGS84_SEMI_MINOR_AXIS) / (WGS84_SEMI_MINOR_AXIS*WGS84_SEMI_MINOR_AXIS);
+	double A = 1 + u_sqrd/16384*(4096+u_sqrd*(-768+u_sqrd*(320-175*u_sqrd)));
+	double B = u_sqrd/1024 * (256+u_sqrd*(-128+u_sqrd*(74-47*u_sqrd)));
+	double delta_phi = B*sin_phi*(cos_2_phi_sub_m+B/4*(cos_phi*(-1+2*cos_2_phi_sub_m*cos_2_phi_sub_m)-
+				B/6*cos_2_phi_sub_m*(-3+4*sin_phi*sin_phi)*(-3+4*cos_2_phi_sub_m*cos_2_phi_sub_m)));
+
+	return WGS84_SEMI_MINOR_AXIS * A * (phi - delta_phi);
 }
 
 // for long lines
-double wgs84_geographic_geodesic_distance_lamberts_formula( double lon1, double lat1, double lon2, double lat2 )
+double wgs84_geographic_geodesic_distance_lamberts( double lon1, double lat1, double lon2, double lat2 )
 {
 	double lat1_rads = DEGREES_TO_RADIANS(lat1);
 	double lat2_rads = DEGREES_TO_RADIANS(lat2);
@@ -117,7 +155,6 @@ double wgs84_geographic_geodesic_distance_lamberts_formula( double lon1, double 
 		cos(beta1) * cos(beta2) * sin( (lon2_rads - lon1_rads) / 2.0 ) * sin( (lon2_rads - lon1_rads) / 2.0 )
 	));
 
-
 	double sin_p = sin(p);
 	double sin_q = sin(q);
 	double cos_q = cos(q);
@@ -130,7 +167,7 @@ double wgs84_geographic_geodesic_distance_lamberts_formula( double lon1, double 
 	return WGS84_SEMI_MAJOR_AXIS * (central_angle - (WGS84_FLATTENING_FACTOR / 2.0) * (x + y));
 }
 
-double wgs84_geographic_geodesic_distance_haversine_formula( double lon1, double lat1, double lon2, double lat2 )
+double wgs84_geographic_geodesic_distance_haversine( double lon1, double lat1, double lon2, double lat2 )
 {
 	double lat1_rads = DEGREES_TO_RADIANS(lat1);
 	double lat2_rads = DEGREES_TO_RADIANS(lat2);
