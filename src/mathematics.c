@@ -288,4 +288,29 @@ long double clampld( long double value, long double min, long double max )
 	#endif
 }
 
+int powi( int b, unsigned int e )
+{
+	int result = 1;
+
+	while( e > 0 )
+	{
+		result *= b;
+		e -= 1;
+	}
+
+	return result;
+}
+
+long int powli( long b, unsigned long e )
+{
+	long result = 1L;
+
+	while( e > 0L )
+	{
+		result *= b;
+		e -= 1L;
+	}
+
+	return result;
+}
 

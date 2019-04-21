@@ -55,6 +55,8 @@ bool test_clampl           ( void );
 bool test_clampf           ( void );
 bool test_clampd           ( void );
 bool test_clampld          ( void );
+bool test_powi             ( void );
+bool test_powli            ( void );
 
 const test_feature_t math_tests[] = {
 	{ "Testing scaler_t size", test_scaler_size },
@@ -86,6 +88,8 @@ const test_feature_t math_tests[] = {
 	{ "Testing clampf()", test_clampf },
 	{ "Testing clampd()", test_clampd },
 	{ "Testing clampld()", test_clampld },
+	{ "Testing powi()", test_powi },
+	{ "Testing powli()", test_powli },
 };
 
 size_t math_test_suite_size( void )
@@ -550,3 +554,20 @@ bool test_clampld( void )
 	       long_double_equals( d, 0.0 );
 }
 
+bool test_powi( void )
+{
+	int a = powi(2, 3);
+	int b = powi(11, 7);
+
+	return integer_equals( a, 8 ) &&
+	       integer_equals( b, 19487171 );
+}
+
+bool test_powli( void )
+{
+	long a = powli(3, 7);
+	long b = powli(17, 5);
+
+	return integer_equals( a, 2187L ) &&
+	       integer_equals( b, 1419857L );
+}

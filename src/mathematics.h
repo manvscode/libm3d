@@ -104,7 +104,8 @@ long          clampl             ( long value, long min, long max );
 float         clampf             ( float value, float min, float max );
 double        clampd             ( double value, double min, double max );
 long double   clampld            ( long double value, long double min, long double max );
-
+int           powi               ( int b, unsigned int e );
+long int      powli              ( long b, unsigned long e );
 
 static inline bool is_even( int n )
 {
@@ -192,7 +193,6 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 	long double:  minld, \
 	default: minf \
 );
-
 #define clamp(a, b) _Generic( (a), \
 	int:     clampi, \
 	long:    clampl, \
@@ -200,6 +200,14 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 	double:  mind, \
 	long double:  clampld, \
 	default: clampf \
+);
+#define power(b, e) _Generic( (b), \
+	int:     powi, \
+	long:    powli, \
+	float:   powf, \
+	double:  pow, \
+	long double:  powl, \
+	default: powf \
 );
 #endif
 
