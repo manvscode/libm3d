@@ -112,6 +112,11 @@ static inline scaler_t vec4_magnitude( const vec4_t* v )
     return scaler_sqrt( v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w );
 }
 
+static inline scaler_t vec4_magnitude_squared( const vec4_t* v )
+{
+    return v->x * v->x + v->y * v->y + v->z * v->z + v->w * v->w;
+}
+
 static inline scaler_t vec4_distance( const vec4_t* restrict a, const vec4_t* restrict b )
 {
     return scaler_sqrt(

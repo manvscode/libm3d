@@ -102,6 +102,11 @@ static inline scaler_t vec2_magnitude( const vec2_t* v )
     return scaler_sqrt( v->x * v->x + v->y * v->y );
 }
 
+static inline scaler_t vec2_magnitude_squared( const vec2_t* v )
+{
+    return v->x * v->x + v->y * v->y;
+}
+
 static inline scaler_t vec2_distance( const vec2_t* restrict a, const vec2_t* restrict b )
 {
     return scaler_sqrt(

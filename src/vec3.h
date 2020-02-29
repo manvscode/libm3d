@@ -105,6 +105,11 @@ static inline scaler_t vec3_magnitude( const vec3_t* v )
     return scaler_sqrt( v->x * v->x + v->y * v->y + v->z * v->z );
 }
 
+static inline scaler_t vec3_magnitude_squared( const vec3_t* v )
+{
+    return v->x * v->x + v->y * v->y + v->z * v->z;
+}
+
 static inline scaler_t vec3_distance( const vec3_t* restrict a, const vec3_t* restrict b )
 {
     return scaler_sqrt(
