@@ -38,7 +38,13 @@ const vec4_t VEC4_WUNIT = { .x = 0.0f, .y = 0.0f, .z = 0.0f, .w = 1.0f };
 const char* vec4_to_string( const vec4_t* v ) /* not thread safe */
 {
 	static char string_buffer[ 128 ];
+#if defined(LIBM3D_USE_LONG_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1, "(%.2Lf, %.2Lf, %.2Lf, %.2Lf)", v->x, v->y, v->z, v->w );
+#elif defined(LIBM3D_USE_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1, "(%.2lf, %.2lf, %.2lf, %.2lf)", v->x, v->y, v->z, v->w );
+#else
 	snprintf( string_buffer, sizeof(string_buffer) - 1, "(%.2f, %.2f, %.2f, %.2f)", v->x, v->y, v->z, v->w );
+#endif
 	string_buffer[ sizeof(string_buffer) - 1 ] = '\0';
 	return string_buffer;
 }

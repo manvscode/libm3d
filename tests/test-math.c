@@ -109,9 +109,9 @@ int main( int argc, char* argv[] )
 
 bool test_scaler_size( void )
 {
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	#if defined(LIBM3D_USE_LONG_DOUBLE)
 	return sizeof(scaler_t) == sizeof(long double);
-	#elif defined(LIB3DMATH_USE_DOUBLE)
+	#elif defined(LIBM3D_USE_DOUBLE)
 	return sizeof(scaler_t) == sizeof(double);
 	#else /* default: use float */
 	return sizeof(scaler_t) == sizeof(float);
@@ -124,7 +124,7 @@ bool test_uniformf( void )
 
 	for( size_t i = 0; passed && i < 10000; i++ )
 	{
-		float n = uniformf( );
+		float n = m3d_uniformf( );
 
 		if( n < 0.0f || n > 1.0f )
 		{
@@ -141,7 +141,7 @@ bool test_uniformd( void )
 
 	for( size_t i = 0; passed && i < 10000; i++ )
 	{
-		double n = uniformd( );
+		double n = m3d_uniformd( );
 
 		if( n < 0.0 || n > 1.0 )
 		{
@@ -158,7 +158,7 @@ bool test_uniformld( void )
 
 	for( size_t i = 0; passed && i < 10000; i++ )
 	{
-		long double n = uniformld( );
+		long double n = m3d_uniformld( );
 
 		if( n < 0.0 || n > 1.0 )
 		{
@@ -177,9 +177,9 @@ bool test_uniform_rangei( void )
 	{
 		int a = rand();
 		int b = rand();
-		int min = mini(a,b);
-		int max = maxi(a,b);
-		int n = uniform_rangei( min, max );
+		int min = m3d_mini(a,b);
+		int max = m3d_maxi(a,b);
+		int n = m3d_uniform_rangei( min, max );
 
 		if( n < min || n > max )
 		{
@@ -198,9 +198,9 @@ bool test_uniform_rangel( void )
 	{
 		long a = rand();
 		long b = rand();
-		long min = minl(a,b);
-		long max = maxl(a,b);
-		long n = uniform_rangel( min, max );
+		long min = m3d_minl(a,b);
+		long max = m3d_maxl(a,b);
+		long n = m3d_uniform_rangel( min, max );
 
 		if( n < min || n > max )
 		{
@@ -221,7 +221,7 @@ bool test_uniform_rangef( void )
 		float b = (float) rand();
 		float min = fmin(a,b);
 		float max = fmax(a,b);
-		float n = uniform_rangef( min, max );
+		float n = m3d_uniform_rangef( min, max );
 
 		if( n < min || n > max )
 		{
@@ -242,7 +242,7 @@ bool test_uniform_ranged( void )
 		double b = (double) rand();
 		double min = fmin(a,b);
 		double max = fmax(a,b);
-		double n = uniform_ranged( min, max );
+		double n = m3d_uniform_ranged( min, max );
 
 		if( n < min || n > max )
 		{
@@ -259,7 +259,7 @@ bool test_uniform_unitf( void )
 
 	for( size_t i = 0; passed && i < 10000; i++ )
 	{
-		float n = uniform_unitf( );
+		float n = m3d_uniform_unitf( );
 
 		if( n < -1.0f || n > 1.0f )
 		{
@@ -276,7 +276,7 @@ bool test_uniform_unitd( void )
 
 	for( size_t i = 0; passed && i < 10000; i++ )
 	{
-		double n = uniform_unitd( );
+		double n = m3d_uniform_unitd( );
 
 		if( n < -1.0 || n > 1.0 )
 		{
@@ -293,7 +293,7 @@ bool test_uniform_unitld( void )
 
 	for( size_t i = 0; passed && i < 10000; i++ )
 	{
-		long double n = uniform_unitd( );
+		long double n = m3d_uniform_unitd( );
 
 		if( n < -1.0 || n > 1.0 )
 		{
@@ -312,12 +312,12 @@ bool test_even_and_odd( void )
 	{
 		if( i % 2 == 0 )
 		{
-			passed = is_even( i ) == true && is_odd( i ) == false;
+			passed = m3d_is_even( i ) == true && m3d_is_odd( i ) == false;
 
 		}
 		else
 		{
-			passed = is_odd( i ) == true && is_even( i ) == false;
+			passed = m3d_is_odd( i ) == true && m3d_is_even( i ) == false;
 		}
 	}
 
@@ -326,10 +326,10 @@ bool test_even_and_odd( void )
 
 bool test_maxi( void )
 {
-	int a = maxi( -3, 5 );
-	int b = maxi( 1003, 54 );
-	int c = maxi( 120, 3 );
-	int d = maxi( -1000, -99 );
+	int a = m3d_maxi( -3, 5 );
+	int b = m3d_maxi( 1003, 54 );
+	int c = m3d_maxi( 120, 3 );
+	int d = m3d_maxi( -1000, -99 );
 
 	return (a == 5) &&
 	       (b == 1003) &&
@@ -339,10 +339,10 @@ bool test_maxi( void )
 
 bool test_maxl( void )
 {
-	long a = maxl( -3L, 5L );
-	long b = maxl( 1003L, 54L );
-	long c = maxl( 120L, 3L );
-	long d = maxl( 100L, -99L );
+	long a = m3d_maxl( -3L, 5L );
+	long b = m3d_maxl( 1003L, 54L );
+	long c = m3d_maxl( 120L, 3L );
+	long d = m3d_maxl( 100L, -99L );
 
 	return (a == 5L) &&
 	       (b == 1003L) &&
@@ -352,10 +352,10 @@ bool test_maxl( void )
 
 bool test_maxf( void )
 {
-	float a = maxf( -3.3f, 5.1f );
-	float b = maxf( 1003.0234f, 54.123f );
-	float c = maxf( 3.0f, 3.00001f );
-	float d = maxf( 100.0f, -99.5f );
+	float a = m3d_maxf( -3.3f, 5.1f );
+	float b = m3d_maxf( 1003.0234f, 54.123f );
+	float c = m3d_maxf( 3.0f, 3.00001f );
+	float d = m3d_maxf( 100.0f, -99.5f );
 
 	return float_equals(a, 5.1f) &&
 	       float_equals(b, 1003.0234f) &&
@@ -365,10 +365,10 @@ bool test_maxf( void )
 
 bool test_maxd( void )
 {
-	double a = maxd( -3.3, 5.1 );
-	double b = maxd( 1003.0234, 54.123 );
-	double c = maxd( 3.0, 3.00001 );
-	double d = maxd( 100.0, -99.5 );
+	double a = m3d_maxd( -3.3, 5.1 );
+	double b = m3d_maxd( 1003.0234, 54.123 );
+	double c = m3d_maxd( 3.0, 3.00001 );
+	double d = m3d_maxd( 100.0, -99.5 );
 
 	return double_equals(a, 5.1) &&
 	       double_equals(b, 1003.0234) &&
@@ -378,10 +378,10 @@ bool test_maxd( void )
 
 bool test_maxld( void )
 {
-	long double a = maxld( -3.3, 5.1 );
-	long double b = maxld( 1003.0234, 54.123 );
-	long double c = maxld( 3.0, 3.00001 );
-	long double d = maxld( 100.0, -99.5 );
+	long double a = m3d_maxld( -3.3, 5.1 );
+	long double b = m3d_maxld( 1003.0234, 54.123 );
+	long double c = m3d_maxld( 3.0, 3.00001 );
+	long double d = m3d_maxld( 100.0, -99.5 );
 
 	return long_double_equals(a, 5.1) &&
 	       long_double_equals(b, 1003.0234) &&
@@ -391,10 +391,10 @@ bool test_maxld( void )
 
 bool test_mini( void )
 {
-	int a = mini( -3, 5 );
-	int b = mini( 1003, 54 );
-	int c = mini( 120, 3 );
-	int d = mini( 100, -99 );
+	int a = m3d_mini( -3, 5 );
+	int b = m3d_mini( 1003, 54 );
+	int c = m3d_mini( 120, 3 );
+	int d = m3d_mini( 100, -99 );
 
 	return (a == -3) &&
 	       (b == 54) &&
@@ -404,10 +404,10 @@ bool test_mini( void )
 
 bool test_minl( void )
 {
-	long a = minl( -3L, 5L );
-	long b = minl( 1003L, 54L );
-	long c = minl( 120L, 3L );
-	long d = minl( 100L, -99L );
+	long a = m3d_minl( -3L, 5L );
+	long b = m3d_minl( 1003L, 54L );
+	long c = m3d_minl( 120L, 3L );
+	long d = m3d_minl( 100L, -99L );
 
 	return (a == -3L) &&
 	       (b == 54L) &&
@@ -417,10 +417,10 @@ bool test_minl( void )
 
 bool test_minf( void )
 {
-	float a = minf( -3.3f, 5.1f );
-	float b = minf( 1003.0234f, 54.123f );
-	float c = minf( 3.0f, 3.00001f );
-	float d = minf( 100.0f, -99.5f );
+	float a = m3d_minf( -3.3f, 5.1f );
+	float b = m3d_minf( 1003.0234f, 54.123f );
+	float c = m3d_minf( 3.0f, 3.00001f );
+	float d = m3d_minf( 100.0f, -99.5f );
 
 	return float_equals(a, -3.3f) &&
 	       float_equals(b, 54.123f) &&
@@ -430,10 +430,10 @@ bool test_minf( void )
 
 bool test_mind( void )
 {
-	double a = mind( -3.3, 5.1 );
-	double b = mind( 1003.0234, 54.123 );
-	double c = mind( 3.0, 3.00001 );
-	double d = mind( 100.0, -99.5 );
+	double a = m3d_mind( -3.3, 5.1 );
+	double b = m3d_mind( 1003.0234, 54.123 );
+	double c = m3d_mind( 3.0, 3.00001 );
+	double d = m3d_mind( 100.0, -99.5 );
 
 	return double_equals(a, -3.3) &&
 	       double_equals(b, 54.123) &&
@@ -443,10 +443,10 @@ bool test_mind( void )
 
 bool test_minld( void )
 {
-	long double a = mind( -3.3, 5.1 );
-	long double b = mind( 1003.0234, 54.123 );
-	long double c = mind( 3.0, 3.00001 );
-	long double d = mind( 100.0, -99.5 );
+	long double a = m3d_mind( -3.3, 5.1 );
+	long double b = m3d_mind( 1003.0234, 54.123 );
+	long double c = m3d_mind( 3.0, 3.00001 );
+	long double d = m3d_mind( 100.0, -99.5 );
 
 	return long_double_equals(a, -3.3) &&
 	       long_double_equals(b, 54.123) &&
@@ -456,11 +456,11 @@ bool test_minld( void )
 
 bool test_clampui( void )
 {
-	int a = clampui( 4, 1, 10 );
-	int b = clampui( 124234, 0, 6003450 );
-	int c = clampui( 16, 10, 30 );
-	int d = clampui( 35, 10, 30 );
-	int e = clampui( 8, 10, 30 );
+	int a = m3d_clampui( 4, 1, 10 );
+	int b = m3d_clampui( 124234, 0, 6003450 );
+	int c = m3d_clampui( 16, 10, 30 );
+	int d = m3d_clampui( 35, 10, 30 );
+	int e = m3d_clampui( 8, 10, 30 );
 
 	return (a == 4) &&
 	       (b == 124234) &&
@@ -471,11 +471,11 @@ bool test_clampui( void )
 
 bool test_clampul( void )
 {
-	long a = clampul( 4L, 1L, 10L );
-	long b = clampul( 124234L, 0L, 6003450L );
-	long c = clampul( 16L, 10L, 30L );
-	long d = clampul( 35L, 10L, 30L );
-	long e = clampul( 8L, 10L, 30L );
+	long a = m3d_clampul( 4L, 1L, 10L );
+	long b = m3d_clampul( 124234L, 0L, 6003450L );
+	long c = m3d_clampul( 16L, 10L, 30L );
+	long d = m3d_clampul( 35L, 10L, 30L );
+	long e = m3d_clampul( 8L, 10L, 30L );
 
 	return (a == 4L) &&
 	       (b == 124234L) &&
@@ -487,12 +487,12 @@ bool test_clampul( void )
 
 bool test_clampi( void )
 {
-	int a = clampi( -4, 1, 10 );
-	int b = clampi( 5, 50, 100 );
-	int c = clampi( -5, -10, 0 );
-	int d = clampi( 5, -10, 0 );
-	int e = clampi( -99, -40, -4 );
-	int f = clampi( 99, 4, 40 );
+	int a = m3d_clampi( -4, 1, 10 );
+	int b = m3d_clampi( 5, 50, 100 );
+	int c = m3d_clampi( -5, -10, 0 );
+	int d = m3d_clampi( 5, -10, 0 );
+	int e = m3d_clampi( -99, -40, -4 );
+	int f = m3d_clampi( 99, 4, 40 );
 
 	return (a == 1) &&
 	       (b == 50) &&
@@ -504,10 +504,10 @@ bool test_clampi( void )
 
 bool test_clampl( void )
 {
-	long a = clampl( -4L, 1L, 10L );
-	long b = clampl( 5L, 50L, 100L );
-	long c = clampl( -5L, -10L, 0L );
-	long d = clampl( 5L, -10L, 0L );
+	long a = m3d_clampl( -4L, 1L, 10L );
+	long b = m3d_clampl( 5L, 50L, 100L );
+	long c = m3d_clampl( -5L, -10L, 0L );
+	long d = m3d_clampl( 5L, -10L, 0L );
 
 	return (a == 1L) &&
 	       (b == 50L) &&
@@ -517,10 +517,10 @@ bool test_clampl( void )
 
 bool test_clampf( void )
 {
-	float a = clampf( -4.0f, 1.0f, 10.0f );
-	float b = clampf( 5.0f, 50.0f, 100.0f );
-	float c = clampf( -5.0f, -10.0f, 0.0f );
-	float d = clampf( 5.0f, -10.0f, 0.0f );
+	float a = m3d_clampf( -4.0f, 1.0f, 10.0f );
+	float b = m3d_clampf( 5.0f, 50.0f, 100.0f );
+	float c = m3d_clampf( -5.0f, -10.0f, 0.0f );
+	float d = m3d_clampf( 5.0f, -10.0f, 0.0f );
 
 	return float_equals( a, 1.0f ) &&
 	       float_equals( b, 50.0f ) &&
@@ -530,10 +530,10 @@ bool test_clampf( void )
 
 bool test_clampd( void )
 {
-	double a = clampd( -4.0, 1.0, 10.0 );
-	double b = clampd( 5.0, 50.0, 100.0 );
-	double c = clampd( -5.0, -10.0, 0.0 );
-	double d = clampd( 5.0, -10.0, 0.0 );
+	double a = m3d_clampd( -4.0, 1.0, 10.0 );
+	double b = m3d_clampd( 5.0, 50.0, 100.0 );
+	double c = m3d_clampd( -5.0, -10.0, 0.0 );
+	double d = m3d_clampd( 5.0, -10.0, 0.0 );
 
 	return double_equals( a, 1.0 ) &&
 	       double_equals( b, 50.0 ) &&
@@ -543,10 +543,10 @@ bool test_clampd( void )
 
 bool test_clampld( void )
 {
-	long double a = clampld( -4.0, 1.0, 10.0 );
-	long double b = clampld( 5.0, 50.0, 100.0 );
-	long double c = clampld( -5.0, -10.0, 0.0 );
-	long double d = clampld( 5.0, -10.0, 0.0 );
+	long double a = m3d_clampld( -4.0, 1.0, 10.0 );
+	long double b = m3d_clampld( 5.0, 50.0, 100.0 );
+	long double c = m3d_clampld( -5.0, -10.0, 0.0 );
+	long double d = m3d_clampld( 5.0, -10.0, 0.0 );
 
 	return long_double_equals( a, 1.0 ) &&
 	       long_double_equals( b, 50.0 ) &&
@@ -556,8 +556,8 @@ bool test_clampld( void )
 
 bool test_powi( void )
 {
-	int a = powi(2, 3);
-	int b = powi(11, 7);
+	int a = m3d_powi(2, 3);
+	int b = m3d_powi(11, 7);
 
 	return integer_equals( a, 8 ) &&
 	       integer_equals( b, 19487171 );
@@ -565,8 +565,8 @@ bool test_powi( void )
 
 bool test_powli( void )
 {
-	long a = powli(3, 7);
-	long b = powli(17, 5);
+	long a = m3d_powli(3, 7);
+	long b = m3d_powli(17, 5);
 
 	return integer_equals( a, 2187L ) &&
 	       integer_equals( b, 1419857L );

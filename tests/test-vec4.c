@@ -112,7 +112,7 @@ bool test_vec4_magnitude( void )
 {
 	vec4_t a = VEC4( 4, 3, 2, 1 );
 	scaler_t r = vec4_magnitude( &a );
-	return scaler_compare( r, 5.477225575051661 );
+	return scaler_compare( r, scaler_sqrt(4*4 + 3*3 + 2*2 + 1) );
 }
 
 bool test_vec4_dot_product( void )
@@ -140,7 +140,7 @@ bool test_vec4_distance( void )
 	scaler_t r2 = vec4_distance( &c, &d );
 
 	return scaler_compare( r1, 0.0 ) &&
-	       scaler_compare( r2, 11.87434196472168 );
+	       scaler_compare( r2, scaler_sqrt((5-1)*(5-1) + (1-1)*(1-1) + (6-1)*(6-1) + (5+5)*(5+5)) );
 }
 
 bool test_vec4_angle( void )
@@ -153,8 +153,8 @@ bool test_vec4_angle( void )
 	vec4_t d = VEC4( 0, 1, 0, 0 );
 	scaler_t r2 = vec4_angle( &c, &d );
 
-	return scaler_compare( r1, 45.0 * RADIANS_PER_DEGREE ) &&
-	       scaler_compare( r2, 90.0 * RADIANS_PER_DEGREE );
+	return scaler_compare( r1, 45.0 * M3D_RADIANS_PER_DEGREE ) &&
+	       scaler_compare( r2, 90.0 * M3D_RADIANS_PER_DEGREE );
 }
 
 bool test_vec4_normalize( void )

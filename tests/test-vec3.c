@@ -172,8 +172,8 @@ bool test_vec3_angle( void )
 	vec3_t d = VEC3( 0, 1, 0 );
 	scaler_t r2 = vec3_angle( &c, &d );
 
-	return scaler_compare( r1, 45.0 * RADIANS_PER_DEGREE ) &&
-	       scaler_compare( r2, 90.0 * RADIANS_PER_DEGREE );
+	return scaler_compare( r1, 45.0 * M3D_RADIANS_PER_DEGREE ) &&
+	       scaler_compare( r2, 90.0 * M3D_RADIANS_PER_DEGREE );
 }
 
 bool test_vec3_normalize( void )

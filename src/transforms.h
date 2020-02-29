@@ -33,7 +33,7 @@ extern "C" {
  * Transformations
  */
 
-static inline mat4_t translate( const vec3_t* t )
+static inline mat4_t m3d_translate( const vec3_t* t )
 {
 	assert( t );
 	return MAT4(
@@ -44,7 +44,7 @@ static inline mat4_t translate( const vec3_t* t )
 	);
 }
 
-static inline mat4_t rotate_x( scaler_t a )
+static inline mat4_t m3d_rotate_x( scaler_t a )
 {
 	scaler_t s = scaler_sin( a );
 	scaler_t c = scaler_cos( a );
@@ -57,7 +57,7 @@ static inline mat4_t rotate_x( scaler_t a )
 	);
 }
 
-static inline mat4_t rotate_y( scaler_t a )
+static inline mat4_t m3d_rotate_y( scaler_t a )
 {
 	scaler_t s = scaler_sin( a );
 	scaler_t c = scaler_cos( a );
@@ -70,7 +70,7 @@ static inline mat4_t rotate_y( scaler_t a )
 	);
 }
 
-static inline mat4_t rotate_z( scaler_t a )
+static inline mat4_t m3d_rotate_z( scaler_t a )
 {
 	scaler_t s = scaler_sin( a );
 	scaler_t c = scaler_cos( a );
@@ -83,7 +83,7 @@ static inline mat4_t rotate_z( scaler_t a )
 	);
 }
 
-static inline mat4_t scale( const vec3_t* s )
+static inline mat4_t m3d_scale( const vec3_t* s )
 {
 	assert( s );
 	return MAT4(
@@ -94,7 +94,7 @@ static inline mat4_t scale( const vec3_t* s )
 	);
 }
 
-static inline mat4_t uniform_scale( scaler_t s )
+static inline mat4_t m3d_uniform_scale( scaler_t s )
 {
 	return MAT4(
 		  s, 0.0, 0.0, 0.0,
@@ -104,7 +104,7 @@ static inline mat4_t uniform_scale( scaler_t s )
 	);
 }
 
-static inline mat4_t shear( scaler_t s )
+static inline mat4_t m3d_shear( scaler_t s )
 {
 	return MAT4(
 		1.0, 0.0, 0.0, 0.0,
@@ -115,7 +115,7 @@ static inline mat4_t shear( scaler_t s )
 }
 
 /* Beware of gimbal lock when any angle is set to +/- HALF_PI */
-static inline mat4_t euler_transform( scaler_t h /*heading*/, scaler_t p /*pitch*/, scaler_t r /*roll*/ )
+static inline mat4_t m3d_euler_transform( scaler_t h /*heading*/, scaler_t p /*pitch*/, scaler_t r /*roll*/ )
 {
 	const scaler_t sin_h = scaler_sin( h );
 	const scaler_t cos_h = scaler_cos( h );
@@ -132,7 +132,7 @@ static inline mat4_t euler_transform( scaler_t h /*heading*/, scaler_t p /*pitch
 	);
 }
 
-static inline mat4_t orientation( vec3_t* f, vec3_t* l, vec3_t* u )
+static inline mat4_t m3d_orientation( vec3_t* f, vec3_t* l, vec3_t* u )
 {
 	assert( f );
 	assert( l );
@@ -149,7 +149,7 @@ static inline mat4_t orientation( vec3_t* f, vec3_t* l, vec3_t* u )
 	);
 }
 
-static inline mat4_t change_handedness( void )
+static inline mat4_t m3d_change_handedness( void )
 {
 	// convert from our coordinate system (looking down X)
 	// to OpenGL's coordinate system (looking down -Z)
@@ -161,15 +161,15 @@ static inline mat4_t change_handedness( void )
 	);
 }
 
-static inline mat4_t rigid_body_transform( const mat4_t* orientation, const mat4_t* translation )
+static inline mat4_t m3d_rigid_body_transform( const mat4_t* orientation, const mat4_t* translation )
 {
 	return mat4_mult_matrix( translation, orientation );
 }
 
-mat4_t rotate_xyz               ( const char* order, ... );
-mat3_t rotate_from_vec3_to_vec3 ( const vec3_t* s, const vec3_t* t );
-mat4_t rotate_from_vec4_to_vec4 ( const vec4_t* s, const vec4_t* t );
-mat4_t look_at                  ( const pt3_t* eye, const pt3_t* target, const vec3_t* up );
+mat4_t m3d_rotate_xyz               ( const char* order, ... );
+mat3_t m3d_rotate_from_vec3_to_vec3 ( const vec3_t* s, const vec3_t* t );
+mat4_t m3d_rotate_from_vec4_to_vec4 ( const vec4_t* s, const vec4_t* t );
+mat4_t m3d_look_at                  ( const pt3_t* eye, const pt3_t* target, const vec3_t* up );
 
 #ifdef __cplusplus
 } /* C linkage */

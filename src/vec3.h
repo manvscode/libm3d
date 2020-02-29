@@ -174,9 +174,9 @@ static inline void vec3_zero( vec3_t* v )
 static inline vec3_t vec3_lerp( const vec3_t* restrict a, const vec3_t* restrict b, scaler_t s )
 {
 	return VEC3(
-		linear_interpolation( s, a->x, b->x ),
-		linear_interpolation( s, a->y, b->y ),
-		linear_interpolation( s, a->z, b->z )
+		m3d_linear_interpolation( s, a->x, b->x ),
+		m3d_linear_interpolation( s, a->y, b->y ),
+		m3d_linear_interpolation( s, a->z, b->z )
 	);
 }
 

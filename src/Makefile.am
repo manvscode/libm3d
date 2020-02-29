@@ -1,43 +1,48 @@
 # Add new files in alphabetical order. Thanks.
-lib3dmath_src = vec2.c \
-				vec3.c \
-				vec4.c \
-				mat2.c \
-				mat3.c \
-				mat4.c \
-				quat.c \
-				mathematics.c \
-				transforms.c \
-				geometric-tools.c \
-				numerical-methods.c \
-				algorithms.c \
-				geographic.c
+libm3d_src = \
+             algorithms.c \
+             fixed-point-decimal.c \
+             geographic.c \
+             geometric-tools.c \
+             mat2.c \
+             mat3.c \
+             mat4.c \
+             mathematics.c \
+             numerical-methods.c \
+             quat.c \
+             transforms.c \
+             vec2.c \
+             vec3.c \
+             vec4.c
 
 # Add new files in alphabetical order. Thanks.
-lib3dmath_headers = easing.h \
-					vec2.h \
-					vec3.h \
-					vec4.h \
-					mat2.h \
-					mat3.h \
-					mat4.h \
-					quat.h \
-					mathematics.h \
-					numerical-methods.h \
-					scaler-float.h \
-					scaler-double.h \
-					scaler-long-double.h \
-					transforms.h \
-					projections.h \
-					geometric-tools.h \
-					algorithms.h \
-					geographic.h \
-					lib3dmath-config.h
+libm3d_headers = \
+                 algorithms.h \
+                 easing.h \
+                 fixed-point-decimal.h \
+                 geographic.h \
+                 geometric-tools.h \
+                 integer-arithmetic-tests.h \
+                 libm3d-config.h \
+                 mat2.h \
+                 mat3.h \
+                 mat4.h \
+                 mathematics.h \
+                 numerical-methods.h \
+                 projections.h \
+                 quat.h \
+                 scaler-double.h \
+                 scaler-float.h \
+                 scaler-long-double.h \
+                 transforms.h \
+                 vec2.h \
+                 vec3.h \
+                 vec4.h
 
-library_includedir      = $(includedir)/lib3dmath/
-library_include_HEADERS = $(lib3dmath_headers)
+library_includedir      = $(includedir)/libm3d/
+library_include_HEADERS = $(libm3d_headers)
 
 # Library
-lib_LTLIBRARIES                          = $(top_builddir)/lib/lib3dmath.la
-__top_builddir__lib_lib3dmath_la_SOURCES = $(lib3dmath_src)
-__top_builddir__lib_lib3dmath_la_LDFLAGS = -lm
+lib_LTLIBRARIES                       = $(top_builddir)/lib/libm3d.la
+__top_builddir__lib_libm3d_la_SOURCES = $(libm3d_src)
+__top_builddir__lib_libm3d_la_LDFLAGS = -lm

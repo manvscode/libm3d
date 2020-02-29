@@ -15,8 +15,8 @@
 *.log
 
 
-# Test Programs 
-bin/test-*
+# Test Programs
+bin
 
 # Autoconf files
 Makefile

@@ -31,8 +31,8 @@
  * of iterations, otherwise, a solution will not be found. Returns true
  * when a solution is found and false otherwise.
  */
-bool bissection_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root );
-bool bissection_method_max_precision( double a, double b, double (*f)(double x), double* root );
+bool m3d_bissection_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root );
+bool m3d_bissection_method_max_precision( double a, double b, double (*f)(double x), double* root );
 
 /* Find the root of a function f(x). Given f(x) = 0, transform f(x) to form a
  * fixed point equation of the form x = g(x). If |g'(x)| < 1, then g(x) will
@@ -51,65 +51,65 @@ bool bissection_method_max_precision( double a, double b, double (*f)(double x),
  *
  *      0 = x^3 + 4x^2 - 10 <==> 10 = x^2 * (x + 4) <==> sqrt(10 / (x + 4)) = x
  */
-bool fixed_point_iteration( double estimate, double epsilon, size_t iterations, double (*g)(double x), double* root );
-bool fixed_point_iteration_max_precision( double estimate, double (*g)(double x), double* root );
+bool m3d_fixed_point_iteration( double estimate, double epsilon, size_t iterations, double (*g)(double x), double* root );
+bool m3d_fixed_point_iteration_max_precision( double estimate, double (*g)(double x), double* root );
 
 /* Find the root of a function f(x) given two initial estimates a and b. This
  * method is similar to Newton-Ralphson method but does not require knowing f'(x).
  * This method is better than the bissection_method(). Returns true when a
  * solution is found and false otherwise.
  */
-bool secant_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root );
+bool m3d_secant_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root );
 
 /*
  * Given a list of (x,y) coordinates, least_squares_linear() will find the least
  * sqaures linear equation y = mx + b that has the minimal error.
  */
-void   least_squares_linear       ( const double x[], const double y[], size_t count, double* m, double* b );
-double least_squares_linear_error ( const double x[], const double y[], size_t count, double m, double b );
+void   m3d_least_squares_linear       ( const double x[], const double y[], size_t count, double* m, double* b );
+double m3d_least_squares_linear_error ( const double x[], const double y[], size_t count, double m, double b );
 
 /*
  * Given a list of (x,y) coordinates, least_squares_quadratic() will find the least
  * sqaures quadratic equation y = ax^2 + bx + c that has the minimal error.
  */
-void   least_squares_quadratic       ( const double x[], const double y[], size_t count, double* a, double* b, double* c );
-double least_squares_quadratic_error ( const double x[], const double y[], size_t count, double a, double b, double c );
+void   m3d_least_squares_quadratic       ( const double x[], const double y[], size_t count, double* a, double* b, double* c );
+double m3d_least_squares_quadratic_error ( const double x[], const double y[], size_t count, double a, double b, double c );
 
 
 /*
  * Write out the coordinates in a tabular layout.
  */
-void table_dump( FILE* stream, const double x[], const double y[], size_t count, const char* label_x, const char* label_y );
+void m3d_table_dump( FILE* stream, const double x[], const double y[], size_t count, const char* label_x, const char* label_y );
 
 
 
 
-static inline float absolute_errorf( float actual, float measured )
+static inline float m3d_absolute_errorf( float actual, float measured )
 {
 	return fabsf( actual - measured );
 }
 
-static inline double absolute_errord( double actual, double measured )
+static inline double m3d_absolute_errord( double actual, double measured )
 {
 	return fabs( actual - measured );
 }
 
-static inline long double absolute_errorld( long double actual, long double measured )
+static inline long double m3d_absolute_errorld( long double actual, long double measured )
 {
 	return fabsl( actual - measured );
 }
 
-static inline float relative_errorf( float actual, float measured )
+static inline float m3d_relative_errorf( float actual, float measured )
 {
 	return fabsf( actual - measured ) / fabsf(actual);
 }
 
-static inline double relative_errord( double actual, double measured )
+static inline double m3d_relative_errord( double actual, double measured )
 {
 	return fabs( actual - measured ) / fabs(actual);
 }
 
-static inline long double relative_errorld( long double actual, long double measured )
+static inline long double m3d_relative_errorld( long double actual, long double measured )
 {
 	return fabsl( actual - measured ) / fabsl(actual);
 }

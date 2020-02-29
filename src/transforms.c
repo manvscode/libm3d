@@ -22,7 +22,7 @@
 #include <assert.h>
 #include "transforms.h"
 
-mat4_t rotate_xyz( const char* order, ... )
+mat4_t m3d_rotate_xyz( const char* order, ... )
 {
 	assert( order );
 	va_list list;
@@ -37,7 +37,7 @@ mat4_t rotate_xyz( const char* order, ... )
 			case 'X':
 			{
 				double angle = va_arg( list, double );
-				mat4_t r = rotate_x( angle );
+				mat4_t r = m3d_rotate_x( angle );
 				result = mat4_mult_matrix( &result, &r );
 				break;
 			}
@@ -45,7 +45,7 @@ mat4_t rotate_xyz( const char* order, ... )
 			case 'Y':
 			{
 				double angle = va_arg( list, double );
-				mat4_t r = rotate_y( angle );
+				mat4_t r = m3d_rotate_y( angle );
 				result = mat4_mult_matrix( &result, &r );
 				break;
 			}
@@ -53,7 +53,7 @@ mat4_t rotate_xyz( const char* order, ... )
 			case 'Z':
 			{
 				double angle = va_arg( list, double );
-				mat4_t r = rotate_z( angle );
+				mat4_t r = m3d_rotate_z( angle );
 				result = mat4_mult_matrix( &result, &r );
 				break;
 			}
@@ -66,7 +66,7 @@ mat4_t rotate_xyz( const char* order, ... )
 	return result;
 }
 
-mat3_t rotate_from_vec3_to_vec3( const vec3_t* s, const vec3_t* t )
+mat3_t m3d_rotate_from_vec3_to_vec3( const vec3_t* s, const vec3_t* t )
 {
 	const vec3_t v = vec3_cross_product( s, t );
 	const scaler_t e = vec3_dot_product( s, t );
@@ -79,7 +79,7 @@ mat3_t rotate_from_vec3_to_vec3( const vec3_t* s, const vec3_t* t )
 	);
 }
 
-mat4_t rotate_from_vec4_to_vec4( const vec4_t* s, const vec4_t* t )
+mat4_t m3d_rotate_from_vec4_to_vec4( const vec4_t* s, const vec4_t* t )
 {
 	const vec3_t v = vec3_cross_product( vec4_to_vec3(s), vec4_to_vec3(t) );
 	const scaler_t e = vec3_dot_product( vec4_to_vec3(s), vec4_to_vec3(t) );
@@ -148,7 +148,7 @@ mat4_t look_at( const pt3_t* eye, const pt3_t* target, const vec3_t* up )
 	#endif
 }
 #else
-mat4_t look_at( const pt3_t* eye, const pt3_t* target, const vec3_t* up )
+mat4_t m3d_look_at( const pt3_t* eye, const pt3_t* target, const vec3_t* up )
 {
 	vec3_t z = VEC3( target->x - eye->x, target->y - eye->y, target->z - eye->z );
 	vec3_normalize( &z );

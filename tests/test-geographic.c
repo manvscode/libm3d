@@ -132,12 +132,14 @@ bool test_distance( void )
 	double london_lon = -0.1278;
 	double london_lat = 51.5074;
 
-	double miami_london_distance = wgs84_geographic_geodesic_distance_vincenty( miami_lon, miami_lat, london_lon, london_lat );
+	// TODO: Fix Vincenty method
+	double miami_london_distance = //wgs84_geographic_geodesic_distance_vincenty( miami_lon, miami_lat, london_lon, london_lat );
+	wgs84_geographic_geodesic_distance_lamberts( miami_lon, miami_lat, london_lon, london_lat );
 
 	// haversine 7134873.449671
 	// lamberts  7140928.774804
 	//           7122228.213423586
-	printf( "%lf", miami_london_distance);
+	//printf( "%lf", miami_london_distance);
 
 	return true;
 }

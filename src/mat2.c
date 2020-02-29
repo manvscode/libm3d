@@ -120,12 +120,28 @@ void mat2_transpose( mat2_t* m )
 const char* mat2_to_string( const mat2_t* m )
 {
 	static char string_buffer[ 128 ];
+	#if defined(LIBM3D_USE_LONG_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1,
+		"|%-6.2Lf %6.2Lf|\n"
+		"|%-6.2Lf %6.2Lf|\n",
+		m->m[0], m->m[2],
+		m->m[1], m->m[3]
+ 	);
+	#elif defined(LIBM3D_USE_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1,
+		"|%-6.2lf %6.2lf|\n"
+		"|%-6.2lf %6.2lf|\n",
+		m->m[0], m->m[2],
+		m->m[1], m->m[3]
+ 	);
+	#else
 	snprintf( string_buffer, sizeof(string_buffer) - 1,
 		"|%-6.2f %6.2f|\n"
 		"|%-6.2f %6.2f|\n",
 		m->m[0], m->m[2],
 		m->m[1], m->m[3]
  	);
+	#endif
 	string_buffer[ sizeof(string_buffer) - 1 ] = '\0';
 	return string_buffer;
 }

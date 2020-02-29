@@ -289,16 +289,40 @@ mat4_t mat4_from_axis3_angle( const vec3_t* axis, scaler_t angle )
 const char* mat4_to_string( const mat4_t* m )
 {
 	static char string_buffer[ 128 ];
+	#if defined(LIBM3D_USE_LONG_DOUBLE)
 	snprintf( string_buffer, sizeof(string_buffer) - 1,
-		"|%-6.1f %-6.1f %-6.1f %6.1f|\n"
-		"|%-6.1f %-6.1f %-6.1f %6.1f|\n"
-		"|%-6.1f %-6.1f %-6.1f %6.1f|\n"
-		"|%-6.1f %-6.1f %-6.1f %6.1f|\n",
+		"|%-6.2Lf %-6.2Lf %-6.2Lf %6.2Lf|\n"
+		"|%-6.2Lf %-6.2Lf %-6.2Lf %6.2Lf|\n"
+		"|%-6.2Lf %-6.2Lf %-6.2Lf %6.2Lf|\n"
+		"|%-6.2Lf %-6.2Lf %-6.2Lf %6.2Lf|\n",
 		m->m[ 0], m->m[ 4], m->m[ 8], m->m[12],
 		m->m[ 1], m->m[ 5], m->m[ 9], m->m[13],
 		m->m[ 2], m->m[ 6], m->m[10], m->m[14],
 		m->m[ 3], m->m[ 7], m->m[11], m->m[15]
  	);
+	#elif defined(LIBM3D_USE_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1,
+		"|%-6.2lf %-6.2lf %-6.2lf %6.2lf|\n"
+		"|%-6.2lf %-6.2lf %-6.2lf %6.2lf|\n"
+		"|%-6.2lf %-6.2lf %-6.2lf %6.2lf|\n"
+		"|%-6.2lf %-6.2lf %-6.2lf %6.2lf|\n",
+		m->m[ 0], m->m[ 4], m->m[ 8], m->m[12],
+		m->m[ 1], m->m[ 5], m->m[ 9], m->m[13],
+		m->m[ 2], m->m[ 6], m->m[10], m->m[14],
+		m->m[ 3], m->m[ 7], m->m[11], m->m[15]
+ 	);
+	#else
+	snprintf( string_buffer, sizeof(string_buffer) - 1,
+		"|%-6.2f %-6.2f %-6.2f %6.2f|\n"
+		"|%-6.2f %-6.2f %-6.2f %6.2f|\n"
+		"|%-6.2f %-6.2f %-6.2f %6.2f|\n"
+		"|%-6.2f %-6.2f %-6.2f %6.2f|\n",
+		m->m[ 0], m->m[ 4], m->m[ 8], m->m[12],
+		m->m[ 1], m->m[ 5], m->m[ 9], m->m[13],
+		m->m[ 2], m->m[ 6], m->m[10], m->m[14],
+		m->m[ 3], m->m[ 7], m->m[11], m->m[15]
+ 	);
+	#endif
 	string_buffer[ sizeof(string_buffer) - 1 ] = '\0';
 	return string_buffer;
 }

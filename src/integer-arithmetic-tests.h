@@ -18,65 +18,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef _SCALER_H_
-#define _SCALER_H_
+#ifndef _INTEGER_ARITHMETIC_TESTS_H_
+#define _INTEGER_ARITHMETIC_TESTS_H_
+#include <stdbool.h>
 
-#ifndef SCALAR_T
-#define SCALAR_T
-typedef float scaler_t;
-#endif
-#ifndef SCALAR_EPSILON
-#define SCALAR_EPSILON FLT_EPSILON
-#endif
+#define m3d_signed_integer_overflow_test(result, a, b, max_val) \
+	if( (a) ^ (b) < 0 ) (result) = false; \ // opposite signs can't overflow
+	else if( (a) > 0 )  (result) = (b) > max_val - (a); \
+	else                (result) = (b) < max_val - (a);
 
-static inline bool scaler_compare( scaler_t a, scaler_t b )
-{
-	return fabsf( a - b ) < SCALAR_EPSILON;
-}
+#define m3d_unsigned_integer_overflow_test(result, a, b) \
+	(result) = (a) + (b) < (a);
 
-static inline scaler_t scaler_max( scaler_t a, scaler_t b )
-{
-	return m3d_maxf( a, b );
-}
-
-static inline scaler_t scaler_min( scaler_t a, scaler_t b )
-{
-	return m3d_minf( a, b );
-}
-
-static inline scaler_t scaler_abs( scaler_t s )
-{
-	return fabsf( s );
-}
-
-static inline scaler_t scaler_sqrt( scaler_t s )
-{
-	return sqrtf( s );
-}
-
-static inline scaler_t scaler_sin( scaler_t a )
-{
-	return sinf( a );
-}
-
-static inline scaler_t scaler_asin( scaler_t a )
-{
-	return asinf( a );
-}
-
-static inline scaler_t scaler_cos( scaler_t a )
-{
-	return cosf( a );
-}
-
-static inline scaler_t scaler_acos( scaler_t a )
-{
-	return acosf( a );
-}
-
-static inline char* scaler_type_string( void )
-{
-	return "float";
-}
-
-#endif /* _SCALER_H_ */
+#endif /* _INTEGER_ARITHMETIC_TESTS_H_ */

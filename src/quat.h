@@ -243,10 +243,10 @@ static inline void quat_extract_axis4_and_angle( const quat_t* q, vec4_t* axis, 
 static inline quat_t quat_lerp( const quat_t* restrict a, const quat_t* restrict b, scaler_t s )
 {
 	return QUAT(
-		linear_interpolation( s, a->x, b->x ),
-		linear_interpolation( s, a->y, b->y ),
-		linear_interpolation( s, a->z, b->z ),
-		linear_interpolation( s, a->w, b->w )
+		m3d_linear_interpolation( s, a->x, b->x ),
+		m3d_linear_interpolation( s, a->y, b->y ),
+		m3d_linear_interpolation( s, a->z, b->z ),
+		m3d_linear_interpolation( s, a->w, b->w )
 	);
 }
 

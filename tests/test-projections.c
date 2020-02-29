@@ -20,6 +20,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#define SCALAR_EPSILON 0.000001
 #include "../src/mat4.h"
 #include "../src/mathematics.h"
 #include "../src/projections.h"
@@ -55,7 +56,7 @@ int main( int argc, char* argv[] )
 bool test_orthographic_projection1( void )
 {
 	scaler_t aspect = 4.0 / 3.0;
-	mat4_t o = projection_orthographic( -10.0 * aspect, 10.0 * aspect, -10.0, 10.0, -10.0, 10.0 );
+	mat4_t o = m3d_projection_orthographic( -10.0 * aspect, 10.0 * aspect, -10.0, 10.0, -10.0, 10.0 );
 	return scaler_compare( o.m[ 0],  0.075 ) &&
 	       scaler_compare( o.m[ 1],  0.0 ) &&
 	       scaler_compare( o.m[ 2],  0.0 ) &&
@@ -76,7 +77,7 @@ bool test_orthographic_projection1( void )
 
 bool test_orthographic_projection2( void )
 {
-	mat4_t o = projection_orthographic( 0, 3.0, 0, 3.0, 0, 3.0 );
+	mat4_t o = m3d_projection_orthographic( 0, 3.0, 0, 3.0, 0, 3.0 );
 	return scaler_compare( o.m[ 0],  0.6666666667 ) &&
 	       scaler_compare( o.m[ 1],  0.0 ) &&
 	       scaler_compare( o.m[ 2],  0.0 ) &&
@@ -98,7 +99,7 @@ bool test_orthographic_projection2( void )
 bool test_perspective_projection1( void )
 {
 	scaler_t aspect = 4.0 / 3.0;
-	mat4_t p = projection_perspective( to_radians(45.0), aspect, 0.1, 100.0 );
+	mat4_t p = m3d_projection_perspective( m3d_to_radians(45.0), aspect, 0.1, 100.0 );
 	return scaler_compare( p.m[ 0],  1.81066000 ) &&
 	       scaler_compare( p.m[ 1],  0.0 ) &&
 	       scaler_compare( p.m[ 2],  0.0 ) &&
@@ -119,8 +120,7 @@ bool test_perspective_projection1( void )
 
 bool test_perspective_projection2( void )
 {
-	mat4_t p = projection_perspective( to_radians(160.0), 1.0, 0.01, 1000.0 );
-	//printf( "%s\n", mat4_to_string(&p) );
+	mat4_t p = m3d_projection_perspective( m3d_to_radians(160.0), 1.0, 0.01, 1000.0 );
 	return scaler_compare( p.m[ 0],  0.17632702 ) &&
 	       scaler_compare( p.m[ 1],  0.0 ) &&
 	       scaler_compare( p.m[ 2],  0.0 ) &&

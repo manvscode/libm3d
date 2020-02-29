@@ -106,7 +106,7 @@ bool test_vec2_magnitude( void )
 {
 	vec2_t a = VEC2( 3, 2 );
 	scaler_t r = vec2_magnitude( &a );
-	return scaler_compare( r, 3.605551275463989 );
+	return scaler_compare( r, scaler_sqrt(3*3 + 2*2) );
 }
 
 bool test_vec2_dot_product( void )
@@ -164,8 +164,8 @@ bool test_vec2_angle( void )
 	vec2_t d = VEC2( 0, 1 );
 	scaler_t r2 = vec2_angle( &c, &d );
 
-	return scaler_compare( r1, 45.0 * RADIANS_PER_DEGREE ) &&
-	       scaler_compare( r2, 90.0 * RADIANS_PER_DEGREE );
+	return scaler_compare( r1, 45.0 * M3D_RADIANS_PER_DEGREE ) &&
+	       scaler_compare( r2, 90.0 * M3D_RADIANS_PER_DEGREE );
 }
 
 bool test_vec2_normalize( void )

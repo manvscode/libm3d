@@ -68,8 +68,8 @@ void wgs84_cartesian_to_geographic_with_epsilon( double x, double y, double z, d
 
 void wgs84_geographic_to_mercator( double lon, double lat, double central_meridian, double* x, double* y )
 {
-	lat = clampd( lat, -89.5, 89.5 );
-	central_meridian = clampd( central_meridian, -180.0, 180.0 );
+	lat = m3d_clampd( lat, -89.5, 89.5 );
+	central_meridian = m3d_clampd( central_meridian, -180.0, 180.0 );
 	*x = WGS84_SEMI_MAJOR_AXIS * DEGREES_TO_RADIANS(lon - central_meridian);
 	*y = WGS84_SEMI_MINOR_AXIS * log( tan( M_PI_4 + 0.5 * DEGREES_TO_RADIANS(lat) ) );
 }
@@ -124,7 +124,6 @@ double wgs84_geographic_geodesic_distance_vincenty( double lon1, double lat1, do
 		}
 
 	} while( fabs(lambda - lambda_prime) > SCALAR_EPSILON && ++iterations<200 );
-	//if (iterations>=200) throw new Error('Formula failed to converge');
 
 	double u_sqrd = cos_alpha_sqrd * (WGS84_SEMI_MAJOR_AXIS*WGS84_SEMI_MAJOR_AXIS - WGS84_SEMI_MINOR_AXIS*WGS84_SEMI_MINOR_AXIS) / (WGS84_SEMI_MINOR_AXIS*WGS84_SEMI_MINOR_AXIS);
 	double A = 1 + u_sqrd/16384*(4096+u_sqrd*(-768+u_sqrd*(320-175*u_sqrd)));

@@ -1,43 +1,46 @@
-# lib3dmath
+# libm3d
 A fully-tested math library for computer graphics applications and games.
 
 ## Supported Constructs
-* 2D Vectors
-* 3D Vectors
-* 4D Vectors
-* 2x2 Matrices
-* 3x3 Matrices
-* 4x4 Matrices
+* 2D vectors
+* 3D vectors
+* 4D vectors
+* 2x2 matrices
+* 3x3 matrices
+* 4x4 matrices
 * Quaternions
 * Transformations
 * Projections
-* Geometric Tools
+* Geometric tools
+* Numerical Methods for root-finding and least squares fitting.
+* Geographic WGS84 transformations and distance calculations.
 
 ##  Build Instructions
-You can compile *lib3dmath* with either float or double precision.
-### If you want to build the float version of lib3dmath:
+You can compile *libm3d* with either float or double precision.
+### If you want to build the float version of libm3d:
 * autoreconf -i
 * ./configure
 * make
 * make install
 
-### If you want to build the double version of lib3dmath:
+### If you want to build the double version of libm3d:
 * autoreconf -i
 * ./configure --enable-use-double
 * make
 * make install
 
-##  Supported Environments
-* Mac OS X
-* Linux
-* iOS
+### If you want to build the long double version of libm3d:
+* autoreconf -i
+* ./configure --enable-use-long-double
+* make
+* make install
 
 ##  Testing
 If you want to enable the test programs, you just need to use the
 --enable-tests configure flag.
 
 # License
-You may use *lib3dmath* in a commercial product as long as the below copyright is retained in the source directory and on all source files.
+You may use *libm3d* in a commercial product as long as the below copyright is retained in the source directory and on all source files.
 
     Copyright (C) 2013-2015 by Joseph A. Marrero, http://www.manvscode.com/
     

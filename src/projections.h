@@ -30,7 +30,7 @@ extern "C" {
 #endif
 
 
-static inline mat4_t projection_orthographic( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
+static inline mat4_t m3d_projection_orthographic( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
 {
 	return MAT4(
 		2.0 / (right - left)          , 0.0                           ,  0.0                      , 0.0,
@@ -40,7 +40,7 @@ static inline mat4_t projection_orthographic( scaler_t left, scaler_t right, sca
 	);
 }
 
-static inline mat4_t projection_frustum( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
+static inline mat4_t m3d_projection_frustum( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
 {
 	scaler_t A = 2.0 * near / (right - left);
 	scaler_t B = (right + left) / (right - left);
@@ -57,8 +57,7 @@ static inline mat4_t projection_frustum( scaler_t left, scaler_t right, scaler_t
 	);
 }
 
-
-static inline mat4_t projection_perspective( scaler_t fov /* in radians */, scaler_t aspect, scaler_t near, scaler_t far )
+static inline mat4_t m3d_projection_perspective( scaler_t fov /* in radians */, scaler_t aspect, scaler_t near, scaler_t far )
 {
 	scaler_t A = 1.0 / tan(fov * 0.5);
 	scaler_t B = -far / (far - near);
@@ -71,9 +70,6 @@ static inline mat4_t projection_perspective( scaler_t fov /* in radians */, scal
 	         0.0,  0.0,    C,  0.0
 	);
 }
-
-
-
 
 #ifdef __cplusplus
 } /* C linkage */

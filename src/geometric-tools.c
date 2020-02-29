@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include "geometric-tools.h"
 
-vec3_t normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_t* v3 )
+vec3_t m3d_normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_t* v3 )
 {
 	vec3_t normal = vec3_cross_product(
 		&VEC3( v2->x - v1->x, v2->y - v1->y, v2->z - v1->z ),
@@ -32,7 +32,7 @@ vec3_t normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_t* v
 	return normal;
 }
 
-vec3_t normal_from_triangles( const vec3_t* points[], size_t max_points )
+vec3_t m3d_normal_from_triangles( const vec3_t* points[], size_t max_points )
 {
 	/*
 	 * Every vertex is generally shared among 6 triangles.  We calculate the
@@ -55,7 +55,7 @@ vec3_t normal_from_triangles( const vec3_t* points[], size_t max_points )
 
 	for( size_t i = 0; i < max_points; i += 3 )
 	{
-		vec3_t n = normal_from_triangle( points[ i + 0], points[ i + 1 ], points[ i + 2 ] );
+		vec3_t n = m3d_normal_from_triangle( points[ i + 0], points[ i + 1 ], points[ i + 2 ] );
 
 		if( vec3_dot_product( &normal, &n ) < 0.0f )
 		{
@@ -72,7 +72,7 @@ vec3_t normal_from_triangles( const vec3_t* points[], size_t max_points )
 	return vec3_multiply( &normal, 1.0f / number_of_triangles );
 }
 
-vec4_t point_unproject( const vec2_t* position, const mat4_t* projection, const mat4_t* model, int viewport[] )
+vec4_t m3d_point_unproject( const vec2_t* position, const mat4_t* projection, const mat4_t* model, int viewport[] )
 {
 	/* Convert to normalized device coordinates */
 	vec4_t normalized_device_coordinate = VEC4( ((position->x * 2.0f) / viewport[2]) - 1.0f, ((position->y * 2.0f) / viewport[3]) - 1.0f, 0.0f, 1.0f );
@@ -83,7 +83,7 @@ vec4_t point_unproject( const vec2_t* position, const mat4_t* projection, const 
 	return mat4_mult_vector( &inv_projmodel, &normalized_device_coordinate );
 }
 
-vec2_t point_project( const vec4_t* point, const mat4_t* projection, const mat4_t* model, int viewport[] )
+vec2_t m3d_point_project( const vec4_t* point, const mat4_t* projection, const mat4_t* model, int viewport[] )
 {
 	mat4_t projmodel = mat4_mult_matrix( projection, model );
 	vec4_t pt = mat4_mult_vector( &projmodel, point );

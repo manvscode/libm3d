@@ -78,9 +78,9 @@ int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );
 
-	#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+	#if defined(LIBM3D_USE_LONG_DOUBLE)
 	printf( "%s: %s%-30s%s\n\n", COLOR_CYAN_STR("Type of scaler_t"), COLOR_GREEN, "long double", COLOR_END );
-	#elif defined(LIB3DMATH_USE_DOUBLE)
+	#elif defined(LIBM3D_USE_DOUBLE)
 	printf( "%s: %s%-30s%s\n\n", COLOR_CYAN_STR("Type of scaler_t"), COLOR_GREEN, "double", COLOR_END );
 	#else /* default: use float */
 	printf( "%s: %s%-30s%s\n\n", COLOR_CYAN_STR("Type of scaler_t"), COLOR_GREEN, "float", COLOR_END );

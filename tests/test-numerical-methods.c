@@ -66,8 +66,8 @@ double f(double x)
 bool test_bissection_method( void )
 {
 	double root = 0.0;
-	bool result = bissection_method( 1.0, 2.0, DBL_EPSILON, 100, f, &root );
-	return result && relative_errord(1.36523, root) < 0.001;
+	bool result = m3d_bissection_method( 1.0, 2.0, DBL_EPSILON, 100, f, &root );
+	return result && m3d_relative_errord(1.36523, root) < 0.001;
 }
 
 double g(double x)
@@ -81,16 +81,16 @@ bool test_fixed_point_iteration( void )
 
 	// To find the root of sin(0.5x + pi/8) = 0, we set
 	// g(x) = sin(0.5x + pi/8) - x
-	bool result = fixed_point_iteration( 3.0, DBL_EPSILON, 1000, g, &root );
+	bool result = m3d_fixed_point_iteration( 3.0, DBL_EPSILON, 1000, g, &root );
 
-	return result && relative_errord(5.49778, root) < 0.001;
+	return result && m3d_relative_errord(5.49778, root) < 0.001;
 }
 
 bool test_secant_method( void )
 {
 	double root = 0.0;
-	bool result = secant_method( 1.0, 2.0, DBL_EPSILON, 100, f, &root );
-	return result && relative_errord(1.36523, root) < 0.001;
+	bool result = m3d_secant_method( 1.0, 2.0, DBL_EPSILON, 100, f, &root );
+	return result && m3d_relative_errord(1.36523, root) < 0.001;
 }
 
 bool test_least_squares_linear( void )
@@ -108,10 +108,10 @@ bool test_least_squares_linear( void )
 
 	double m1 = 0.0;
 	double b1 = 0.0;
-	least_squares_linear( x1, y1, 8, &m1, &b1 );
+	m3d_least_squares_linear( x1, y1, 8, &m1, &b1 );
 
-	bool test1 = relative_errord( 0.421569, m1 ) < 0.001 &&
-		         relative_errord( 2.237745, b1 ) < 0.001;
+	bool test1 = m3d_relative_errord( 0.421569, m1 ) < 0.001 &&
+		         m3d_relative_errord( 2.237745, b1 ) < 0.001;
 
 	double x2[] = {
 		 1,  2,  8
@@ -121,9 +121,9 @@ bool test_least_squares_linear( void )
 	};
 	double m2 = 0.0;
 	double b2 = 0.0;
-	least_squares_linear( x2, y2, 3, &m2, &b2 );
-	bool test2 = relative_errord( 2.0, m2 ) < 0.001 &&
-		         relative_errord( 1.0, b2 ) < 0.001;
+	m3d_least_squares_linear( x2, y2, 3, &m2, &b2 );
+	bool test2 = m3d_relative_errord( 2.0, m2 ) < 0.001 &&
+		         m3d_relative_errord( 1.0, b2 ) < 0.001;
 
 	return test1 && test2;
 }
@@ -140,13 +140,13 @@ bool test_least_squares_quadratic( void )
 	double a = 0.0;
 	double b = 0.0;
 	double c = 0.0;
-	least_squares_quadratic( x, y, 5, &a, &b, &c );
+	m3d_least_squares_quadratic( x, y, 5, &a, &b, &c );
 
-	double err = least_squares_quadratic_error( x, y, 5, a, b, c );
+	double err = m3d_least_squares_quadratic_error( x, y, 5, a, b, c );
 
-	bool test1 = relative_errord( 0.843, a ) < 0.001 &&
-	             relative_errord( 0.864, b ) < 0.001 &&
-		         relative_errord( 1.005, c ) < 0.001;
+	bool test1 = m3d_relative_errord( 0.843, a ) < 0.001 &&
+	             m3d_relative_errord( 0.864, b ) < 0.001 &&
+		         m3d_relative_errord( 1.005, c ) < 0.001;
 
 	return test1;
 }

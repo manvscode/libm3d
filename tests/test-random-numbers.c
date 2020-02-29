@@ -32,20 +32,20 @@ int main( int argc, char* argv[] )
 
 	for( int i = 0; i < 10; i++ )
 	{
-		float r = uniform_unitf( );
+		float r = m3d_uniform_unitf( );
 		assert( r >= -1.0f && r <= 1.0f );
 		printf( "uniform random = %.3f\n", r );
 	}
 
 	for( int i = 0; i < 10; i++ )
 	{
-		float r = guassianf( 0, 2.0 );
+		float r = m3d_guassianf( 0, 2.0 );
 		printf( "guassian random = %.3f\n", r );
 	}
 
 	for( int i = 0; i < 10; i++ )
 	{
-		int r = uniform_rangei( 30, 100 );
+		int r = m3d_uniform_rangei( 30, 100 );
 		assert( r >= 30 && r <= 100 );
 		printf( "random integer between 30 and 100 = %d\n", r );
 	}

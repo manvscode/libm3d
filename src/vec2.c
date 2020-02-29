@@ -34,7 +34,13 @@ const vec2_t VEC2_YUNIT = { .x = 0.0f, .y = 1.0f };
 const char* vec2_to_string( const vec2_t* v ) /* not thread safe */
 {
 	static char string_buffer[ 128 ];
+#if defined(LIBM3D_USE_LONG_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1, "(%08.1Lf, %08.1Lf)", v->x, v->y );
+#elif defined(LIBM3D_USE_DOUBLE)
+	snprintf( string_buffer, sizeof(string_buffer) - 1, "(%08.1lf, %08.1lf)", v->x, v->y );
+#else
 	snprintf( string_buffer, sizeof(string_buffer) - 1, "(%08.1f, %08.1f)", v->x, v->y );
+#endif
 	string_buffer[ sizeof(string_buffer) - 1 ] = '\0';
 	return string_buffer;
 }

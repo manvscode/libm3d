@@ -36,12 +36,12 @@ static inline bool scaler_compare( scaler_t a, scaler_t b )
 
 static inline scaler_t scaler_max( scaler_t a, scaler_t b )
 {
-	return maxld( a, b );
+	return m3d_maxld( a, b );
 }
 
 static inline scaler_t scaler_min( scaler_t a, scaler_t b )
 {
-	return minld( a, b );
+	return m3d_minld( a, b );
 }
 
 static inline scaler_t scaler_abs( scaler_t s )

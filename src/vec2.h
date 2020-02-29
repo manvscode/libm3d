@@ -166,8 +166,8 @@ static inline void vec2_zero( vec2_t* v )
 static inline vec2_t vec2_lerp( const vec2_t* restrict a, const vec2_t* restrict b, scaler_t s )
 {
 	return VEC2(
-		linear_interpolation( s, a->x, b->x ),
-		linear_interpolation( s, a->y, b->y )
+		m3d_linear_interpolation( s, a->x, b->x ),
+		m3d_linear_interpolation( s, a->y, b->y )
 	);
 }
 

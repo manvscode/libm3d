@@ -22,66 +22,66 @@
 #include <math.h>
 #include "mathematics.h"
 
-int uniformi( void )
+int m3d_uniformi( void )
 {
 	return rand( );
 }
 
-float uniformf( void )
+float m3d_uniformf( void )
 {
 	return ((float)rand( )) / RAND_MAX;
 }
 
-double uniformd( void )
+double m3d_uniformd( void )
 {
 	return ((double)rand( )) / RAND_MAX;
 }
 
-long double uniformld( void )
+long double m3d_uniformld( void )
 {
 	return ((long double)rand( )) / RAND_MAX;
 }
 
-int uniform_rangei( int min, int max )
+int m3d_uniform_rangei( int min, int max )
 {
 	int diff = max - min;
 	return min + rand() % (diff + 1);
 }
 
-long uniform_rangel( long min, long max )
+long m3d_uniform_rangel( long min, long max )
 {
 	long diff = max - min;
 	return min + rand() % (diff + 1);
 }
 
-float uniform_rangef( float min, float max )
+float m3d_uniform_rangef( float min, float max )
 {
 	float diff = max - min;
-	return min + uniformf() * diff;
+	return min + m3d_uniformf() * diff;
 }
 
-double uniform_ranged( double min, double max )
+double m3d_uniform_ranged( double min, double max )
 {
 	double diff = max - min;
-	return min + uniformd() * diff;
+	return min + m3d_uniformd() * diff;
 }
 
-float uniform_unitf( void )
+float m3d_uniform_unitf( void )
 {
 	return 2 * (((float)rand()) / RAND_MAX) - 1;
 }
 
-double uniform_unitd( void )
+double m3d_uniform_unitd( void )
 {
 	return 2 * (((double)rand()) / RAND_MAX) - 1;
 }
 
-long double uniform_unitld( void )
+long double m3d_uniform_unitld( void )
 {
 	return 2 * (((long double)rand()) / RAND_MAX) - 1;
 }
 
-float guassianf( float mean, float stddev )
+float m3d_guassianf( float mean, float stddev )
 {
 	float ux;
 	float uy;
@@ -97,8 +97,8 @@ float guassianf( float mean, float stddev )
 	else
 	{
 		do {
-			ux = uniformf( ) * 2.0f - 1;
-			uy = uniformf( ) * 2.0f - 1;
+			ux = m3d_uniformf( ) * 2.0f - 1;
+			uy = m3d_uniformf( ) * 2.0f - 1;
 			s = ux * ux + uy * uy;
 		} while( s >= 1.0f || s <= 0.0f );
 
@@ -111,7 +111,7 @@ float guassianf( float mean, float stddev )
 	}
 }
 
-double guassiand( double mean, double stddev )
+double m3d_guassiand( double mean, double stddev )
 {
 	double ux;
 	double uy;
@@ -127,8 +127,8 @@ double guassiand( double mean, double stddev )
 	else
 	{
 		do {
-			ux = uniformd( ) * 2.0 - 1;
-			uy = uniformd( ) * 2.0 - 1;
+			ux = m3d_uniformd( ) * 2.0 - 1;
+			uy = m3d_uniformd( ) * 2.0 - 1;
 			s = ux * ux + uy * uy;
 		} while( s >= 1.0f || s <= 0.0f );
 
@@ -141,7 +141,7 @@ double guassiand( double mean, double stddev )
 	}
 }
 
-long double guassianld( long double mean, long double stddev )
+long double m3d_guassianld( long double mean, long double stddev )
 {
 	long double ux;
 	long double uy;
@@ -157,8 +157,8 @@ long double guassianld( long double mean, long double stddev )
 	else
 	{
 		do {
-			ux = uniformld( ) * 2.0 - 1;
-			uy = uniformld( ) * 2.0 - 1;
+			ux = m3d_uniformld( ) * 2.0 - 1;
+			uy = m3d_uniformld( ) * 2.0 - 1;
 			s = ux * ux + uy * uy;
 		} while( s >= 1.0f || s <= 0.0f );
 
@@ -171,124 +171,124 @@ long double guassianld( long double mean, long double stddev )
 	}
 }
 
-int maxi( int x, int y )
+int m3d_maxi( int x, int y )
 {
-	return integer_max( x, y );
+	return m3d_integer_max( x, y );
 }
 
-long maxl( long x, long y )
+long m3d_maxl( long x, long y )
 {
-	return integer_max( x, y );
+	return m3d_integer_max( x, y );
 }
 
-float maxf( float x, float y )
+float m3d_maxf( float x, float y )
 {
 	return fmaxf( x, y );
 }
 
-double maxd( double x, double y )
+double m3d_maxd( double x, double y )
 {
 	return fmax( x, y );
 }
 
-long double maxld( long double x, long double y )
+long double m3d_maxld( long double x, long double y )
 {
 	return fmaxl( x, y );
 }
 
-int mini( int x, int y )
+int m3d_mini( int x, int y )
 {
-	return integer_min( x, y );
+	return m3d_integer_min( x, y );
 }
 
-long minl( long x, long y )
+long m3d_minl( long x, long y )
 {
-	return integer_min( x, y );
+	return m3d_integer_min( x, y );
 }
 
-float minf( float x, float y )
+float m3d_minf( float x, float y )
 {
 	return fminf( x, y );
 }
 
-double mind( double x, double y )
+double m3d_mind( double x, double y )
 {
 	return fmin( x, y );
 }
 
-long double minld( long double x, long double y )
+long double m3d_minld( long double x, long double y )
 {
 	return fminl( x, y );
 }
 
-unsigned int clampui( unsigned int value, unsigned int min, unsigned int max )
+unsigned int m3d_clampui( unsigned int value, unsigned int min, unsigned int max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	value = integer_max( value, min );
-	return integer_min( value, max );
+	value = m3d_integer_max( value, min );
+	return m3d_integer_min( value, max );
 	#endif
 }
 
-unsigned long clampul( unsigned long value, unsigned long min, unsigned long max )
+unsigned long m3d_clampul( unsigned long value, unsigned long min, unsigned long max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	value = integer_max( value, min );
-	return integer_min( value, max );
+	value = m3d_integer_max( value, min );
+	return m3d_integer_min( value, max );
 	#endif
 }
 
-int clampi( int value, int min, int max )
+int m3d_clampi( int value, int min, int max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	value = integer_max( value, min );
-	return integer_min( value, max );
+	value = m3d_integer_max( value, min );
+	return m3d_integer_min( value, max );
 	#endif
 }
 
-long clampl( long value, long min, long max )
+long m3d_clampl( long value, long min, long max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	value = integer_max( value, min );
-	return integer_min( value, max );
+	value = m3d_integer_max( value, min );
+	return m3d_integer_min( value, max );
 	#endif
 }
 
-float clampf( float value, float min, float max )
+float m3d_clampf( float value, float min, float max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	return minf( maxf(value, min), max );
+	return m3d_minf( m3d_maxf(value, min), max );
 	#endif
 }
 
-double clampd( double value, double min, double max )
+double m3d_clampd( double value, double min, double max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	return mind( maxd(value, min), max );
+	return m3d_mind( m3d_maxd(value, min), max );
 	#endif
 }
 
-long double clampld( long double value, long double min, long double max )
+long double m3d_clampld( long double value, long double min, long double max )
 {
 	#if 0
 	return value > max ? max : (value < min ? min : value);
 	#else
-	return minld( maxld(value, min), max );
+	return m3d_minld( m3d_maxld(value, min), max );
 	#endif
 }
 
-int powi( int b, unsigned int e )
+int m3d_powi( int b, unsigned int e )
 {
 	int result = 1;
 
@@ -301,7 +301,7 @@ int powi( int b, unsigned int e )
 	return result;
 }
 
-long int powli( long b, unsigned long e )
+long int m3d_powli( long b, unsigned long e )
 {
 	long result = 1L;
 

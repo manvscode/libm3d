@@ -22,9 +22,9 @@
 #define _MATHEMATICS_H_
 
 #if defined(_MSC_VER) || defined(__WIN32__) || defined(__WIN64__)
-# include "lib3dmath-config-vs2013.h"
+# include "libm3d-config-windows.h"
 #else
-# include "lib3dmath-config.h"
+# include "libm3d-config.h"
 #endif
 
 /* Compiler Intrinsics */
@@ -49,80 +49,96 @@
 # error "Need a C99 compiler."
 #endif
 
-#ifndef M_PI
-# define M_PI   3.14159265358979323846
-#endif
-#ifndef M_PI_2
-# define M_PI_2 1.57079632679489661923
+#if defined(LIBM3D_USE_LONG_DOUBLE)
+# ifndef M_PI
+#  define M_PI   3.141592653589793238462643383279502884L
+# endif
+# ifndef M_PI_2
+#  define M_PI_2 1.570796326794896619231321691639751442L
+# endif
+#elif defined(LIBM3D_USE_DOUBLE)
+# ifndef M_PI
+#  define M_PI   3.14159265358979323846
+# endif
+# ifndef M_PI_2
+#  define M_PI_2 1.57079632679489661923
+# endif
+#else
+# ifndef M_PI
+#  define M_PI   3.14159265358979323846f
+# endif
+# ifndef M_PI_2
+#  define M_PI_2 1.57079632679489661923f
+# endif
 #endif
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define HALF_PI               (M_PI_2)
-#define PI                    (M_PI)
-#define TWO_PI                (2*M_PI)
-#define RADIANS_PER_DEGREE    (M_PI / 180.0)
-#define DEGREES_PER_RANDIAN   (180.0 / M_PI)
-#define EASING_EPSILON        (0.0001)
+#define M3D_HALF_PI               (M_PI_2)
+#define M3D_PI                    (M_PI)
+#define M3D_TWO_PI                (2*M_PI)
+#define M3D_RADIANS_PER_DEGREE    (M_PI / 180.0)
+#define M3D_DEGREES_PER_RANDIAN   (180.0 / M_PI)
+#define M3D_EASING_EPSILON        (0.0001)
 
-#define to_radians( degrees )  ((degrees)*RADIANS_PER_DEGREE)
-#define to_degrees( radians )  ((radians)*DEGREES_PER_RANDIAN)
+#define m3d_to_radians( degrees )  ((degrees) * M3D_RADIANS_PER_DEGREE)
+#define m3d_to_degrees( radians )  ((radians) * M3D_DEGREES_PER_RANDIAN)
 
-#define integer_max( x, y )    ((x) ^ (((x) ^ (y)) & -((x) < (y))))
-#define integer_min( x, y )    ((y) ^ (((x) ^ (y)) & -((x) < (y))))
+#define m3d_integer_max( x, y )    ((x) ^ (((x) ^ (y)) & -((x) < (y))))
+#define m3d_integer_min( x, y )    ((y) ^ (((x) ^ (y)) & -((x) < (y))))
 
-float         uniformf           ( void ); /* [0.0f, 1.0f] */
-double        uniformd           ( void ); /* [0.0, 1.0] */
-long double   uniformld          ( void ); /* [0.0, 1.0] */
-int           uniform_rangei     ( int min, int max ); /* [min. max] */
-long          uniform_rangel     ( long min, long max ); /* [min. max] */
-float         uniform_rangef     ( float min, float max ); /* [min. max] */
-double        uniform_ranged     ( double min, double max ); /* [min. max] */
-float         uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
-double        uniform_unitd      ( void ); /* [-1.0, 1.0]; */
-long double   uniform_unitld     ( void ); /* [-1.0, 1.0]; */
-float         guassianf          ( float mean, float stddev );
-double        guassiand          ( double mean, double stddev );
-long double   guassianld         ( long double mean, long double stddev );
-int           maxi               ( int x, int y );
-long          maxl               ( long x, long y );
-float         maxf               ( float x, float y );
-double        maxd               ( double x, double y );
-long double   maxld              ( long double x, long double y );
-int           mini               ( int x, int y );
-long          minl               ( long x, long y );
-float         minf               ( float x, float y );
-double        mind               ( double x, double y );
-long double   minld              ( long double x, long double y );
-unsigned int  clampui            ( unsigned int value, unsigned int min, unsigned int max );
-unsigned long clampul            ( unsigned long value, unsigned long min, unsigned long max );
-int           clampi             ( int value, int min, int max );
-int           clampi             ( int value, int min, int max );
-long          clampl             ( long value, long min, long max );
-float         clampf             ( float value, float min, float max );
-double        clampd             ( double value, double min, double max );
-long double   clampld            ( long double value, long double min, long double max );
-int           powi               ( int b, unsigned int e );
-long int      powli              ( long b, unsigned long e );
+float         m3d_uniformf           ( void ); /* [0.0f, 1.0f] */
+double        m3d_uniformd           ( void ); /* [0.0, 1.0] */
+long double   m3d_uniformld          ( void ); /* [0.0, 1.0] */
+int           m3d_uniform_rangei     ( int min, int max ); /* [min. max] */
+long          m3d_uniform_rangel     ( long min, long max ); /* [min. max] */
+float         m3d_uniform_rangef     ( float min, float max ); /* [min. max] */
+double        m3d_uniform_ranged     ( double min, double max ); /* [min. max] */
+float         m3d_uniform_unitf      ( void ); /* [-1.0f, 1.0f]; */
+double        m3d_uniform_unitd      ( void ); /* [-1.0, 1.0]; */
+long double   m3d_uniform_unitld     ( void ); /* [-1.0, 1.0]; */
+float         m3d_guassianf          ( float mean, float stddev );
+double        m3d_guassiand          ( double mean, double stddev );
+long double   m3d_guassianld         ( long double mean, long double stddev );
+int           m3d_maxi               ( int x, int y );
+long          m3d_maxl               ( long x, long y );
+float         m3d_maxf               ( float x, float y );
+double        m3d_maxd               ( double x, double y );
+long double   m3d_maxld              ( long double x, long double y );
+int           m3d_mini               ( int x, int y );
+long          m3d_minl               ( long x, long y );
+float         m3d_minf               ( float x, float y );
+double        m3d_mind               ( double x, double y );
+long double   m3d_minld              ( long double x, long double y );
+unsigned int  m3d_clampui            ( unsigned int value, unsigned int min, unsigned int max );
+unsigned long m3d_clampul            ( unsigned long value, unsigned long min, unsigned long max );
+int           m3d_clampi             ( int value, int min, int max );
+int           m3d_clampi             ( int value, int min, int max );
+long          m3d_clampl             ( long value, long min, long max );
+float         m3d_clampf             ( float value, float min, float max );
+double        m3d_clampd             ( double value, double min, double max );
+long double   m3d_clampld            ( long double value, long double min, long double max );
+int           m3d_powi               ( int b, unsigned int e );
+long int      m3d_powli              ( long b, unsigned long e );
 
-static inline bool is_even( int n )
+static inline bool m3d_is_even( int n )
 {
 	return (n & 1) == 0;
 }
 
-static inline bool is_odd( int n )
+static inline bool m3d_is_odd( int n )
 {
 	return (n & 1) == 1;
 }
 
-static inline bool is_power_of_2( int x )
+static inline bool m3d_is_power_of_2( int x )
 {
 	return (x & (x - 1)) == 0;
 }
 
-static inline int next_power_of_2( int v )
+static inline int m3d_next_power_of_2( int v )
 {
 	int r = v;
 	r--;
@@ -150,60 +166,60 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 #endif
 
 #if 1
-#define lerp                                           linear_interpolation
-#define linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
-#define bilear_interpolation( a, b, x0, x1, x2, x3 )   (lerp( b, lerp( a, x0, x1 ), lerp( a, x2, x3 ) ))
-#define bilerp                                         bilear_interpolation
+#define m3d_lerp                                           m3d_linear_interpolation
+#define m3d_linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
+#define m3d_bilear_interpolation( a, b, x0, x1, x2, x3 )   (m3d_lerp( b, m3d_lerp( a, x0, x1 ), m3d_lerp( a, x2, x3 ) ))
+#define m3d_bilerp                                         m3d_bilear_interpolation
 #endif
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
 /*
  * C11 generic functions
  */
-#define uniform_range(min_num, max_num) _Generic( (min_num), \
-	int:     uniform_rangei, \
-	long:    uniform_rangel, \
-	float:   uniform_rangef, \
-	double:  uniform_ranged, \
-	default: uniform_rangef \
+#define m3d_uniform_range(min_num, max_num) _Generic( (min_num), \
+	int:     m3d_uniform_rangei, \
+	long:    m3d_uniform_rangel, \
+	float:   m3d_uniform_rangef, \
+	double:  m3d_uniform_ranged, \
+	default: m3d_uniform_rangef \
 );
-#define uniform(type) _Generic( (type), \
-	float:   uniformf, \
-	double:  uniformd, \
-	default: uniformf \
+#define m3d_uniform(type) _Generic( (type), \
+	float:   m3d_uniformf, \
+	double:  m3d_uniformd, \
+	default: m3d_uniformf \
 );
-#define guassian(mean, stddev) _Generic( (mean), \
-	float:   guassianf, \
-	double:  guassiand, \
-	default: guassianf \
+#define m3d_guassian(mean, stddev) _Generic( (mean), \
+	float:   m3d_guassianf, \
+	double:  m3d_guassiand, \
+	default: m3d_guassianf \
 );
-#define max(a, b) _Generic( (a), \
-	int:     maxi, \
-	long:    maxl, \
-	float:   maxf, \
-	double:  maxd, \
-	long double:  maxld, \
-	default: maxf \
+#define m3d_max(a, b) _Generic( (a), \
+	int:     m3d_maxi, \
+	long:    m3d_maxl, \
+	float:   m3d_maxf, \
+	double:  m3d_maxd, \
+	long double:  m3d_maxld, \
+	default: m3d_maxf \
 );
-#define min(a, b) _Generic( (a), \
-	int:     mini, \
-	long:    minl, \
-	float:   minf, \
-	double:  mind, \
-	long double:  minld, \
-	default: minf \
+#define m3d_min(a, b) _Generic( (a), \
+	int:     m3d_mini, \
+	long:    m3d_minl, \
+	float:   m3d_minf, \
+	double:  m3d_mind, \
+	long double:  m3d_minld, \
+	default: m3d_minf \
 );
-#define clamp(a, b) _Generic( (a), \
-	int:     clampi, \
-	long:    clampl, \
-	float:   clampf, \
-	double:  mind, \
-	long double:  clampld, \
-	default: clampf \
+#define m3d_clamp(a, b) _Generic( (a), \
+	int:     m3d_clampi, \
+	long:    m3d_clampl, \
+	float:   m3d_clampf, \
+	double:  m3d_mind, \
+	long double:  m3d_clampld, \
+	default: m3d_clampf \
 );
-#define power(b, e) _Generic( (b), \
-	int:     powi, \
-	long:    powli, \
+#define m3d_power(b, e) _Generic( (b), \
+	int:     m3d_powi, \
+	long:    m3d_powli, \
 	float:   powf, \
 	double:  pow, \
 	long double:  powl, \
@@ -212,16 +228,16 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 #endif
 
 
-#if defined(LIB3DMATH_USE_LONG_DOUBLE)
+#if defined(LIBM3D_USE_LONG_DOUBLE)
 # include "scaler-long-double.h"
-#elif defined(LIB3DMATH_USE_DOUBLE)
+#elif defined(LIBM3D_USE_DOUBLE)
 # include "scaler-double.h"
 #else /* default: use float */
 # include "scaler-float.h"
 #endif
 
 
-static inline scaler_t fast_inverse_sqrt( scaler_t number )
+static inline scaler_t m3d_fast_inverse_sqrt( scaler_t number )
 {
 	long i;
 	scaler_t x2, y;

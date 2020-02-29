@@ -1,4 +1,4 @@
-/* Copyright (C) 2013-2015 by Joseph A. Marrero, http://www.manvscode.com/
+/* Copyright (C) 2013-2019 by Joseph A. Marrero, http://www.manvscode.com/
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -18,65 +18,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef _SCALER_H_
-#define _SCALER_H_
+#ifndef _FIXED_POINT_DECIMAL_H_
+#define _FIXED_POINT_DECIMAL_H_
 
-#ifndef SCALAR_T
-#define SCALAR_T
-typedef float scaler_t;
-#endif
-#ifndef SCALAR_EPSILON
-#define SCALAR_EPSILON FLT_EPSILON
+#ifndef M3D_FIXED_POINT_DECIMAL_SCALE
+# define M3D_FIXED_POINT_DECIMAL_SCALE      5
 #endif
 
-static inline bool scaler_compare( scaler_t a, scaler_t b )
-{
-	return fabsf( a - b ) < SCALAR_EPSILON;
-}
+#include <stdbool.h>
 
-static inline scaler_t scaler_max( scaler_t a, scaler_t b )
-{
-	return m3d_maxf( a, b );
-}
+typedef struct fixed_point_decimal {
+	int64_t val;
+	//uint16_t scale;
+} fpdec_t;
 
-static inline scaler_t scaler_min( scaler_t a, scaler_t b )
-{
-	return m3d_minf( a, b );
-}
+fpdec_t m3d_fixed_point_decimal_from_float( float v );
+fpdec_t m3d_fixed_point_decimal_from_double( double v );
+fpdec_t m3d_fixed_point_decimal_from_long_double( long double v );
+fpdec_t m3d_fixed_point_decimal_create( int64_t significand, int fraction );
 
-static inline scaler_t scaler_abs( scaler_t s )
-{
-	return fabsf( s );
-}
+fpdec_t m3d_fixed_point_decimal_add( fpdec_t a, fpdec_t b, bool* result );
+fpdec_t m3d_fixed_point_decimal_multiply( fpdec_t a, fpdec_t b, bool* result );
+fpdec_t m3d_fixed_point_decimal_divide( fpdec_t a, fpdec_t b, bool* result );
 
-static inline scaler_t scaler_sqrt( scaler_t s )
-{
-	return sqrtf( s );
-}
+bool m3d_fixed_point_decimal_string( char* string, size_t size, fpdec_t n );
 
-static inline scaler_t scaler_sin( scaler_t a )
-{
-	return sinf( a );
-}
-
-static inline scaler_t scaler_asin( scaler_t a )
-{
-	return asinf( a );
-}
-
-static inline scaler_t scaler_cos( scaler_t a )
-{
-	return cosf( a );
-}
-
-static inline scaler_t scaler_acos( scaler_t a )
-{
-	return acosf( a );
-}
-
-static inline char* scaler_type_string( void )
-{
-	return "float";
-}
-
-#endif /* _SCALER_H_ */
+#endif /* _FIXED_POINT_DECIMAL_H_ */

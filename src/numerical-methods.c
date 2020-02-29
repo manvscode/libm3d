@@ -23,7 +23,7 @@
 #include "mat2.h"
 #include "mat3.h"
 
-bool bissection_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root )
+bool m3d_bissection_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root )
 {
 	bool found = false;
 	double f_of_a = f( a );
@@ -61,12 +61,12 @@ bool bissection_method( double a, double b, double epsilon, size_t iterations, d
 	return found;
 }
 
-bool bissection_method_max_precision( double a, double b, double (*f)(double x), double* root )
+bool m3d_bissection_method_max_precision( double a, double b, double (*f)(double x), double* root )
 {
-	return bissection_method( a, b, DBL_EPSILON, 100, f, root );
+	return m3d_bissection_method( a, b, DBL_EPSILON, 100, f, root );
 }
 
-bool fixed_point_iteration( double estimate, double epsilon, size_t iterations, double (*g)(double x), double* root )
+bool m3d_fixed_point_iteration( double estimate, double epsilon, size_t iterations, double (*g)(double x), double* root )
 {
 	bool found = false;
 
@@ -88,12 +88,12 @@ bool fixed_point_iteration( double estimate, double epsilon, size_t iterations, 
 	return found;
 }
 
-bool fixed_point_iteration_max_precision( double estimate, double (*g)(double x), double* root )
+bool m3d_fixed_point_iteration_max_precision( double estimate, double (*g)(double x), double* root )
 {
-	return fixed_point_iteration( estimate, DBL_EPSILON, 100, g, root );
+	return m3d_fixed_point_iteration( estimate, DBL_EPSILON, 100, g, root );
 }
 
-bool secant_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root )
+bool m3d_secant_method( double a, double b, double epsilon, size_t iterations, double (*f)(double x), double* root )
 {
 	bool found   = false;
 	double alpha = f(a);
@@ -120,7 +120,7 @@ bool secant_method( double a, double b, double epsilon, size_t iterations, doubl
 	return found;
 }
 
-void least_squares_linear( const double x[], const double y[], size_t count, double* m, double* b )
+void m3d_least_squares_linear( const double x[], const double y[], size_t count, double* m, double* b )
 {
 	double alpha = 0.0;
 	double beta  = 0.0;
@@ -162,7 +162,7 @@ void least_squares_linear( const double x[], const double y[], size_t count, dou
 #endif
 }
 
-double least_squares_linear_error( const double x[], const double y[], size_t count, double m, double b )
+double m3d_least_squares_linear_error( const double x[], const double y[], size_t count, double m, double b )
 {
 	double error = 0.0;
 
@@ -175,7 +175,7 @@ double least_squares_linear_error( const double x[], const double y[], size_t co
 	return error;
 }
 
-void least_squares_quadratic( const double x[], const double y[], size_t count, double* a, double* b, double* c )
+void m3d_least_squares_quadratic( const double x[], const double y[], size_t count, double* a, double* b, double* c )
 {
 	double alpha   = 0.0;
 	double beta    = 0.0;
@@ -213,7 +213,7 @@ void least_squares_quadratic( const double x[], const double y[], size_t count, 
 	*c = coefficients.x;
 }
 
-double least_squares_quadratic_error( const double x[], const double y[], size_t count, double a, double b, double c )
+double m3d_least_squares_quadratic_error( const double x[], const double y[], size_t count, double a, double b, double c )
 {
 	double error = 0.0;
 
@@ -226,7 +226,7 @@ double least_squares_quadratic_error( const double x[], const double y[], size_t
 	return error;
 }
 
-void table_dump( FILE* stream, const double x[], const double y[], size_t count, const char* label_x, const char* label_y )
+void m3d_table_dump( FILE* stream, const double x[], const double y[], size_t count, const char* label_x, const char* label_y )
 {
 	fprintf( stream, "+--------------+--------------+\n" );
 	fprintf( stream, "|%13s | %-13s|\n", label_x, label_y );
