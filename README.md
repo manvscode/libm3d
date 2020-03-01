@@ -16,20 +16,20 @@ A fully-tested math library for computer graphics applications and games.
 * Geographic WGS84 transformations and distance calculations.
 
 ##  Build Instructions
-You can compile *libm3d* with either float or double precision.
-### If you want to build the float version of libm3d:
+You can compile *libm3d* with either float, double, or long-double precision.
+### If you want to build the float version:
 * autoreconf -i
 * ./configure
 * make
 * make install
 
-### If you want to build the double version of libm3d:
+### If you want to build the double version:
 * autoreconf -i
 * ./configure --enable-use-double
 * make
 * make install
 
-### If you want to build the long double version of libm3d:
+### If you want to build the long double version:
 * autoreconf -i
 * ./configure --enable-use-long-double
 * make
