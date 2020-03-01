@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: @PACKAGE_NAME@
+Description: A fully-tested math library for computer graphics applications and games.
+URL: @PACKAGE_URL@
+Version: @PACKAGE_VERSION@
+Requires:
+Lib: -L${libdir} -lm
+Cflags: -I${includedir}/@PACKAGE_NAME@-@PACKAGE_VERSION@

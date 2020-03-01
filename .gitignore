@@ -18,6 +18,9 @@
 # Test Programs
 bin
 
+# Generated pkg-config file
+m3d.pc
+
 # Autoconf files
 Makefile
 Makefile.in

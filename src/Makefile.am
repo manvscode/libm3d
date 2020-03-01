@@ -39,7 +39,7 @@ libm3d_headers = \
                  vec3.h \
                  vec4.h
 
-library_includedir      = $(includedir)/libm3d/
+library_includedir      = $(includedir)/m3d-@VERSION@/
 library_include_HEADERS = $(libm3d_headers)
 
 # Library

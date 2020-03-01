@@ -4,7 +4,7 @@ AM_CFLAGS = -std=c11 -pg -g -ggdb -O0 -I$(top_builddir)/src/ -I. -I.. -I/usr/loc
 AM_CXXFLAGS = -std=c++0x -pg -g -ggdb -O0 -I$(top_builddir)/src/ -I. -I.. -I/usr/local/include/
 LDADD = -lm
 
-bin_PROGRAMS = $(top_builddir)/bin/test \
+bin_PROGRAMS = $(top_builddir)/bin/test-all \
 			   $(top_builddir)/bin/test-math \
 			   $(top_builddir)/bin/test-vec2 \
 			   $(top_builddir)/bin/test-vec3 \
@@ -19,8 +19,8 @@ bin_PROGRAMS = $(top_builddir)/bin/test \
 			   $(top_builddir)/bin/test-geographic \
 			   $(top_builddir)/bin/test-fixed-point-decimal
 
-__top_builddir__bin_test_SOURCES                   = test-all.c test-math.c test-vec2.c test-vec3.c test-vec4.c test-mat2.c test-mat3.c test-mat4.c test-numerical-methods.c test-projections.c test-geographic.c
-__top_builddir__bin_test_LDFLAGS                   = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_all_SOURCES               = test-all.c test-math.c test-vec2.c test-vec3.c test-vec4.c test-mat2.c test-mat3.c test-mat4.c test-numerical-methods.c test-projections.c test-geographic.c
+__top_builddir__bin_test_all_LDFLAGS               = -lm $(top_builddir)/lib/libm3d.la
 
 __top_builddir__bin_test_math_SOURCES              = test-math.c
 __top_builddir__bin_test_math_CFLAGS               = -DTEST_MATHEMATICS_STANDALONE

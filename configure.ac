@@ -1,14 +1,18 @@
 AC_PREREQ(2.67)
-AC_INIT([libm3d], [1.0], [manvscode@gmail.com], [libm3d], [http://www.joemarrero.com/])
-AM_INIT_AUTOMAKE([1.13 foreign silent-rules -Wall -Werror])
+AC_INIT([m3d], [1.0.0], [manvscode@gmail.com], [m3d], [http://www.joemarrero.com/])
+AM_INIT_AUTOMAKE([1.13 foreign silent-rules dist-zip -Wall -Werror])
+#AC_CONFIG_MACRO_DIRS([m4])
 
-AM_SILENT_RULES([yes])
+# Enable silent build when possible.
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
 AC_CONFIG_HEADERS([src/libm3d-config.h])
 
 AC_PROG_CC
 AC_PROG_CC_C99
 AC_C_INLINE
 AC_HEADER_STDC
+AC_TYPE_SIZE_T
 
 AH_TOP([
 #ifndef _LIBM3D_H_
@@ -19,18 +23,11 @@ AH_BOTTOM([
 ])
 AX_EXT
 
-DFLAGS="$DFLAGS"
-
-CFLAGS="$DFLAGS $CFLAGS -Werror"
-#CFLAGS="-Wall -g -ggdb -O0 $DFLAGS $CFLAGS"
-LDFLAGS="-lm $LDFLAGS"
-
 
 AM_PROG_AR
 LT_INIT([static])
 AC_PROG_LIBTOOL
 AM_PROG_LIBTOOL
-
 
 # -------------------------------------------------
 AC_ARG_ENABLE([use_long_double],
@@ -76,17 +73,24 @@ AM_CONDITIONAL([ENABLE_TESTS], [test "x$enable_tests" = "xyes"])
 
 AC_PROG_INSTALL
 
-echo " ------------------------------ "
-echo ""
-echo "   CFLAGS = $CFLAGS"
-echo "  LDFLAGS = $LDFLAGS"
-echo ""
-echo " ------------------------------ "
+echo "------------------------------------------------------------------------------"
+if [test -z "$CFLAGS"]; then
+	echo "  CFLAGS: Not set"
+else
+	echo "  CFLAGS: $CFLAGS"
+fi
+if [test -z "$LDFLAGS"]; then
+	echo " LDFLAGS: Not set"
+else
+	echo " LDFLAGS: $LDFLAGS"
+fi
+echo "------------------------------------------------------------------------------"
 
 AC_CONFIG_FILES([
-        Makefile
-        src/Makefile
-        tests/Makefile
+	Makefile
+	src/Makefile
+	tests/Makefile
+	m3d.pc
 ])
 
 AC_OUTPUT
