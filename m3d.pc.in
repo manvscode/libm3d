@@ -8,5 +8,5 @@ Description: A fully-tested math library for computer graphics applications and 
 URL: @PACKAGE_URL@
 Version: @PACKAGE_VERSION@
 Requires:
-Lib: -L${libdir} -lm
+Libs: -l:libm3d.a -L${libdir} -lm
 Cflags: -I${includedir}/@PACKAGE_NAME@-@PACKAGE_VERSION@

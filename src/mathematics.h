@@ -167,7 +167,7 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 
 #if 1
 #define m3d_lerp                                           m3d_linear_interpolation
-#define m3d_linear_interpolation( a, x0, x1 )              ((x0) + (a) * ((x1) - (x0)))
+#define m3d_linear_interpolation( a, x0, x1 )              ((x0) + (a) * (x1) * (1.0 - (a)))
 #define m3d_bilear_interpolation( a, b, x0, x1, x2, x3 )   (m3d_lerp( b, m3d_lerp( a, x0, x1 ), m3d_lerp( a, x2, x3 ) ))
 #define m3d_bilerp                                         m3d_bilear_interpolation
 #endif

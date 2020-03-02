@@ -39,10 +39,11 @@ libm3d_headers = \
                  vec3.h \
                  vec4.h
 
-library_includedir      = $(includedir)/m3d-@VERSION@/
+library_includedir      = $(includedir)/m3d-@VERSION@/m3d/
 library_include_HEADERS = $(libm3d_headers)
 
 # Library
 lib_LTLIBRARIES                       = $(top_builddir)/lib/libm3d.la
 __top_builddir__lib_libm3d_la_SOURCES = $(libm3d_src)
+__top_builddir__lib_libm3d_la_CFLAGS  = -fPIC
 __top_builddir__lib_libm3d_la_LDFLAGS = -lm
