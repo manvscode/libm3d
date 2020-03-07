@@ -55,7 +55,7 @@ AM_COND_IF([ENABLE_USE_LONG_DOUBLE],
 				AC_MSG_NOTICE([scaler_t is a double.])
 			],
 			[ # else
-				AC_DEFINE([LIBM3D_USE_FLOAT], [0], [All scalar types are float.])
+				AC_DEFINE([LIBM3D_USE_FLOAT], [1], [All scalar types are float.])
 				AC_MSG_NOTICE([scaler_t is a float.])
 			]
 		) # if ENABLE_USE_DOUBLE
