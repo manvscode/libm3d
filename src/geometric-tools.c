@@ -79,7 +79,7 @@ vec3_t m3d_normal_from_triangles( const vec3_t* points[], size_t max_points )
 	return vec3_multiply( &normal, 1.0f / number_of_triangles );
 }
 
-vec4_t m3d_point_unproject( const vec2_t* point, const mat4_t* projection, const mat4_t* modelview, int viewport[4] )
+vec4_t m3d_point_unproject( const vec2_t* restrict point, const mat4_t* restrict projection, const mat4_t* restrict modelview, int viewport[4] )
 {
 	/* Convert to normalized device coordinates */
 	vec4_t normalized_device_coordinate = VEC4(
@@ -95,7 +95,7 @@ vec4_t m3d_point_unproject( const vec2_t* point, const mat4_t* projection, const
 	return mat4_mult_vector( &inv_projmodel, &normalized_device_coordinate );
 }
 
-vec2_t m3d_point_project( const vec4_t* point, const mat4_t* projection, const mat4_t* modelview, int viewport[4] )
+vec2_t m3d_point_project( const vec4_t* restrict point, const mat4_t* restrict projection, const mat4_t* restrict modelview, int viewport[4] )
 {
 	mat4_t projmodel = mat4_mult_matrix( projection, modelview );
 	vec4_t pt = mat4_mult_vector( &projmodel, point );

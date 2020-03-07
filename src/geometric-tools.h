@@ -40,12 +40,12 @@ vec3_t m3d_normal_from_triangles( const vec3_t* points[], size_t max_points );
 /*
  * Map a point from viewport coordinates to world coordinates.
  */
-vec4_t m3d_point_unproject( const vec2_t* position, const mat4_t* projection, const mat4_t* modelview, int viewport[4] );
+vec4_t m3d_point_unproject( const vec2_t* restrict position, const mat4_t* projection, const mat4_t* restrict modelview, int viewport[4] );
 
 /*
  * Map a point from world coordinates to viewport coordinates.
  */
-vec2_t m3d_point_project( const vec4_t* point, const mat4_t* projection, const mat4_t* modelview, int viewport[4] );
+vec2_t m3d_point_project( const vec4_t* restrict point, const mat4_t* restrict projection, const mat4_t* restrict modelview, int viewport[4] );
 
 
 /*

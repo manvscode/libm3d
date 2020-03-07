@@ -33,7 +33,7 @@ extern "C" {
  * Transformations
  */
 
-static inline mat4_t m3d_translate( const vec3_t* t )
+static inline mat4_t m3d_translate( const vec3_t* restrict t )
 {
 	assert( t );
 	return MAT4(
@@ -83,7 +83,7 @@ static inline mat4_t m3d_rotate_z( scaler_t a )
 	);
 }
 
-static inline mat4_t m3d_scale( const vec3_t* s )
+static inline mat4_t m3d_scale( const vec3_t* restrict s )
 {
 	assert( s );
 	return MAT4(
@@ -132,7 +132,7 @@ static inline mat4_t m3d_euler_transform( scaler_t h /*heading*/, scaler_t p /*p
 	);
 }
 
-static inline mat4_t m3d_orientation( vec3_t* f, vec3_t* l, vec3_t* u )
+static inline mat4_t m3d_orientation( vec3_t* restrict f, vec3_t* restrict l, vec3_t* restrict u )
 {
 	assert( f );
 	assert( l );
@@ -161,7 +161,7 @@ static inline mat4_t m3d_change_handedness( void )
 	);
 }
 
-static inline mat4_t m3d_rigid_body_transform( const mat4_t* orientation, const mat4_t* translation )
+static inline mat4_t m3d_rigid_body_transform( const mat4_t* restrict orientation, const mat4_t* restrict translation )
 {
 	return mat4_mult_matrix( translation, orientation );
 }
