@@ -47,7 +47,7 @@ size_t geographic_test_suite_size( void )
 }
 
 
-#ifdef TEST_GEOGRAPHIC_STANDALONE
+#ifdef TEST_STANDALONE
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );

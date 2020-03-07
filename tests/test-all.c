@@ -53,6 +53,9 @@ size_t numerical_methods_test_suite_size( void );
 extern const test_feature_t projection_tests[];
 size_t projection_test_suite_size( void );
 
+extern const test_feature_t geometric_tools_tests[];
+extern size_t geometric_tools_test_suite_size( void );
+
 extern const test_feature_t geographic_tests[];
 size_t geographic_test_suite_size( void );
 
@@ -70,6 +73,7 @@ const test_suite_t suites[] = {
 	//{ "Tests for quat.h", quat_tests, quat_test_suite_size },
 	{ "Tests for numerical-methods.h", numerical_methods_tests, numerical_methods_test_suite_size },
 	{ "Tests for projections.h", projection_tests, projection_test_suite_size },
+	{ "Tests for geometric-tools.h", geometric_tools_tests, geometric_tools_test_suite_size },
 	{ "Tests for geographic.h", geographic_tests, geographic_test_suite_size },
 };
 

@@ -59,7 +59,7 @@ size_t vec2_test_suite_size( void )
 	return sizeof(vec2_tests) / sizeof(vec2_tests[0]);
 }
 
-#ifdef TEST_VEC2_STANDALONE
+#ifdef TEST_STANDALONE
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );

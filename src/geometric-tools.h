@@ -20,6 +20,7 @@
  */
 #ifndef _GEOMETRIC_TOOLS_H_
 #define _GEOMETRIC_TOOLS_H_
+#include <assert.h>
 #include "vec2.h"
 #include "vec3.h"
 #include "vec4.h"
@@ -69,6 +70,17 @@ static inline vec2_t m3d_ndc_to_wc( const vec4_t* ndc, int viewport[4] )
 		(1.0f + ndc->x) * (viewport[2] / 2.0f) + viewport[0],
 		(1.0f + ndc->y) * (viewport[3] / 2.0f) + viewport[1]
 	);
+}
+
+/*
+ *  Wrap indexes in the range of [0, length).  This is useful for
+ *  sampling rectangular values and not having to worry about indexing
+ *  out of bounds in an array.
+ */
+static inline size_t m3d_wrap_index( size_t index, size_t length )
+{
+	assert( length > 0 && "Array length must be greater than 0.");
+	return ((index % length) + length) % length;
 }
 
 

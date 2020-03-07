@@ -41,7 +41,7 @@ size_t fixed_point_decimal_test_suite_size( void )
 	return sizeof(fixed_point_decimal_tests) / sizeof(fixed_point_decimal_tests[0]);
 }
 
-#ifdef TEST_FPDEC_STANDALONE
+#ifdef TEST_STANDALONE
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );

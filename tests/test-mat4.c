@@ -50,7 +50,7 @@ size_t mat4_test_suite_size( void )
 }
 
 
-#ifdef TEST_MAT4_STANDALONE
+#ifdef TEST_STANDALONE
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );

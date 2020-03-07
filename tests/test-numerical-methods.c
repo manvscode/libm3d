@@ -49,7 +49,7 @@ size_t numerical_methods_test_suite_size( void )
 }
 
 
-#ifdef TEST_NUMERICAL_METHODS_STANDALONE
+#ifdef TEST_STANDALONE
 int main( int argc, char* argv[] )
 {
 	srand( time(NULL) );
