@@ -30,6 +30,14 @@ extern "C" {
 #endif
 
 
+/*
+ *  Get a matrix for an orthographic projection. An orthographic projection is a
+ *  type of parallel projection where parallel lines will remain parallel.
+ *
+ *  Any point that is transformed by this matrix will be in clip coordinates. To
+ *  get normalized device coordinates in the range (-1, -1, -1) to (1, 1, 1) then
+ *  one has to devide each component by it's w-component.
+ */
 static inline mat4_t m3d_orthographic( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
 {
 	return MAT4(
@@ -40,6 +48,30 @@ static inline mat4_t m3d_orthographic( scaler_t left, scaler_t right, scaler_t b
 	);
 }
 
+/*
+ *  The inverse matrix of the orthographic projection.
+ */
+static inline mat4_t m3d_orthographic_inverse( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
+{
+	return MAT4(
+		(right - left) / 2.0          , 0.0                           ,  0.0                      , 0.0,
+		0.0                           , (top - bottom) / 2.0          ,  0.0                      , 0.0,
+		0.0                           , 0.0                           , -(far - near) / 2.0       , 0.0,
+		(left + right) / 2.0          , (top + bottom) / 2.0          , -(far + near) / 2.0       , 1.0
+	);
+}
+
+
+
+/*
+ *  Get a matrix for using a frustum (i.e. pyramid with top removed) for projection.
+ *  This projection has the effect that parallel lines will converge toward the
+ *  horizon (i.e. a perspective projection).
+ *
+ *  Any point that is transformed by this matrix will be in clip coordinates. To
+ *  get normalized device coordinates in the range (-1, -1, -1) to (1, 1, 1) then
+ *  one has to devide each component by it's w-component.
+ */
 static inline mat4_t m3d_frustum( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
 {
 	scaler_t A = 2.0 * near / (right - left);
@@ -57,6 +89,14 @@ static inline mat4_t m3d_frustum( scaler_t left, scaler_t right, scaler_t bottom
 	);
 }
 
+/*
+ *  Get a matrix for a perspective projection (i.e frustum) using field of view, aspect
+ *  ratio, and the near and far planes.
+ *
+ *  Any point that is transformed by this matrix will be in clip coordinates. To
+ *  get normalized device coordinates in the range (-1, -1, -1) to (1, 1, 1) then
+ *  one has to devide each component by it's w-component.
+ */
 static inline mat4_t m3d_perspective( scaler_t fov /* in radians */, scaler_t aspect, scaler_t near, scaler_t far )
 {
 	scaler_t A = 1.0 / tan(fov * 0.5);
