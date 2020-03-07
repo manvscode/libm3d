@@ -21,6 +21,9 @@
 #include <stdlib.h>
 #include "geometric-tools.h"
 
+/*
+ * Calculate a normal from a triangle.
+ */
 vec3_t m3d_normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_t* v3 )
 {
 	vec3_t normal = vec3_cross_product(
@@ -32,6 +35,10 @@ vec3_t m3d_normal_from_triangle( const vec3_t* v1, const vec3_t* v2, const vec3_
 	return normal;
 }
 
+/*
+ * Calculate an average normal from a list of triangles. This is useful for
+ * smoothing surfaces.
+ */
 vec3_t m3d_normal_from_triangles( const vec3_t* points[], size_t max_points )
 {
 	/*
@@ -55,7 +62,7 @@ vec3_t m3d_normal_from_triangles( const vec3_t* points[], size_t max_points )
 
 	for( size_t i = 0; i < max_points; i += 3 )
 	{
-		vec3_t n = m3d_normal_from_triangle( points[ i + 0], points[ i + 1 ], points[ i + 2 ] );
+		vec3_t n = m3d_normal_from_triangle( points[ i + 0 ], points[ i + 1 ], points[ i + 2 ] );
 
 		if( vec3_dot_product( &normal, &n ) < 0.0f )
 		{
@@ -72,21 +79,28 @@ vec3_t m3d_normal_from_triangles( const vec3_t* points[], size_t max_points )
 	return vec3_multiply( &normal, 1.0f / number_of_triangles );
 }
 
-vec4_t m3d_point_unproject( const vec2_t* position, const mat4_t* projection, const mat4_t* model, int viewport[] )
+vec4_t m3d_point_unproject( const vec2_t* point, const mat4_t* projection, const mat4_t* modelview, int viewport[4] )
 {
 	/* Convert to normalized device coordinates */
-	vec4_t normalized_device_coordinate = VEC4( ((position->x * 2.0f) / viewport[2]) - 1.0f, ((position->y * 2.0f) / viewport[3]) - 1.0f, 0.0f, 1.0f );
+	vec4_t normalized_device_coordinate = VEC4(
+		(point->x - viewport[0]) * (2.0f / viewport[2]) - 1.0f,
+		(point->y - viewport[1]) * (2.0f / viewport[3]) - 1.0f,
+		0.0f,
+		1.0f
+	);
 
-	mat4_t inv_projmodel = mat4_mult_matrix( projection, model );
+	mat4_t inv_projmodel = mat4_mult_matrix( projection, modelview );
 	mat4_invert( &inv_projmodel );
 
 	return mat4_mult_vector( &inv_projmodel, &normalized_device_coordinate );
 }
 
-vec2_t m3d_point_project( const vec4_t* point, const mat4_t* projection, const mat4_t* model, int viewport[] )
+vec2_t m3d_point_project( const vec4_t* point, const mat4_t* projection, const mat4_t* modelview, int viewport[4] )
 {
-	mat4_t projmodel = mat4_mult_matrix( projection, model );
+	mat4_t projmodel = mat4_mult_matrix( projection, modelview );
 	vec4_t pt = mat4_mult_vector( &projmodel, point );
-
-	return VEC2( ((1.0f + pt.x) * viewport[2]) / 2.0f, ((1.0f + pt.y) * viewport[3]) / 2.0f );
+	return VEC2(
+		(1.0f + pt.x) * (viewport[2] / 2.0f) + viewport[0],
+		(1.0f + pt.y) * (viewport[3] / 2.0f) + viewport[1]
+	);
 }
