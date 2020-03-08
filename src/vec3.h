@@ -29,9 +29,29 @@ extern "C" {
  * Three Dimensional Vectors
  */
 typedef struct vec3 {
+	#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
+	union {
+		struct {
+			scaler_t x;
+			scaler_t y;
+			scaler_t z;
+		};
+		struct {
+			scaler_t s;
+			scaler_t t;
+			scaler_t p;
+		};
+		struct {
+			scaler_t r;
+			scaler_t g;
+			scaler_t b;
+		};
+	};
+	#else
 	scaler_t x;
 	scaler_t y;
 	scaler_t z;
+	#endif
 } vec3_t;
 
 typedef vec3_t pt3_t;

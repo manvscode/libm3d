@@ -30,10 +30,33 @@ extern "C" {
  * Four Dimensional Vectors
  */
 typedef struct vec4 {
+	#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
+	union {
+		struct {
+			scaler_t x;
+			scaler_t y;
+			scaler_t z;
+			scaler_t w;
+		};
+		struct {
+			scaler_t s;
+			scaler_t t;
+			scaler_t p;
+			scaler_t q;
+		};
+		struct {
+			scaler_t r;
+			scaler_t g;
+			scaler_t b;
+			scaler_t a;
+		};
+	};
+	#else
 	scaler_t x;
 	scaler_t y;
 	scaler_t z;
 	scaler_t w;
+	#endif
 } vec4_t;
 
 typedef vec4_t pt4_t;

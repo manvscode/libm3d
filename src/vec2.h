@@ -31,8 +31,21 @@ extern "C" {
  * Two Dimensional Vectors
  */
 typedef struct vec2 {
+	#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
+	union {
+		struct {
+			scaler_t x;
+			scaler_t y;
+		};
+		struct {
+			scaler_t s;
+			scaler_t t;
+		};
+	};
+	#else
 	scaler_t x;
 	scaler_t y;
+	#endif
 } vec2_t;
 
 typedef vec2_t pt2_t;
