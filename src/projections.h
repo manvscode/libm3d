@@ -20,6 +20,7 @@
  */
 #ifndef _PROJECTIONS_H_
 #define _PROJECTIONS_H_
+#include <stdbool.h>
 #include "mathematics.h"
 #include "vec3.h"
 #include "vec4.h"
@@ -110,6 +111,31 @@ static inline mat4_t m3d_perspective( scaler_t fov /* in radians */, scaler_t as
 	         0.0,  0.0,    C,  0.0
 	);
 }
+
+/*
+ *  Convert clip coordinates to normalized device coordinates in the
+ *  range (-1, -1, -1) to (1, 1, 1).
+ */
+static inline vec3_t m3d_perspective_division( const vec4_t* v )
+{
+	return VEC3(
+		v->x / v->w,
+		v->y / v->w,
+		v->z / v->w
+	);
+}
+
+/*
+ *  Check if a point in clip-space is inside the view
+ *  volume (i.e frustum, et cetera).
+ */
+static inline bool m3d_inside_view_volume( const vec4_t* v )
+{
+	return (-v->w <= v->x && v->x <= v->w) &&
+	       (-v->w <= v->y && v->y <= v->w) &&
+	       (-v->w <= v->z && v->z <= v->w);
+}
+
 
 #ifdef __cplusplus
 } /* C linkage */
