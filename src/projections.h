@@ -21,6 +21,7 @@
 #ifndef _PROJECTIONS_H_
 #define _PROJECTIONS_H_
 #include <stdbool.h>
+#include <assert.h>
 #include "mathematics.h"
 #include "vec3.h"
 #include "vec4.h"
@@ -35,9 +36,8 @@ extern "C" {
  *  Get a matrix for an orthographic projection. An orthographic projection is a
  *  type of parallel projection where parallel lines will remain parallel.
  *
- *  Any point that is transformed by this matrix will be in clip coordinates. To
- *  get normalized device coordinates in the range (-1, -1, -1) to (1, 1, 1) then
- *  one has to devide each component by it's w-component.
+ *  Any point that is transformed by this matrix will be in clip coordinates (and
+ *  normalized-device coordiantes).
  */
 static inline mat4_t m3d_orthographic( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
 {
@@ -76,17 +76,17 @@ static inline mat4_t m3d_orthographic_inverse( scaler_t left, scaler_t right, sc
 static inline mat4_t m3d_frustum( scaler_t left, scaler_t right, scaler_t bottom, scaler_t top, scaler_t near, scaler_t far )
 {
 	scaler_t A = 2.0 * near / (right - left);
-	scaler_t B = (right + left) / (right - left);
-	scaler_t C = 2.0 * near / (top - bottom);
+	scaler_t B = 2.0 * near / (top - bottom);
+	scaler_t C = (right + left) / (right - left);
 	scaler_t D = (top + bottom) / (top - bottom);
 	scaler_t E = -(far + near) / (far - near);
 	scaler_t F = -(2.0 * far * near) / (far - near);
 
 	return MAT4(
-		  A,  0.0,    B,  0.0,
-		0.0,    C,    D,  0.0,
-		0.0,  0.0,    E,    F,
-		0.0,  0.0, -1.0,  0.0
+		  A, 0.0, 0.0,  0.0,
+		0.0,   B, 0.0,  0.0,
+		  C,   D,   E, -1.0,
+		0.0, 0.0,   F,  0.0
 	);
 }
 
@@ -114,14 +114,16 @@ static inline mat4_t m3d_perspective( scaler_t fov /* in radians */, scaler_t as
 
 /*
  *  Convert clip coordinates to normalized device coordinates in the
- *  range (-1, -1, -1) to (1, 1, 1).
+ *  range (-1, -1, -1) to (1, 1, 1). This is only needed for perspective
+ *  projections.
  */
-static inline vec3_t m3d_perspective_division( const vec4_t* v )
+static inline vec4_t m3d_perspective_divide( const vec4_t* v )
 {
-	return VEC3(
+	return VEC4(
 		v->x / v->w,
 		v->y / v->w,
-		v->z / v->w
+		v->z / v->w,
+		1.0
 	);
 }
 
@@ -134,6 +136,29 @@ static inline bool m3d_inside_view_volume( const vec4_t* v )
 	return (-v->w <= v->x && v->x <= v->w) &&
 	       (-v->w <= v->y && v->y <= v->w) &&
 	       (-v->w <= v->z && v->z <= v->w);
+}
+
+static inline vec3_t m3d_window_space( scaler_t viewport[4], scaler_t near, scaler_t far, const vec3_t* ndc )
+{
+	scaler_t viewport_x      = viewport[0];
+	scaler_t viewport_y      = viewport[1];
+	scaler_t viewport_width  = viewport[2];
+	scaler_t viewport_height = viewport[3];
+	return VEC3(
+		0.5 * viewport_width * ndc->x + viewport_x + 0.5 * viewport_width,
+		0.5 * viewport_height * ndc->y + viewport_y + 0.5 * viewport_height,
+		0.5 * (far - near) * ndc->z + 0.5 * (far + near)
+	);
+}
+
+
+/*
+ *  Map z-values in the range [0, 1].
+ */
+static inline scaler_t m3d_depth_range_transformation( scaler_t z, scaler_t near, scaler_t far )
+{
+	assert(near < far && "Near plane needs to be closer than far plane");
+	return (scaler_clamp( z, near, far ) - near) / (far - near);
 }
 
 

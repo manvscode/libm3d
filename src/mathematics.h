@@ -209,7 +209,7 @@ static inline scaler_t bilerp( scaler_t a, scaler_t b, scaler_t x0, scaler_t x1,
 	long double:  m3d_minld, \
 	default: m3d_minf \
 );
-#define m3d_clamp(a, b) _Generic( (a), \
+#define m3d_clamp(val, m, M) _Generic( (val), \
 	int:     m3d_clampi, \
 	long:    m3d_clampl, \
 	float:   m3d_clampf, \

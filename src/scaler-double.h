@@ -74,6 +74,11 @@ static inline scaler_t scaler_acos( scaler_t a )
 	return acos( a );
 }
 
+static inline scaler_t scaler_clamp( scaler_t v, scaler_t min, scaler_t max )
+{
+	return m3d_clampd( v, min, max );
+}
+
 static inline char* scaler_type_string( void )
 {
 	return "double";
