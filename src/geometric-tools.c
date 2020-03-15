@@ -104,3 +104,71 @@ vec2_t m3d_point_project( const vec4_t* restrict point, const mat4_t* restrict p
 		(1.0f + pt.y) * (viewport[3] / 2.0f) + viewport[1]
 	);
 }
+
+int m3d_cyrus_beck_line_clipping( const vec2_t* p0, const vec2_t* p1, vec2_t points[2] )
+{
+	const size_t edge_count = 4;
+	const vec2_t edge_points[] = {
+		VEC2(+1, +1),
+		VEC2(-1, +1),
+		VEC2(-1, -1),
+		VEC2(+1, -1)
+	};
+	const vec2_t edge_normals[] = {
+		VEC2( 0, +1),
+		VEC2(-1,  0),
+		VEC2( 0, -1),
+		VEC2(+1,  0)
+	};
+	return m3d_cyrus_beck_polygon_line_clipping( edge_points, edge_normals, edge_count, p0, p1, points );
+}
+
+int m3d_cyrus_beck_polygon_line_clipping( const vec2_t* edge_points, const vec2_t* edge_normals, size_t edge_count,
+                                          const vec2_t* p0, const vec2_t* p1, vec2_t points[2] )
+{
+	assert( edge_count >= 3 && "Expected a convex polygon" );
+	vec2_t line_vector = vec2_subtract(p1, p0);
+	int found_intersections = 0;
+	vec2_t intersections[2];
+	scaler_t edge_line_dot_product = 0;
+
+	for( int i = 0; found_intersections < 2 && i < edge_count; i++ )
+	{
+		vec2_t edge_to_point_vector = vec2_subtract(&edge_points[i], p0 );
+		scaler_t denominator = vec2_dot_product( &edge_normals[i], &line_vector );
+		scaler_t t = vec2_dot_product( &edge_normals[i], &edge_to_point_vector ) / denominator;
+
+		if( 0.0f < t && t < 1.0f )
+		{
+			assert( (found_intersections + 1) <= 2 && "Expecting at most 2 intersection points" );
+			intersections[found_intersections++] = VEC2(
+				p0->x + (p1->x - p0->x) * t,
+				p0->y + (p1->y - p0->y) * t
+			);
+			edge_line_dot_product = denominator;
+		}
+	}
+
+	if (found_intersections > 1)
+	{
+			points[0] = intersections[0];
+			points[1] = intersections[1];
+
+	}
+	else if (found_intersections == 1)
+	{
+		if( edge_line_dot_product > 0  )
+		{
+			points[0] = intersections[0];
+			points[1] = *p1;
+		}
+		else
+		{
+			points[0] = *p0;
+			points[1] = intersections[0];
+
+		}
+	}
+
+	return found_intersections;
+}

@@ -83,5 +83,14 @@ static inline size_t m3d_wrap_index( size_t index, size_t length )
 	return ((index % length) + length) % length;
 }
 
+/*
+ *  Clip lines within (-1, -1) to (1, 1).
+ */
+int m3d_cyrus_beck_line_clipping( const vec2_t* p0, const vec2_t* p1, vec2_t points[2] );
 
+/*
+ *  Clip lines within a polygon.
+ */
+int m3d_cyrus_beck_polygon_line_clipping( const vec2_t* edge_points, const vec2_t* edge_normals, size_t edge_count,
+                                          const vec2_t* p0, const vec2_t* p1, vec2_t points[2] );
 #endif /* _GEOMETRIC_TOOLS_H_ */
