@@ -32,61 +32,61 @@ __top_builddir__bin_test_all_SOURCES = test-all.c \
                                        test-projections.c \
                                        test-geometric-tools.c \
                                        test-geographic.c
-__top_builddir__bin_test_all_LDFLAGS = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_all_LDFLAGS = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_math_SOURCES              = test-math.c
 __top_builddir__bin_test_math_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_math_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_math_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_vec2_SOURCES              = test-vec2.c
 __top_builddir__bin_test_vec2_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_vec2_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_vec2_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_vec3_SOURCES              = test-vec3.c
 __top_builddir__bin_test_vec3_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_vec3_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_vec3_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_vec4_SOURCES              = test-vec4.c
 __top_builddir__bin_test_vec4_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_vec4_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_vec4_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_mat2_SOURCES              = test-mat2.c
 __top_builddir__bin_test_mat2_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_mat2_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_mat2_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_mat3_SOURCES              = test-mat3.c
 __top_builddir__bin_test_mat3_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_mat3_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_mat3_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_mat4_SOURCES              = test-mat4.c
 __top_builddir__bin_test_mat4_CFLAGS               = -DTEST_STANDALONE
-__top_builddir__bin_test_mat4_LDFLAGS              = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_mat4_LDFLAGS              = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_random_numbers_SOURCES    = test-random-numbers.c
-__top_builddir__bin_test_random_numbers_LDFLAGS    = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_random_numbers_LDFLAGS    = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_numerical_methods_SOURCES = test-numerical-methods.c
 __top_builddir__bin_test_numerical_methods_CFLAGS  = -DTEST_STANDALONE
-__top_builddir__bin_test_numerical_methods_LDFLAGS = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_numerical_methods_LDFLAGS = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_algorithms_SOURCES        = test-algorithms.c
 __top_builddir__bin_test_algorithms_CFLAGS         = -DTEST_ALGORITHMS_STANDALONE
-__top_builddir__bin_test_algorithms_LDFLAGS        = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_algorithms_LDFLAGS        = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_projections_SOURCES       = test-projections.c
 __top_builddir__bin_test_projections_CFLAGS        = -DTEST_STANDALONE
-__top_builddir__bin_test_projections_LDFLAGS       = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_projections_LDFLAGS       = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_geometric_tools_SOURCES   = test-geometric-tools.c
 __top_builddir__bin_test_geometric_tools_CFLAGS    = -DTEST_STANDALONE
-__top_builddir__bin_test_geometric_tools_LDFLAGS   = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_geometric_tools_LDFLAGS   = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_geographic_SOURCES        = test-geographic.c
 __top_builddir__bin_test_geographic_CFLAGS         = -DTEST_STANDALONE
-__top_builddir__bin_test_geographic_LDFLAGS        = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_geographic_LDFLAGS        = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 __top_builddir__bin_test_fixed_point_decimal_SOURCES = test-fixed-point-decimal.c
 __top_builddir__bin_test_fixed_point_decimal_CFLAGS  = -D TEST_STANDALONE
-__top_builddir__bin_test_fixed_point_decimal_LDFLAGS = -lm $(top_builddir)/lib/libm3d.la
+__top_builddir__bin_test_fixed_point_decimal_LDFLAGS = -L$(top_builddir)/lib/ -l:libm3d.a -lm
 
 endif
