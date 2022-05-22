@@ -58,9 +58,9 @@ fpdec_t m3d_fixed_point_decimal_add( fpdec_t a, fpdec_t b, bool* result )
 {
 	if( result )
 	{
-		if( a.val ^ b.val < 0 ) *result = true; // opposite signs can't overflow
-		else if( a.val > 0 )    *result = b.val > INT64_MAX - a.val; // overflow
-		else                    *result = b.val < INT64_MAX - a.val; // overflow
+		if(( a.val ^ b.val) < 0 ) *result = true; // opposite signs can't overflow
+		else if( a.val > 0 )      *result = b.val > INT64_MAX - a.val; // overflow
+		else                      *result = b.val < INT64_MAX - a.val; // overflow
 	}
 
 	return (fpdec_t) {
@@ -126,4 +126,5 @@ bool m3d_fixed_point_decimal_string( char* string, size_t size, fpdec_t n )
 	}
 
 	string[ digits + 1 ] = '\0';
+    return true;
 }
