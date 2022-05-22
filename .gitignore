@@ -44,5 +44,5 @@ lib/.dirstamp
 src/.deps
 src/stamp-h1
 tests/.deps
-src/lib3dmath-config.h
-src/lib3dmath-config.h.in
+src/libm3d-config.h
+src/libm3d-config.h.in
