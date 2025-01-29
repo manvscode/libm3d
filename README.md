@@ -1,6 +1,13 @@
 # libm3d
 A fully-tested math library for computer graphics applications and games.
 
+## Donate, if you found this tool useful
+
+The development of this library took numerous hours of development and testing.  If you found that it
+is useful to you, then please consider making a donation of bitcoin to: **bc1qezh0x9324px8aszr09xmmtxqe7ttd7ftumayhv**
+
+All donations help cover maintenance costs.
+
 ## Supported Constructs
 * 2D vectors
 * 3D vectors
@@ -42,7 +49,7 @@ If you want to enable the test programs, you just need to use the
 # License
 You may use *libm3d* in a commercial product as long as the below copyright is retained in the source directory and on all source files.
 
-    Copyright (C) 2013-2015 by Joseph A. Marrero, http://www.manvscode.com/
+    Copyright (C) 2013-2025 by Joseph A. Marrero, https://joemarrero.com/
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
